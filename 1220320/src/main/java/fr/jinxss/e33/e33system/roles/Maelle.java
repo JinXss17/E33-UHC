@@ -85,4 +85,8 @@ public class Maelle extends Roles {
             event.setDamage(event.getDamage() * (1 + MODIFIER));
         }
     }
+    
+    public boolean isPostureItem(ItemStack item) {
+        return item != null && item.isSimilar(postureItem);
+    }
 }

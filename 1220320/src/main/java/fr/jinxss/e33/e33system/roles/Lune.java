@@ -7,6 +7,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import fr.jinxss.e33.Roles;
 
@@ -45,6 +47,9 @@ public class Lune extends Roles {
         Player p = getPlayer();
         if (p == null) return;
 
+        p.removePotionEffect(PotionEffectType.SPEED);
+        p.removePotionEffect(PotionEffectType.RESISTANCE);
+        
         // Rotation des éléments
         switch (current) {
             case TERRE:
@@ -58,10 +63,12 @@ public class Lune extends Roles {
             case GLACE:
                 current = Element.FOUDRE;
                 p.sendMessage("§f→ ÉLÉMENT : FOUDRE");
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
                 break;
             case FOUDRE:
                 current = Element.TERRE;
                 p.sendMessage("§7→ ÉLÉMENT : TERRE");
+                p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, Integer.MAX_VALUE, 0, false, false));
                 break;
         }
 

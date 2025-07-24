@@ -17,17 +17,19 @@ public class RoleRecipes {
     private static void registerRole(JavaPlugin plugin) {
         ItemStack result = new ItemStack(Material.FEATHER);
         ItemMeta meta = result.getItemMeta();
-        meta.setDisplayName("§dRole - Role");
+        meta.setDisplayName("§dRôle - Lune");
         result.setItemMeta(meta);
 
-        NamespacedKey key = new NamespacedKey(plugin, "Roles_role");
+        NamespacedKey key = new NamespacedKey(plugin, "Lune_role");
 
         ShapedRecipe recipe = new ShapedRecipe(key, result);
-        recipe.shape("RBR", "PGP", "RBR");
-        recipe.setIngredient('R', Material.REDSTONE);
-        recipe.setIngredient('P', Material.PISTON);
-        recipe.setIngredient('B', Material.IRON_BARS);
+        recipe.shape("BIS", "IGI", "DIA");
+        recipe.setIngredient('B', Material.BLAZE_POWDER);
+        recipe.setIngredient('I', Material.IRON_INGOT);
+        recipe.setIngredient('S', Material.SNOW_BLOCK);
         recipe.setIngredient('G', Material.GLOWSTONE);
+        recipe.setIngredient('D', Material.DIRT);
+        recipe.setIngredient('A', Material.AMETHYST_BLOCK);
 
         Bukkit.addRecipe(recipe);
     }

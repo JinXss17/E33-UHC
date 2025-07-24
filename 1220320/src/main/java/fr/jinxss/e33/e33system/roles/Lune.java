@@ -71,4 +71,8 @@ public class Lune extends Roles {
     public Element getCurrentElement() {
         return current;
     }
+    
+    public boolean isLuneItem(ItemStack item) {
+        return item != null && item.isSimilar(catalyst);
+    }
 }

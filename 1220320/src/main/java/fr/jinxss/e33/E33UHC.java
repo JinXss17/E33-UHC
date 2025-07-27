@@ -2,12 +2,16 @@ package fr.jinxss.e33;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.jinxss.e33.Listeners.PlayerListener;
+import fr.jinxss.e33.uhcsystem.UHCSystem;
+
 import fr.jinxss.e33.listeners.RoleAttackListener;
 import fr.jinxss.e33.listeners.RoleCraftListener;
 import fr.jinxss.e33.listeners.RoleInteractListener;
 
 public class E33UHC extends JavaPlugin {
 
+	private UHCSystem uhcSystem;
 	
  	@Override
     public void onEnable() {
@@ -20,11 +24,18 @@ public class E33UHC extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RoleCraftListener(), this);
         getServer().getPluginManager().registerEvents(new RoleInteractListener(), this);
         getServer().getPluginManager().registerEvents(new RoleAttackListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+ 		
+ 		uhcSystem = new UHCSystem(this);
     }
 
     @Override
     public void onDisable() {
         getLogger().info("MonPlugin est désactivé !");
+    }
+    
+    public UHCSystem getUHCSystem() {
+    	return uhcSystem;
     }
 	
 }

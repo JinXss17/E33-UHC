@@ -9,7 +9,9 @@ import org.bukkit.inventory.ItemStack;
 
 import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.Roles;
+import fr.jinxss.e33.e33system.roles.Gustave;
 import fr.jinxss.e33.e33system.roles.Lune;
+
 
 public class RoleInteractListener implements Listener {
 
@@ -24,6 +26,11 @@ public class RoleInteractListener implements Listener {
 
         ItemStack item = event.getItem();
 
+        // --- Gustave ---------------------------------------------------------
+        if (role instanceof Gustave gustave && gustave.isGustaveItem(item)) {
+            event.setCancelled(true);
+            gustave.onPowerUse(); // ou gustave.onPowerUse() si tu n’as pas besoin du joueur
+        }
         // --- Role ---------------------------------------------------------
         if (role instanceof Lune lune && lune.isLuneItem(item)) {
             event.setCancelled(true);

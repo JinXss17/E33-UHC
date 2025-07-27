@@ -11,10 +11,29 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class RoleRecipes {
 	
     public static void registerAll(JavaPlugin plugin) {
-    	registerRole(plugin);
+    	registerGustave(plugin);
     }
     
-    private static void registerRole(JavaPlugin plugin) {
+
+    private static void registerGustave(JavaPlugin plugin) {
+        ItemStack result = new ItemStack(Material.FEATHER);
+        ItemMeta meta = result.getItemMeta();
+        meta.setDisplayName("§dRôle - Gustave");
+        result.setItemMeta(meta);
+
+        NamespacedKey key = new NamespacedKey(plugin, "gustave_role");
+
+        ShapedRecipe recipe = new ShapedRecipe(key, result);
+        recipe.shape("RBR", "PGP", "RBR");
+        recipe.setIngredient('R', Material.REDSTONE);
+        recipe.setIngredient('P', Material.PISTON);
+        recipe.setIngredient('B', Material.IRON_BARS);
+        recipe.setIngredient('G', Material.GLOWSTONE);
+
+        Bukkit.addRecipe(recipe);
+    }
+    
+    private static void registerLune(JavaPlugin plugin) {
         ItemStack result = new ItemStack(Material.FEATHER);
         ItemMeta meta = result.getItemMeta();
         meta.setDisplayName("§dRôle - Lune");
@@ -30,7 +49,7 @@ public class RoleRecipes {
         recipe.setIngredient('G', Material.GLOWSTONE);
         recipe.setIngredient('D', Material.DIRT);
         recipe.setIngredient('A', Material.AMETHYST_BLOCK);
-
+        
         Bukkit.addRecipe(recipe);
     }
 

@@ -1,5 +1,6 @@
 package fr.jinxss.e33.e33system.nevrons;
 
+import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.Roles;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -46,7 +47,7 @@ public class Mime extends Roles {
             return false;
         }
 
-        Roles targetRole = /* ici, accéder au rôle du joueur cible depuis votre système de gestion des rôles */;
+        Roles targetRole = RoleManager.getRole(target.getUniqueId())/* ici, accéder au rôle du joueur cible depuis votre système de gestion des rôles */;
         if (targetRole == null) {
             getPlayer().sendMessage("§cCe joueur n’a pas encore de rôle assigné !");
             return false;

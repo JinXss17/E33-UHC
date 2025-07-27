@@ -14,6 +14,7 @@ public class RoleRecipes {
     public static void registerAll(JavaPlugin plugin) {
     	registerGustave(plugin);
     	registerMaelle(plugin);
+    	registerLune(plugin);
     }
     
 
@@ -35,7 +36,7 @@ public class RoleRecipes {
         Bukkit.addRecipe(recipe);
     }
     
-    private static void registerLune(JavaPlugin plugin) {
+	private static void registerLune(JavaPlugin plugin) {
         ItemStack result = new ItemStack(Material.FEATHER);
         ItemMeta meta = result.getItemMeta();
         meta.setDisplayName("§dRôle - Lune");

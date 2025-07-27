@@ -1,8 +1,15 @@
 package fr.jinxss.e33.e33system.roles;
 
+import java.util.UUID;
+
 import fr.jinxss.e33.Roles;
 
 public class Peintresse extends Roles {
+
+	public Peintresse(UUID uuid, String name) {
+		super(uuid, name);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void onAssign() {

@@ -84,12 +84,8 @@ public class PlayerListener implements Listener {
 	}
 	
 	public void onPlayerRespawn(PlayerRespawnEvent e) {
-		
 		Player p = e.getPlayer();
-		
 		Bukkit.getScheduler().runTaskLater(plugin, () -> {p.setGameMode(GameMode.SPECTATOR);} , 1);
-		
-		
 	}
 	
 	@EventHandler

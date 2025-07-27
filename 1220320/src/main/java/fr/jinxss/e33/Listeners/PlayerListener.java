@@ -1,13 +1,20 @@
 package fr.jinxss.e33.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.GameRule;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -60,20 +67,40 @@ public class PlayerListener implements Listener {
 	}
 	
 	@EventHandler
-	public void onClickItem(PlayerInteractEvent e) {
+	public void onDead(PlayerDeathEvent e) {
 		
-		ItemStack it = e.getItem();
-		
-		if(it == null) {
-			return;
+		Player p = e.getEntity();
+		String deathMSG = E33UHC.GetPréffix() + " §c"+ p.getName() + " est mort !";
+		e.setDeathMessage(deathMSG);
+		if(p.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY) != true) {
+			p.getWorld().setGameRule(GameRule.KEEP_INVENTORY, true);
 		}
-		
-		if(it.hasItemMeta() && it.getItemMeta().getDisplayName().equalsIgnoreCase(LaunchGameItem.getItemMeta().getDisplayName())) {
-			
-			plugin.getUHCSystem().StartGame();
-			
+		Location DropLocation = p.getLocation();
+		World world = p.getWorld();
+		for(ItemStack drop : p.getInventory()) {
+			world.dropItem(DropLocation, drop);
 		}
 		
 	}
-
+	
+	public void onPlayerRespawn(PlayerRespawnEvent e) {
+		
+		Player p = e.getPlayer();
+		
+		Bukkit.getScheduler().runTaskLater(plugin, () -> {p.setGameMode(GameMode.SPECTATOR);} , 1);
+		
+		
+	}
+	
+	@EventHandler
+	public void onClickItem(PlayerInteractEvent e) {
+		
+		ItemStack it = e.getItem();
+		if(it == null) {
+			return;
+		}
+		if(it.hasItemMeta() && it.getItemMeta().getDisplayName().equalsIgnoreCase(LaunchGameItem.getItemMeta().getDisplayName())) {
+			plugin.getUHCSystem().StartGame();
+		}
+	}
 }

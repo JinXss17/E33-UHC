@@ -27,6 +27,12 @@ public class E33UHC extends JavaPlugin {
  		
  		uhcSystem = new UHCSystem(this);
     }
+ 	
+ 	public static String GetPréffix() {
+ 		
+ 		return "§8[§7E33_UHC§8]§r";
+ 		
+ 	}
 
     @Override
     public void onDisable() {

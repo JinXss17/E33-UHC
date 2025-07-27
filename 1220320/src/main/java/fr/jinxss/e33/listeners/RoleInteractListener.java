@@ -1,5 +1,8 @@
 package fr.jinxss.e33.listeners;
 
+import fr.jinxss.e33.e33system.roles.Maelle;
+import fr.jinxss.e33.RoleManager;
+import fr.jinxss.e33.Roles;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,6 +38,12 @@ public class RoleInteractListener implements Listener {
         if (role instanceof Lune lune && lune.isLuneItem(item)) {
             event.setCancelled(true);
             lune.onPowerUse();
+        }
+        
+        // --- Maelle ---------------------------------------------------------
+        if (role instanceof Maelle maelle && maelle.isPostureItem(item)) {
+            event.setCancelled(true);          // on empêche l’action par défaut
+            maelle.onPowerUse();               // change la posture
         }
 
 

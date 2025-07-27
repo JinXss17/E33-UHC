@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.e33system.roles.Gustave;
 import fr.jinxss.e33.e33system.roles.Lune;
+import fr.jinxss.e33.e33system.roles.Maelle;
 
 public class RoleCraftListener implements Listener {
 
@@ -59,5 +60,25 @@ public class RoleCraftListener implements Listener {
             lune.onAssign();
             player.sendMessage("§aTu as obtenu le rôle §dLune§a !");
         }
+        
+        if (name.equalsIgnoreCase("§dRôle - Maelle")) {
+            if (!RoleManager.isRoleAvailable("Maelle")) {
+                player.sendMessage("§cCe rôle est déjà pris.");
+                event.setCancelled(true);
+                return;
+            }
+
+            if (RoleManager.hasRole(uuid)) {
+                player.sendMessage("§cTu as déjà un rôle !");
+                event.setCancelled(true);
+                return;
+            }
+
+            Maelle maelle = new Maelle(uuid, "Maelle");
+            RoleManager.assignRole(uuid, "Maelle", maelle);
+            maelle.onAssign();
+            player.sendMessage("§aTu as obtenu le rôle §dMaelle§a !");
+        }
+        
     }
 }

@@ -87,8 +87,8 @@ public class UHCScoreBoard {
 	    
 	    
 	    
-	    //double borderSize = borderManager.getCurrentSize();
-	    obj.getScore(ChatColor.DARK_GREEN + "Bordure: " + (int) 1).setScore(-1);
+	    double borderSize = uhcBorder.getCurrentSize();
+	    obj.getScore(ChatColor.DARK_GREEN + "Bordure: " + (int) borderSize).setScore(-1);
 	
 	     // Activer le PvP si le temps est dépassé et qu'il ne l'est pas encore
 	     if (!uhcSystem.isPvpEnabled() && elapsed >= PVP_ENABLE_TIME) {

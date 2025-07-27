@@ -13,7 +13,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.jinxss.e33.E33UHC;
 import fr.jinxss.e33.uhcsystem.UHCSystem;
-import fr.jinxss.e33.uhcsystem.list.EGameStates;
 
 public class PlayerListener implements Listener {
 	
@@ -65,7 +64,11 @@ public class PlayerListener implements Listener {
 		
 		ItemStack it = e.getItem();
 		
-		if(it.hasItemMeta() && it.getItemMeta().getDisplayName() == LaunchGameItem.getItemMeta().getDisplayName()) {
+		if(it == null) {
+			return;
+		}
+		
+		if(it.hasItemMeta() && it.getItemMeta().getDisplayName().equalsIgnoreCase(LaunchGameItem.getItemMeta().getDisplayName())) {
 			
 			plugin.getUHCSystem().StartGame();
 			

@@ -1,4 +1,4 @@
-package fr.jinxss.e33.Listeners;
+package fr.jinxss.e33.listeners;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -70,7 +70,7 @@ public class PlayerListener implements Listener {
 		
 		if(it.hasItemMeta() && it.getItemMeta().getDisplayName().equalsIgnoreCase(LaunchGameItem.getItemMeta().getDisplayName())) {
 			
-			plugin.getUHCSystem().StartGame();
+			plugin.getUHCSystem().getConfigMenu().open(e.getPlayer());
 			
 		}
 		

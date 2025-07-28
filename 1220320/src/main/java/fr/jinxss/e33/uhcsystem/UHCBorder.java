@@ -23,7 +23,7 @@ public class UHCBorder {
 		border.setCenter(new Location(Bukkit.getWorld("world"), 0, 60, 0 ) );
 		
 	}
-	private void ReduceBorder(double pSize, long pTime) {
+	public void ReduceBorder(double pSize, long pTime) {
 		border.setSize(pSize, pTime*20);
 	}
 	

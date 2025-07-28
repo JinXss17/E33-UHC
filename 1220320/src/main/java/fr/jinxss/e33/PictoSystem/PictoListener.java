@@ -3,6 +3,7 @@ package fr.jinxss.e33.PictoSystem;
 import java.util.Collection;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,14 +13,17 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 
+import fr.jinxss.e33.E33UHC;
 import fr.jinxss.e33.PictoSystem.Pictos.MineurChanceux;
+import fr.jinxss.e33.PictoSystem.Pictos.MineurDor;
 
 public class PictoListener implements Listener {
 
 	private PictoSystem system;
+	private E33UHC plugin;
 	
-	public PictoListener(PictoSystem system) {
-		
+	public PictoListener(E33UHC plugin, PictoSystem system) {
+		this.plugin = plugin;
 		this.system = system;
 		
 	}
@@ -58,25 +62,30 @@ public class PictoListener implements Listener {
 		Collection<ItemStack> drops = block.getDrops();
 		Random r = new Random();
 		
-		boolean DropBoost = false;
-		MineurChanceux mineur = null;
-		
 		for(Picto picto : system.getPlayerPictos(p).getActivatedPicto()) {
 			if(picto instanceof MineurChanceux) {
-				DropBoost = true;
-				mineur = (MineurChanceux)picto;
-			}
-		}
-		if(DropBoost && MineurChanceux.MineraisBoost.contains(block.getType())) {
-			
-			if(r.nextFloat() * 100 < mineur.getDropRate()) {
-				for(ItemStack it : drops) {
-					it.setAmount( it.getAmount() * mineur.getDropMultiplicate() );
-					Exp *= mineur.getDropMultiplicate();
-					e.setExpToDrop(Exp);
-					block.getWorld().dropItemNaturally(block.getLocation(), it);
+				
+				MineurChanceux mineur = (MineurChanceux)picto;
+				if(MineurChanceux.MineraisBoost.contains(block.getType()) && r.nextFloat() * 100 < mineur.getDropRate()) {
+					for(ItemStack it : drops) {
+						it.setAmount( it.getAmount() * mineur.getDropMultiplicate() );
+						Exp *= mineur.getDropMultiplicate();
+						e.setExpToDrop(Exp);
+						block.getWorld().dropItemNaturally(block.getLocation(), it);
+					}
 				}
+				
 			}
+			if(picto instanceof MineurDor) {
+				
+				MineurDor mineur = (MineurDor)picto;
+				if(MineurChanceux.MineraisBoost.contains(block.getType()) && r.nextFloat() * 100 < mineur.getDropRate()) {
+					Bukkit.getScheduler().runTaskLater(plugin, () -> { mineur.DropBonus(block.getLocation()); }, 1);
+					
+				}
+				
+			}
+			
 		}
 	}
 	

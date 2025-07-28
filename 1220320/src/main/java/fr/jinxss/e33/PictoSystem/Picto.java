@@ -1,11 +1,23 @@
 package fr.jinxss.e33.PictoSystem;
 
+import org.bukkit.entity.Player;
+
 public class Picto{
 
+	private int basicCout = 0;
+	public int Cout = 0;
+	
+	private float Coutlvl2Divisor = 1.5f;
+	private float Coutlvl3Divisor = 2;
+	
 	public float DamageBoost = 0;
 	public float ResistanceBoost = 0;
 
 	protected ENiveau Level;
+	
+	public Picto() {
+		Cout = basicCout;
+	}
 	
 	public ENiveau GetLevel() {
 		
@@ -13,10 +25,19 @@ public class Picto{
 		
 	}
 	
+	public boolean IsToggleDamageBoost(Player p) {
+		return false;
+	}
 	
 	public void LevelUp() {
 		if(Level == ENiveau.Instinctif)return;
-		if(Level == ENiveau.Apprentissage)Level = ENiveau.Maitrise;
-		if(Level == ENiveau.Maitrise)Level = ENiveau.Instinctif;
+		if(Level == ENiveau.Apprentissage) {
+			Level = ENiveau.Maitrise;
+			Cout = (int) (basicCout/Coutlvl2Divisor);
+		}
+		if(Level == ENiveau.Maitrise) {
+			Level = ENiveau.Instinctif;
+			Cout = (int) (basicCout/Coutlvl3Divisor);
+		}
 	}
 }

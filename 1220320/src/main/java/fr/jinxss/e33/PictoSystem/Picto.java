@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 
 public class Picto{
 
-	private int basicCout = 0;
+	protected int basicCout = 0;
 	public int Cout = 0;
 	
 	private float Coutlvl2Divisor = 1.5f;

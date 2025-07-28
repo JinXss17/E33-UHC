@@ -11,6 +11,7 @@ public class MineurChanceux extends Picto {
 	
 	public static List<Material> MineraisBoost = List.of(Material.DIAMOND_ORE, Material.GOLD_ORE, Material.IRON_ORE, Material.LAPIS_ORE);
 			
+	private int BasicCout = 16;
 	
 	private float DropRate = 10; // en %
 	private float BonusRateMaitrise = 10;
@@ -18,6 +19,11 @@ public class MineurChanceux extends Picto {
 	private int DropMultiplicate = 2;
 	private int DropBonusInstinct = 1;
 
+	public MineurChanceux() {
+		basicCout = BasicCout;
+		Cout = BasicCout;
+	}
+	
 	public float getDropRate() {
 		return DropRate;
 	}

@@ -13,6 +13,9 @@ import fr.jinxss.e33.PictoSystem.Picto;
 public class MineurDor extends Picto {
 
 	public static List<Material> MineraisBoost = List.of(Material.DIAMOND_ORE, Material.IRON_ORE);
+	
+	private int BasicCout = 10;
+	
 	private ItemStack ItemDropLvl1 =new ItemStack(Material.GOLD_NUGGET, 1);
 	private ItemStack ItemDropLvl2 = new ItemStack(Material.GOLD_NUGGET, 1);
 	private int MidDropLvl2 = 3;
@@ -22,6 +25,11 @@ public class MineurDor extends Picto {
 	private float DropRate = 30; // en %
 	private float BonusRateMaitrise = 20;
 
+	public MineurDor() {
+		basicCout = BasicCout;
+		Cout = BasicCout;
+	}
+	
 	public float getDropRate() {
 		return DropRate;
 	}

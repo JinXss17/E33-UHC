@@ -18,6 +18,7 @@ public class Berserk extends Picto {
 	
 	public Berserk() {
 		DamageBoost = DamageBonusLvl1;
+		basicCout = BasicCout;
 		Cout = BasicCout;
 	}
 	

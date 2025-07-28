@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class RoleCraftListener implements Listener {
 	
-
+	/*
     @EventHandler
     public void onCraft(CraftItemEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
@@ -39,6 +39,6 @@ public class RoleCraftListener implements Listener {
             role.onAssign();
             player.sendMessage("§aTu as obtenu le rôle §dROLES§a !");
         }
-    }
+    }*/
 
 }

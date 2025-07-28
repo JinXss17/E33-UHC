@@ -1,4 +1,4 @@
-package fr.jinxss.e33.PictoSystem.Pictos;
+package fr.jinxss.e33.PictoSystem.Pictos.RessourcePicto;
 
 import java.util.List;
 

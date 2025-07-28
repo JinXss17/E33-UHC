@@ -1,4 +1,4 @@
-package fr.jinxss.e33.PictoSystem.Pictos;
+package fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;

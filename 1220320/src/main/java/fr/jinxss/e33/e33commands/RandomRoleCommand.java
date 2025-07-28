@@ -16,15 +16,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.jinxss.e33.RoleManager;
+import fr.jinxss.e33.e33system.nevrons.Noco;
 
 public class RandomRoleCommand implements CommandExecutor {
 
     private final Set<String> uniqueRolesLeft = new HashSet<>(Arrays.asList(
-            "petank", "mime", "noco", "sakapattate", "matthieu_le_coloss", "trompetiste", "demineur"
+            "noco"//, "mime", "petank", "sakapattate", "matthieu_le_coloss", "trompetiste", "demineur"
     ));
 
     private final List<String> multiRoles = Arrays.asList(
-            "clair", "obscur"
+           // "clair", "obscur"
     );
 
     private final Random random = new Random();
@@ -76,15 +77,16 @@ public class RandomRoleCommand implements CommandExecutor {
             //case "mime" -> RoleManager.assignRole(uuid, "mime", new Mime(uuid, "mime"));
             //case "clair" -> RoleManager.assignRole(uuid, "clair", new Clair(uuid, "clair"));
             //case "obscur" -> RoleManager.assignRole(uuid, "obscur", new Obscur(uuid, "obscur"));
-            //case "noco" -> RoleManager.assignRole(uuid, "noco", new Noco(uuid, "noco"));
+	        case "noco" -> {
+	            Noco noco= new Noco(uuid, "noco");
+	            RoleManager.assignRole(uuid, "noco", noco);
+	            noco.onAssign();
+	        }
             //case "sakapattate" -> RoleManager.assignRole(uuid, "sakapattate", new Sakapattate(uuid, "sakapattate"));
             //case "demineur" -> RoleManager.assignRole(uuid, "demineur", new Demineur(uuid, "demineur"));
             //case "trompetiste" -> RoleManager.assignRole(uuid, "trompetiste", new Trompetiste(uuid, "trompetiste"));
             //case "matthieu_le_coloss" -> RoleManager.assignRole(uuid, "matthieu_le_coloss", new MatthieuLeColoss(uuid, "matthieu_le_coloss"));
             default -> Bukkit.getPlayer(uuid).sendMessage(ChatColor.RED + "Erreur : rôle inconnu.");
         }
-
-        // Appelle la méthode onAssign()
-        RoleManager.getRole(uuid).onAssign();
     }
 }

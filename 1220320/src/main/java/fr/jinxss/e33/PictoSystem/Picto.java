@@ -5,7 +5,7 @@ public class Picto{
 	public float DamageBoost = 0;
 	public float ResistanceBoost = 0;
 
-	private ENiveau Level;
+	protected ENiveau Level;
 	
 	public ENiveau GetLevel() {
 		
@@ -13,11 +13,10 @@ public class Picto{
 		
 	}
 	
+	
 	public void LevelUp() {
-		
 		if(Level == ENiveau.Instinctif)return;
 		if(Level == ENiveau.Apprentissage)Level = ENiveau.Maitrise;
 		if(Level == ENiveau.Maitrise)Level = ENiveau.Instinctif;
 	}
-	
 }

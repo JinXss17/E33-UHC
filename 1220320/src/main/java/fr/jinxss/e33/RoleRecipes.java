@@ -11,23 +11,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class RoleRecipes {
 	
     public static void registerAll(JavaPlugin plugin) {
-    	registerRole(plugin);
+    	registerRenoir(plugin);
     }
     
-    private static void registerRole(JavaPlugin plugin) {
+    private static void registerRenoir(JavaPlugin plugin) {
         ItemStack result = new ItemStack(Material.FEATHER);
         ItemMeta meta = result.getItemMeta();
-        meta.setDisplayName("§dRole - Role");
+        meta.setDisplayName("§dRôle - Renoir");
         result.setItemMeta(meta);
 
-        NamespacedKey key = new NamespacedKey(plugin, "Roles_role");
+        NamespacedKey key = new NamespacedKey(plugin, "Roles_Renoir");
 
         ShapedRecipe recipe = new ShapedRecipe(key, result);
-        recipe.shape("RBR", "PGP", "RBR");
-        recipe.setIngredient('R', Material.REDSTONE);
-        recipe.setIngredient('P', Material.PISTON);
-        recipe.setIngredient('B', Material.IRON_BARS);
-        recipe.setIngredient('G', Material.GLOWSTONE);
+        
+        recipe.shape("RBR", "BSB", "RBR");
+        recipe.setIngredient('R', Material.ROTTEN_FLESH);
+        recipe.setIngredient('S', Material.STRING);
+        recipe.setIngredient('B', Material.BONE);
 
         Bukkit.addRecipe(recipe);
     }

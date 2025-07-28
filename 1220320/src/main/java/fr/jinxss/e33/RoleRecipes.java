@@ -11,18 +11,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class RoleRecipes {
 	
     public static void registerAll(JavaPlugin plugin) {
-    	registerRole(plugin);
+    	registerSciel(plugin);
     }
     
-    private static void registerRole(JavaPlugin plugin) {
+    private static void registerSciel(JavaPlugin plugin) {
         ItemStack result = new ItemStack(Material.FEATHER);
         ItemMeta meta = result.getItemMeta();
-        meta.setDisplayName("§dRole - Role");
+        meta.setDisplayName("§dRôle - Sciel");
         result.setItemMeta(meta);
 
-        NamespacedKey key = new NamespacedKey(plugin, "Roles_role");
+        NamespacedKey key = new NamespacedKey(plugin, "Roles_Sciel");
 
         ShapedRecipe recipe = new ShapedRecipe(key, result);
+        //Créer le craft pour le rôle sciel
         recipe.shape("RBR", "PGP", "RBR");
         recipe.setIngredient('R', Material.REDSTONE);
         recipe.setIngredient('P', Material.PISTON);

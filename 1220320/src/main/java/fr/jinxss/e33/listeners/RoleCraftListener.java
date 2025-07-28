@@ -1,13 +1,15 @@
 package fr.jinxss.e33.listeners;
 
-import fr.jinxss.e33.RoleManager;
+import java.util.UUID;
 
-import org.bukkit.event.*;
-import org.bukkit.event.inventory.*;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.UUID;
+import fr.jinxss.e33.RoleManager;
+import fr.jinxss.e33.e33system.roles.Sciel;
 
 public class RoleCraftListener implements Listener {
 	
@@ -21,8 +23,8 @@ public class RoleCraftListener implements Listener {
         String name = item.getItemMeta().getDisplayName();
         UUID uuid = player.getUniqueId();
 
-        if (name.equalsIgnoreCase("§dRôle - ROLES")) {
-            if (!RoleManager.isRoleAvailable("ROLES")) {
+        if (name.equalsIgnoreCase("§dRôle - Sciel")) {
+            if (!RoleManager.isRoleAvailable("Sciel")) {
                 player.sendMessage("§cCe rôle est déjà pris.");
                 event.setCancelled(true);
                 return;
@@ -34,9 +36,9 @@ public class RoleCraftListener implements Listener {
                 return;
             }
 
-            ROLES role = new ROLES(uuid, "ROLES");
-            RoleManager.assignRole(uuid, "ROLES", role);
-            role.onAssign();
+            Sciel sciel = new Sciel(uuid, "Sciel");
+            RoleManager.assignRole(uuid, "Sciel", sciel);
+            sciel.onAssign();
             player.sendMessage("§aTu as obtenu le rôle §dROLES§a !");
         }
     }

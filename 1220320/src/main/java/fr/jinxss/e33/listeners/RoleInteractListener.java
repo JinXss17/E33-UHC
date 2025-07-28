@@ -1,7 +1,5 @@
 package fr.jinxss.e33.listeners;
 
-import javax.management.relation.Role;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.Roles;
+import fr.jinxss.e33.e33system.roles.Sciel;
 
 public class RoleInteractListener implements Listener {
 
@@ -25,10 +24,10 @@ public class RoleInteractListener implements Listener {
 
         ItemStack item = event.getItem();
 
-        // --- Role ---------------------------------------------------------
-        if (role instanceof Roles roles && roles.isrolesItem(item)) {
+        // --- Sciel ---------------------------------------------------------
+        if (role instanceof Sciel sciel && sciel.isDeck(item)) {
             event.setCancelled(true);
-            roles.onPowerUse(); // ou gustave.onPowerUse() si tu n’as pas besoin du joueur
+            sciel.onPowerUse(); //
         }
 
 

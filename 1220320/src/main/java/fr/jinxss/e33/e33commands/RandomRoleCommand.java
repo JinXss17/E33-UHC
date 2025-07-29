@@ -97,7 +97,11 @@ public class RandomRoleCommand implements CommandExecutor {
 	            demineur.onAssign();
 	        }
             //case "trompetiste" -> RoleManager.assignRole(uuid, "trompetiste", new Trompetiste(uuid, "trompetiste"));
-            //case "matthieu_le_coloss" -> RoleManager.assignRole(uuid, "matthieu_le_coloss", new MatthieuLeColoss(uuid, "matthieu_le_coloss"));
+	        case "matthieu_le_coloss" -> {
+	        	Matthieu_Le_Coloss matthieu_le_coloss = new Matthieu_Le_Coloss(uuid, "matthieu_le_coloss");
+	            RoleManager.assignRole(uuid, "matthieu_le_coloss", matthieu_le_coloss);
+	            matthieu_le_coloss.onAssign();
+	        }
             default -> Bukkit.getPlayer(uuid).sendMessage(ChatColor.RED + "Erreur : rôle inconnu.");
         }
 

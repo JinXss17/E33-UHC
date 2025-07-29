@@ -2,14 +2,12 @@ package fr.jinxss.e33.e33system.roles;
 
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import fr.jinxss.e33.Roles;
 
@@ -20,7 +18,8 @@ public class Gustave extends Roles {
     private boolean onCooldown = false;
 
     private final int MAX_JAUGE = 10;
-    private final long COOLDOWN = 20 * 120; // 2 minutes en ticks (20 ticks = 1 seconde)
+    @SuppressWarnings("unused")
+	private final long COOLDOWN = 20 * 120; // 2 minutes en ticks (20 ticks = 1 seconde)
 
     private final ItemStack gustaveItem;
 

@@ -43,16 +43,16 @@ public abstract class Roles {
     // Méthode appelée quand le joueur utilise son ou ses pouvoir(s)
     public abstract void onPowerUse();
     
-    public double getSpeed() {
-        return speed;
+    public int getSpeed() {
+        return speed/100;
     }
 
-    public double getForce() {
-        return force;
+    public int getForce() {
+        return force/100;
     }
 
-    public double getResi() {
-        return resi;
+    public int getResi() {
+        return resi/100;
     }
 
 }

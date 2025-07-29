@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import fr.jinxss.e33.PictoSystem.ENiveau;
 
 public class Picto{
-
+	
 	protected int basicCout = 0;
 	public int Cout = 0;
 	

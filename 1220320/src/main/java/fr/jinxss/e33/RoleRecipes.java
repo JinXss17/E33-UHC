@@ -76,7 +76,8 @@ public class RoleRecipes {
         Bukkit.addRecipe(recipe);
     }
     
-    private static void registerSciel(JavaPlugin plugin) {
+    @SuppressWarnings("unused")
+	private static void registerSciel(JavaPlugin plugin) {
         ItemStack result = new ItemStack(Material.FEATHER);
         ItemMeta meta = result.getItemMeta();
         meta.setDisplayName("§dRôle - Sciel");

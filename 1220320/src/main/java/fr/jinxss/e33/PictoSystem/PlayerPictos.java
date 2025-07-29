@@ -21,7 +21,7 @@ public class PlayerPictos {
 		return ActivatedPicto;
 	}
 	
-	public boolean HasPictoActivated(Class<Picto> Class) {
+	public boolean HasPictoActivated(Class<? extends Picto> Class) {
 		
 		for(Picto picto : getActivatedPicto()) {
 			if(picto.getClass() == Class) {
@@ -31,7 +31,7 @@ public class PlayerPictos {
 		return false;
 	}
 	
-	public Picto GetPictoActivated(Class<Picto> Class) {
+	public Picto GetPictoActivated(Class<? extends Picto> Class) {
 		
 		for(Picto picto : getActivatedPicto()) {
 			
@@ -52,7 +52,7 @@ public class PlayerPictos {
 		for(Picto picto : getActivatedPicto()) {
 			lTotalDamageBoost += picto.DamageBoost;
 		}
-		return lTotalDamageBoost;
+		return 1 + (lTotalDamageBoost/100);
 	}
 	public float getTotalResistanceBoost() {
 		
@@ -60,7 +60,7 @@ public class PlayerPictos {
 		for(Picto picto : getActivatedPicto()) {
 			lTotalResistanceBoost += picto.ResistanceBoost;
 		}
-		return lTotalResistanceBoost;
+		return 1 - (lTotalResistanceBoost/100);
 	}
 	
 	

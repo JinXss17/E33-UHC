@@ -12,8 +12,12 @@ public class E33UHC extends JavaPlugin {
 
 	private UHCSystem uhcSystem;
 	
+	@SuppressWarnings("unused")
+	private PictoSystem pictoSystem;
+	
  	@Override
     public void onEnable() {
+ 		pictoSystem = new PictoSystem(this);
         getLogger().info("MonPlugin est activé !");
         
         // Enregistre les crafts

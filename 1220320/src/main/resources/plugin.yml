@@ -2,3 +2,8 @@ name: E33UHC
 version: 1.0
 main: fr.jinxss.e33.E33UHC
 api-version: 1.21
+commands:
+  giveRandomRole:
+    description: Assigne un rôle aléatoire à un joueur
+    usage: /giveRandomRole <joueur>
+    permission: role.assign

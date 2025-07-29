@@ -16,15 +16,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.jinxss.e33.RoleManager;
+import fr.jinxss.e33.e33system.nevrons.Petank;
 
 public class RandomRoleCommand implements CommandExecutor {
 
     private final Set<String> uniqueRolesLeft = new HashSet<>(Arrays.asList(
-            "petank", "mime", "noco", "sakapattate", "matthieu_le_coloss", "trompetiste", "demineur"
+            "petank"//, "mime", "noco", "sakapattate", "matthieu_le_coloss", "trompetiste", "demineur"
     ));
 
     private final List<String> multiRoles = Arrays.asList(
-            "clair", "obscur"
+           // "clair", "obscur"
     );
 
     private final Random random = new Random();
@@ -72,7 +73,11 @@ public class RandomRoleCommand implements CommandExecutor {
 
     private void assignRoleToPlayer(UUID uuid, String roleName) {
         switch (roleName.toLowerCase()) {
-            //case "petank" -> RoleManager.assignRole(uuid, "petank", new Petank(uuid, "petank"));
+	        case "petank" -> {
+	            Petank petank = new Petank(uuid, "petank");
+	            RoleManager.assignRole(uuid, "petank", petank);
+	            petank.onAssign();
+	        }
             //case "mime" -> RoleManager.assignRole(uuid, "mime", new Mime(uuid, "mime"));
             //case "clair" -> RoleManager.assignRole(uuid, "clair", new Clair(uuid, "clair"));
             //case "obscur" -> RoleManager.assignRole(uuid, "obscur", new Obscur(uuid, "obscur"));

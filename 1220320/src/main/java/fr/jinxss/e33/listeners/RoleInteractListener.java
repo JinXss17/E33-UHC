@@ -13,7 +13,7 @@ import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.Roles;
 
 public class RoleInteractListener implements Listener {
-
+/*
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         // ne traiter que la main principale
@@ -33,5 +33,5 @@ public class RoleInteractListener implements Listener {
 
 
         // plus tard : autres rôles et objets spéciaux…
-    }
+    }*/
 }

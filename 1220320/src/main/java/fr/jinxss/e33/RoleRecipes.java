@@ -27,6 +27,7 @@ public class RoleRecipes {
         NamespacedKey key = new NamespacedKey(plugin, "gustave_role");
 
         ShapedRecipe recipe = new ShapedRecipe(key, result);
+        //Créer le craft pour le rôle sciel
         recipe.shape("RBR", "PGP", "RBR");
         recipe.setIngredient('R', Material.REDSTONE);
         recipe.setIngredient('P', Material.PISTON);
@@ -72,4 +73,27 @@ public class RoleRecipes {
 
         Bukkit.addRecipe(recipe);
     }
+    
+    private static void registerSciel(JavaPlugin plugin) {
+        ItemStack result = new ItemStack(Material.FEATHER);
+        ItemMeta meta = result.getItemMeta();
+        meta.setDisplayName("§dRôle - Sciel");
+        result.setItemMeta(meta);
+
+        NamespacedKey key = new NamespacedKey(plugin, "Roles_Sciel");
+
+
+
+
+        ShapedRecipe recipe = new ShapedRecipe(key, result);
+        //Créer le craft pour le rôle sciel
+        recipe.shape("RBR", "PGP", "RBR");
+        recipe.setIngredient('R', Material.REDSTONE);
+        recipe.setIngredient('P', Material.PISTON);
+        recipe.setIngredient('B', Material.IRON_BARS);
+        recipe.setIngredient('G', Material.GLOWSTONE);
+
+        Bukkit.addRecipe(recipe);
+    }
+    
 }

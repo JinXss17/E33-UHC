@@ -9,6 +9,15 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import fr.jinxss.e33.RoleManager;
+import fr.jinxss.e33.e33system.roles.Sciel;
+
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.inventory.ItemStack;
+
+import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.e33system.roles.Gustave;
 import fr.jinxss.e33.e33system.roles.Lune;
 import fr.jinxss.e33.e33system.roles.Maelle;
@@ -23,6 +32,25 @@ public class RoleCraftListener implements Listener {
 
         String name = item.getItemMeta().getDisplayName();
         UUID uuid = player.getUniqueId();
+
+		if (name.equalsIgnoreCase("§dRôle - Sciel")) {
+            if (!RoleManager.isRoleAvailable("Sciel")) {
+                player.sendMessage("§cCe rôle est déjà pris.");
+                event.setCancelled(true);
+                return;
+            }
+
+            if (RoleManager.hasRole(uuid)) {
+                player.sendMessage("§cTu as déjà un rôle !");
+                event.setCancelled(true);
+                return;
+            }
+
+            Sciel sciel = new Sciel(uuid, "Sciel");
+            RoleManager.assignRole(uuid, "Sciel", sciel);
+            sciel.onAssign();
+            player.sendMessage("§aTu as obtenu le rôle §dROLES§a !");
+        }
 
         if (name.equalsIgnoreCase("§dRôle - Gustave")) {
             if (!RoleManager.isRoleAvailable("Gustave")) {

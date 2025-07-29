@@ -80,4 +80,5 @@ public class Sciel extends Roles {
     public boolean isDeck(ItemStack item) {
         return item != null && item.isSimilar(deck);
     }
+    
 }

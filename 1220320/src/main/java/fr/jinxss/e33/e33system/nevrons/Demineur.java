@@ -13,12 +13,12 @@ public class Demineur extends Roles {
 
     private boolean canUse = true;
     private final long COOLDOWN = 5 * 60 * 20L; // 5 minutes in ticks
+    private final ItemStack explosiveArrowItem; // ✅ champ global ajouté ici
 
     public Demineur(UUID uuid, String name) {
         super(uuid, name);
 
-        // Objet spécial : bâton nommé "Flèche explosive"
-        ItemStack explosiveArrowItem = new ItemStack(Material.STICK); 
+        explosiveArrowItem = new ItemStack(Material.STICK); // ✅ affecté ici
         var meta = explosiveArrowItem.getItemMeta();
         if (meta != null) {
             meta.setDisplayName("§cFlèche explosive");
@@ -55,9 +55,10 @@ public class Demineur extends Roles {
         arrow.setCustomName("ExplosiveArrow");
 
         player.sendMessage("§eFlèche explosive tirée !");
-        canUse = false;
-
-        // Recharge
+        canUse = true;
+    }
+        // Recharge (oublie le temps de mettre un coldown)
+        /*
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -66,5 +67,9 @@ public class Demineur extends Roles {
                 if (p != null) p.sendMessage("§aVotre flèche explosive est rechargée !");
             }
         }.runTaskLater(Bukkit.getPluginManager().getPlugin("E33-UHC"), COOLDOWN);
+    }*/
+    
+    public boolean isDemineurItem(ItemStack item) {
+        return item != null && item.isSimilar(explosiveArrowItem);
     }
 }

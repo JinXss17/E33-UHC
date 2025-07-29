@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 
 import fr.jinxss.e33.E33UHC;
+import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 import fr.jinxss.e33.PictoSystem.Pictos.RessourcePicto.MineurChanceux;
 import fr.jinxss.e33.PictoSystem.Pictos.RessourcePicto.MineurDor;
 

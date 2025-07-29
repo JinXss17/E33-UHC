@@ -2,6 +2,8 @@ package fr.jinxss.e33.PictoSystem;
 
 import java.util.ArrayList;
 
+import fr.jinxss.e33.PictoSystem.Pictos.Picto;
+
 public class PlayerPictos {
 
 	@SuppressWarnings("unused")

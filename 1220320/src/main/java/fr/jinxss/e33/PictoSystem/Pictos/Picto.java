@@ -1,6 +1,8 @@
-package fr.jinxss.e33.PictoSystem;
+package fr.jinxss.e33.PictoSystem.Pictos;
 
 import org.bukkit.entity.Player;
+
+import fr.jinxss.e33.PictoSystem.ENiveau;
 
 public class Picto{
 

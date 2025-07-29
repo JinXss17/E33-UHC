@@ -54,6 +54,12 @@ public class RoleInteractListener implements Listener {
             event.setCancelled(true);
             renoir.onPowerUse(); // ou gustave.onPowerUse() si tu n’as pas besoin du joueur
         }
+        
+        // --- Demineur ---------------------------------------------------------
+        if (role instanceof Demineur demineur && demineur.isDemineurItem(item)) {
+            event.setCancelled(true);
+            demineur.onPowerUse();
+
 
 
         // plus tard : autres rôles et objets spéciaux…

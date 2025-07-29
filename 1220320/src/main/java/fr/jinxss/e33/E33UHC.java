@@ -35,6 +35,7 @@ public class E33UHC extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RoleInteractListener(), this);
         getServer().getPluginManager().registerEvents(new RoleAttackListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+        getServer().getPluginManager().registerEvents(new ExplosiveArrowListener(), this);
  		
  		uhcSystem = new UHCSystem(this);
     }

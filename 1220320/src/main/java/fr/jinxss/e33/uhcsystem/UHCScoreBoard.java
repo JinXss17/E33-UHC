@@ -35,7 +35,6 @@ public class UHCScoreBoard {
     		) {
         this.plugin = plugin;
         this.uhcBorder = uhcBorder;
-        this.startTime = System.currentTimeMillis();
 		this.uhcSystem = uhcSystem;
     }
 
@@ -54,6 +53,7 @@ public class UHCScoreBoard {
     }
 
     public void startUpdating() {
+    	this.startTime = System.currentTimeMillis();
         new BukkitRunnable() {
             @Override
             public void run() {

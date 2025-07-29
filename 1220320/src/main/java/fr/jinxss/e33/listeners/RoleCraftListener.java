@@ -1,15 +1,6 @@
-package fr.jinxss.e33.listeners;
+package fr.jinxss.e33.Listeners;
 
 import java.util.UUID;
-
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.inventory.ItemStack;
-
-import fr.jinxss.e33.RoleManager;
-import fr.jinxss.e33.e33system.roles.Sciel;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,10 +12,12 @@ import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.e33system.roles.Gustave;
 import fr.jinxss.e33.e33system.roles.Lune;
 import fr.jinxss.e33.e33system.roles.Maelle;
+import fr.jinxss.e33.e33system.roles.Renoir;
+import fr.jinxss.e33.e33system.roles.Sciel;
 
 public class RoleCraftListener implements Listener {
 	
-/*
+
     @EventHandler
     public void onCraft(CraftItemEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
@@ -70,7 +63,6 @@ public class RoleCraftListener implements Listener {
             sciel.onAssign();
             player.sendMessage("§aTu as obtenu le rôle §dROLES§a !");
         }
-    }*/
 
         if (name.equalsIgnoreCase("§dRôle - Gustave")) {
             if (!RoleManager.isRoleAvailable("Gustave")) {

@@ -1,4 +1,4 @@
-package fr.jinxss.e33.listeners;
+package fr.jinxss.e33.Listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -70,18 +70,11 @@ public class PlayerListener implements Listener {
 	public void onClickItem(PlayerInteractEvent e) {
 		
 		ItemStack it = e.getItem();
-		
 		if(it == null) {
 			return;
-
-
-
 		}
-		
 		if(it.hasItemMeta() && it.getItemMeta().getDisplayName().equalsIgnoreCase(LaunchGameItem.getItemMeta().getDisplayName())) {
-			
 			plugin.getUHCSystem().getConfigMenu().open(e.getPlayer());
-			
 		}
 		
 	}
@@ -106,17 +99,5 @@ public class PlayerListener implements Listener {
 	public void onPlayerRespawn(PlayerRespawnEvent e) {
 		Player p = e.getPlayer();
 		Bukkit.getScheduler().runTaskLater(plugin, () -> {p.setGameMode(GameMode.SPECTATOR);} , 1);
-	}
-	
-	@EventHandler
-	public void onClickItem(PlayerInteractEvent e) {
-		
-		ItemStack it = e.getItem();
-		if(it == null) {
-			return;
-		}
-		if(it.hasItemMeta() && it.getItemMeta().getDisplayName().equalsIgnoreCase(LaunchGameItem.getItemMeta().getDisplayName())) {
-			plugin.getUHCSystem().StartGame();
-		}
 	}
 }

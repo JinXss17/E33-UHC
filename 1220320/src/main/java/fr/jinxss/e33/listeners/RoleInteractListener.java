@@ -1,8 +1,5 @@
-package fr.jinxss.e33.listeners;
+package fr.jinxss.e33.Listeners;
 
-import fr.jinxss.e33.e33system.roles.Maelle;
-import fr.jinxss.e33.RoleManager;
-import fr.jinxss.e33.Roles;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,10 +11,12 @@ import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.Roles;
 import fr.jinxss.e33.e33system.roles.Gustave;
 import fr.jinxss.e33.e33system.roles.Lune;
+import fr.jinxss.e33.e33system.roles.Maelle;
+import fr.jinxss.e33.e33system.roles.Renoir;
 import fr.jinxss.e33.e33system.roles.Sciel;
 
 public class RoleInteractListener implements Listener {
-/*
+
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         // ne traiter que la main principale
@@ -33,6 +32,7 @@ public class RoleInteractListener implements Listener {
         if (role instanceof Sciel sciel && sciel.isDeck(item)) {
             event.setCancelled(true);
             sciel.onPowerUse(); //
+        }
         // --- Gustave ---------------------------------------------------------
         if (role instanceof Gustave gustave && gustave.isGustaveItem(item)) {
             event.setCancelled(true);
@@ -57,5 +57,5 @@ public class RoleInteractListener implements Listener {
 
 
         // plus tard : autres rôles et objets spéciaux…
-    }*/
+    }
 }

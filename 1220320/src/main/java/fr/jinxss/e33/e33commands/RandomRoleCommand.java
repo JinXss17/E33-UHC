@@ -16,6 +16,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.jinxss.e33.RoleManager;
+import fr.jinxss.e33.e33system.nevrons.Clair;
 import fr.jinxss.e33.e33system.nevrons.Obscur;
 
 public class RandomRoleCommand implements CommandExecutor {

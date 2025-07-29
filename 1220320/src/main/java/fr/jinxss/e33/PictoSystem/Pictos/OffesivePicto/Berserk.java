@@ -5,7 +5,7 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
 
 import fr.jinxss.e33.PictoSystem.ENiveau;
-import fr.jinxss.e33.PictoSystem.Picto;
+import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 
 public class Berserk extends Picto {
 	

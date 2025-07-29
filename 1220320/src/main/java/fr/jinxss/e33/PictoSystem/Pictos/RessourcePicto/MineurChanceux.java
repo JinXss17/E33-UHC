@@ -5,7 +5,7 @@ import java.util.List;
 import org.bukkit.Material;
 
 import fr.jinxss.e33.PictoSystem.ENiveau;
-import fr.jinxss.e33.PictoSystem.Picto;
+import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 
 public class MineurChanceux extends Picto {
 	

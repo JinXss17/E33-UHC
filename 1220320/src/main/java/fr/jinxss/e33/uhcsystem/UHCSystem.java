@@ -26,13 +26,20 @@ public class UHCSystem {
 	
 	private EGameStates GameState;
 	
-	@SuppressWarnings("unused")
 	private UHCScoreBoard Board;
+	private UHCConfigMenu menuConfig;
 	
 	
 	public UHCSystem(E33UHC plugin) {
 		this.plugin = plugin ;
 		GameState = EGameStates.Waiting;
+		Board = new UHCScoreBoard(plugin, this, new UHCBorder());
+		menuConfig = new UHCConfigMenu(this, Board.getBorder());
+		plugin.getServer().getPluginManager().registerEvents(menuConfig, plugin);
+	}
+	
+	public UHCConfigMenu getConfigMenu() {
+		return menuConfig;
 	}
 	
 	public void StartGame() {
@@ -50,6 +57,7 @@ public class UHCSystem {
 			_AlivePlayerList.add(p.getUniqueId());
 		}
 		
+		Board.startUpdating();
 		RegisterScoreBoard();
 	}
 	
@@ -58,6 +66,12 @@ public class UHCSystem {
 	}
 	public EGameStates getGameState() {
 		return this.GameState;
+	}
+	
+	public UHCScoreBoard getBoard() {
+		
+		return Board;
+	
 	}
 	
 	public void RegisterScoreBoard() {

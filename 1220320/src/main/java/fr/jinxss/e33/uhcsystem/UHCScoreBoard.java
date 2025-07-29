@@ -21,19 +21,21 @@ public class UHCScoreBoard {
     private final Map<Player, Scoreboard> scoreboards = new HashMap<>();
     private long startTime;
     
-    private final long PVP_ENABLE_TIME = 10 * 60; // en secondes
+    public long PVP_ENABLE_TIME = 10; // en minutes
     private final UHCSystem uhcSystem;
     private final UHCBorder uhcBorder;
     
     private boolean meetupStarted = false;
+    
+    public UHCBorder getBorder() {
+    	return uhcBorder;
+    }
 
     public UHCScoreBoard(E33UHC plugin, UHCSystem uhcSystem, UHCBorder uhcBorder
     		) {
         this.plugin = plugin;
         this.uhcBorder = uhcBorder;
-        this.startTime = System.currentTimeMillis();
 		this.uhcSystem = uhcSystem;
-        startUpdating();
     }
 
     public void createScoreboard(Player player) {
@@ -50,7 +52,8 @@ public class UHCScoreBoard {
         player.setScoreboard(board);
     }
 
-    private void startUpdating() {
+    public void startUpdating() {
+    	this.startTime = System.currentTimeMillis();
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -91,11 +94,11 @@ public class UHCScoreBoard {
 	    obj.getScore(ChatColor.DARK_GREEN + "Bordure: " + (int) borderSize).setScore(-1);
 	
 	     // Activer le PvP si le temps est dépassé et qu'il ne l'est pas encore
-	     if (!uhcSystem.isPvpEnabled() && elapsed >= PVP_ENABLE_TIME) {
+	     if (!uhcSystem.isPvpEnabled() && elapsed >= PVP_ENABLE_TIME * 60) {
 	         uhcSystem.TogglePvP();
 	     }
 	     if (!uhcSystem.isPvpEnabled()) {
-		    long remaining = PVP_ENABLE_TIME - elapsed;
+		    long remaining = PVP_ENABLE_TIME * 60 - elapsed;
 		    long lminutes = remaining / 60;
 		    long lseconds = remaining % 60;
 	
@@ -104,7 +107,7 @@ public class UHCScoreBoard {
 	     } else {
 	    	    obj.getScore(ChatColor.LIGHT_PURPLE + "PvP: Activé").setScore(0);
 	     }
-	     if (!meetupStarted && elapsed >= uhcBorder.MinuteToMeetUp) {
+	     if (!meetupStarted && elapsed >= uhcBorder.MinuteToMeetUp * 60) {
 		    meetupStarted = true;
 		    uhcBorder.ReduceToMeetUpSize();
 	
@@ -112,7 +115,7 @@ public class UHCScoreBoard {
 		    Bukkit.broadcastMessage(ChatColor.GOLD + "⚔️ MeetUp ! La bordure se réduit !");
 	     }
 	     if (!meetupStarted) {
-			long remaining = uhcBorder.MinuteToMeetUp - elapsed;
+			long remaining = uhcBorder.MinuteToMeetUp * 60 - elapsed;
 			long lminutes = remaining / 60;
 			long lseconds = remaining % 60;
 			

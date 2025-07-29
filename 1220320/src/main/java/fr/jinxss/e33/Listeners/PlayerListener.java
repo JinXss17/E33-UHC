@@ -67,6 +67,26 @@ public class PlayerListener implements Listener {
 	}
 	
 	@EventHandler
+	public void onClickItem(PlayerInteractEvent e) {
+		
+		ItemStack it = e.getItem();
+		
+		if(it == null) {
+			return;
+
+
+
+		}
+		
+		if(it.hasItemMeta() && it.getItemMeta().getDisplayName().equalsIgnoreCase(LaunchGameItem.getItemMeta().getDisplayName())) {
+			
+			plugin.getUHCSystem().getConfigMenu().open(e.getPlayer());
+			
+		}
+		
+	}
+	
+	@EventHandler
 	public void onDead(PlayerDeathEvent e) {
 		
 		Player p = e.getEntity();

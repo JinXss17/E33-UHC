@@ -16,15 +16,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.jinxss.e33.RoleManager;
+import fr.jinxss.e33.e33system.nevrons.Matthieu_Le_Coloss;
 
 public class RandomRoleCommand implements CommandExecutor {
 
     private final Set<String> uniqueRolesLeft = new HashSet<>(Arrays.asList(
-            "petank", "mime", "noco", "sakapattate", "matthieu_le_coloss", "trompetiste", "demineur"
+            "matthieu_le_coloss"//, "mime", "noco", "sakapattate", "petank", "trompetiste", "demineur"
     ));
 
     private final List<String> multiRoles = Arrays.asList(
-            "clair", "obscur"
+            //"clair", "obscur"
     );
 
     private final Random random = new Random();
@@ -80,7 +81,11 @@ public class RandomRoleCommand implements CommandExecutor {
             //case "sakapattate" -> RoleManager.assignRole(uuid, "sakapattate", new Sakapattate(uuid, "sakapattate"));
             //case "demineur" -> RoleManager.assignRole(uuid, "demineur", new Demineur(uuid, "demineur"));
             //case "trompetiste" -> RoleManager.assignRole(uuid, "trompetiste", new Trompetiste(uuid, "trompetiste"));
-            //case "matthieu_le_coloss" -> RoleManager.assignRole(uuid, "matthieu_le_coloss", new MatthieuLeColoss(uuid, "matthieu_le_coloss"));
+	        case "matthieu_le_coloss" -> {
+	        	Matthieu_Le_Coloss matthieu_le_coloss = new Matthieu_Le_Coloss(uuid, "matthieu_le_coloss");
+	            RoleManager.assignRole(uuid, "matthieu_le_coloss", matthieu_le_coloss);
+	            matthieu_le_coloss.onAssign();
+	        }
             default -> Bukkit.getPlayer(uuid).sendMessage(ChatColor.RED + "Erreur : rôle inconnu.");
         }
 

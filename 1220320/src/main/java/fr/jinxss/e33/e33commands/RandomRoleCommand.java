@@ -22,11 +22,11 @@ import fr.jinxss.e33.e33system.nevrons.Obscur;
 public class RandomRoleCommand implements CommandExecutor {
 
     private final Set<String> uniqueRolesLeft = new HashSet<>(Arrays.asList(
-            //"petank", "mime", "noco", "sakapattate", "matthieu_le_coloss", "trompetiste", "demineur"
+            "petank", "noco", "matthieu_le_coloss", "demineur"//, "mime", "trompetiste", "sakapattate"
     ));
 
     private final List<String> multiRoles = Arrays.asList(
-            "obscur"//, "clair"
+            "obscur", "clair"
     );
 
     private final Random random = new Random();

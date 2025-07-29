@@ -1,4 +1,4 @@
-package fr.jinxss.e33.Listeners;
+package fr.jinxss.e33.listeners;
 
 import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.e33system.roles.Lune;

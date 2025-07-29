@@ -16,6 +16,7 @@ public class RoleRecipes {
     	registerMaelle(plugin);
     	registerLune(plugin);
     	registerRenoir(plugin);
+    	registerSciel(plugin);
     }
     
 

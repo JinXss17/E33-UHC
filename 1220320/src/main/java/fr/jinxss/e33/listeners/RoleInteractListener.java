@@ -1,4 +1,4 @@
-package fr.jinxss.e33.Listeners;
+package fr.jinxss.e33.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.Roles;
+import fr.jinxss.e33.e33system.nevrons.Demineur;
 import fr.jinxss.e33.e33system.roles.Gustave;
 import fr.jinxss.e33.e33system.roles.Lune;
 import fr.jinxss.e33.e33system.roles.Maelle;
@@ -16,7 +17,7 @@ import fr.jinxss.e33.e33system.roles.Renoir;
 import fr.jinxss.e33.e33system.roles.Sciel;
 
 public class RoleInteractListener implements Listener {
-/*
+
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         // ne traiter que la main principale
@@ -59,7 +60,7 @@ public class RoleInteractListener implements Listener {
         if (role instanceof Demineur demineur && demineur.isDemineurItem(item)) {
             event.setCancelled(true);
             demineur.onPowerUse();
-
+        }
 
 
         // plus tard : autres rôles et objets spéciaux…

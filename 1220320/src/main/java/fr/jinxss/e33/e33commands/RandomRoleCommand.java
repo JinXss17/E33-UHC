@@ -16,8 +16,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.jinxss.e33.RoleManager;
-import fr.jinxss.e33.e33system.nevrons.Clair;
-import fr.jinxss.e33.e33system.nevrons.Obscur;
+import fr.jinxss.e33.e33system.nevrons.Noco;
 
 public class RandomRoleCommand implements CommandExecutor {
 
@@ -86,7 +85,11 @@ public class RandomRoleCommand implements CommandExecutor {
 	            RoleManager.assignRole(uuid, "obscur", obscur);
 	            obscur.onAssign();
 	        }
-            //case "noco" -> RoleManager.assignRole(uuid, "noco", new Noco(uuid, "noco"));
+            case "noco" -> {
+	            Noco noco= new Noco(uuid, "noco");
+	            RoleManager.assignRole(uuid, "noco", noco);
+	            noco.onAssign();
+	        }
             //case "sakapattate" -> RoleManager.assignRole(uuid, "sakapattate", new Sakapattate(uuid, "sakapattate"));
             //case "demineur" -> RoleManager.assignRole(uuid, "demineur", new Demineur(uuid, "demineur"));
             //case "trompetiste" -> RoleManager.assignRole(uuid, "trompetiste", new Trompetiste(uuid, "trompetiste"));

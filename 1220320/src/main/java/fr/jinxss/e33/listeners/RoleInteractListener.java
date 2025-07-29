@@ -16,7 +16,7 @@ import fr.jinxss.e33.e33system.roles.Renoir;
 import fr.jinxss.e33.e33system.roles.Sciel;
 
 public class RoleInteractListener implements Listener {
-
+/*
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         // ne traiter que la main principale

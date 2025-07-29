@@ -23,7 +23,8 @@ import fr.jinxss.e33.e33system.roles.Lune;
 import fr.jinxss.e33.e33system.roles.Maelle;
 
 public class RoleCraftListener implements Listener {
-
+	
+	/*
     @EventHandler
     public void onCraft(CraftItemEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
@@ -69,6 +70,7 @@ public class RoleCraftListener implements Listener {
             sciel.onAssign();
             player.sendMessage("§aTu as obtenu le rôle §dROLES§a !");
         }
+    }*/
 
         if (name.equalsIgnoreCase("§dRôle - Gustave")) {
             if (!RoleManager.isRoleAvailable("Gustave")) {

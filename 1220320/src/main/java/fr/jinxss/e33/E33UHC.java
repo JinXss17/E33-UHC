@@ -23,6 +23,8 @@ public class E33UHC extends JavaPlugin {
         // Enregistre les crafts
         RoleRecipes.registerAll(this);
 
+		getCommand("giveRandomRole").setExecutor(new RandomRoleCommand());
+
         // Enregistre les listeners
         getServer().getPluginManager().registerEvents(new RoleCraftListener(), this);
         getServer().getPluginManager().registerEvents(new RoleInteractListener(), this);

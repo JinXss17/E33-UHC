@@ -15,6 +15,7 @@ public class RoleRecipes {
     	registerGustave(plugin);
     	registerMaelle(plugin);
     	registerLune(plugin);
+    	registerRenoir(plugin);
     }
     
 
@@ -93,6 +94,22 @@ public class RoleRecipes {
         recipe.setIngredient('B', Material.IRON_BARS);
         recipe.setIngredient('G', Material.GLOWSTONE);
 
+        Bukkit.addRecipe(recipe);
+    }
+     private static void registerRenoir(JavaPlugin plugin) {
+        ItemStack result = new ItemStack(Material.FEATHER);
+        ItemMeta meta = result.getItemMeta();
+        meta.setDisplayName("§dRôle - Renoir");
+        result.setItemMeta(meta);
+
+        NamespacedKey key = new NamespacedKey(plugin, "Roles_Renoir");
+
+        ShapedRecipe recipe = new ShapedRecipe(key, result);
+        
+        recipe.shape("RBR", "BSB", "RBR");
+        recipe.setIngredient('R', Material.ROTTEN_FLESH);
+        recipe.setIngredient('S', Material.STRING);
+        recipe.setIngredient('B', Material.BONE);
         Bukkit.addRecipe(recipe);
     }
     

@@ -49,6 +49,11 @@ public class RoleInteractListener implements Listener {
             event.setCancelled(true);          // on empêche l’action par défaut
             maelle.onPowerUse();               // change la posture
         }
+        
+        if (role instanceof Renoir renoir && renoir.isInvocationItem(item)) {
+            event.setCancelled(true);
+            renoir.onPowerUse(); // ou gustave.onPowerUse() si tu n’as pas besoin du joueur
+        }
 
 
         // plus tard : autres rôles et objets spéciaux…

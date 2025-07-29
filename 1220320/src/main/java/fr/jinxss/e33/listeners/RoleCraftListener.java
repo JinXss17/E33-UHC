@@ -33,6 +33,24 @@ public class RoleCraftListener implements Listener {
         String name = item.getItemMeta().getDisplayName();
         UUID uuid = player.getUniqueId();
 
+		if (name.equalsIgnoreCase("§dRôle - Renoir")) {
+            if (!RoleManager.isRoleAvailable("Renoir")) {
+                player.sendMessage("§cCe rôle est déjà pris.");
+                event.setCancelled(true);
+                return;
+            }
+
+            if (RoleManager.hasRole(uuid)) {
+                player.sendMessage("§cTu as déjà un rôle !");
+                event.setCancelled(true);
+                return;
+            }
+
+            Renoir renoir = new Renoir(uuid, "Renoir");
+            RoleManager.assignRole(uuid, "Renoir", renoir);
+            renoir.onAssign();
+            player.sendMessage("§aTu as obtenu le rôle §dRenoir§a !");
+        }
 		if (name.equalsIgnoreCase("§dRôle - Sciel")) {
             if (!RoleManager.isRoleAvailable("Sciel")) {
                 player.sendMessage("§cCe rôle est déjà pris.");

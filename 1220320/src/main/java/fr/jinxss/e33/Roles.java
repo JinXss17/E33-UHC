@@ -12,9 +12,9 @@ public abstract class Roles {
 
     protected UUID uuid;
     protected String name;
-    protected int speed;
-    protected int force;
-    protected int resi;
+    protected double speed;
+    protected double force;
+    protected double resi;
 
     // Liste des objets associés au rôle (peut être vide, 1 ou plusieurs)
     protected List<ItemStack> roleItems = new ArrayList<>();
@@ -43,15 +43,15 @@ public abstract class Roles {
     // Méthode appelée quand le joueur utilise son ou ses pouvoir(s)
     public abstract void onPowerUse();
     
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public int getForce() {
+    public double getForce() {
         return force;
     }
 
-    public int getResi() {
+    public double getResi() {
         return resi;
     }
 

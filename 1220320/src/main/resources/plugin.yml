@@ -7,3 +7,7 @@ commands:
     description: Assigne un rôle aléatoire à un joueur
     usage: /giveRandomRole <joueur>
     permission: role.assign
+  givePicto:
+    description: Assigne un Picto aléatoire à un joueur
+    usage: /giveRandomPicto <joueur>
+  picto:

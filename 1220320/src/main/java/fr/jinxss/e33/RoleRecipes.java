@@ -76,7 +76,6 @@ public class RoleRecipes {
         Bukkit.addRecipe(recipe);
     }
     
-    @SuppressWarnings("unused")
 	private static void registerSciel(JavaPlugin plugin) {
         ItemStack result = new ItemStack(Material.FEATHER);
         ItemMeta meta = result.getItemMeta();

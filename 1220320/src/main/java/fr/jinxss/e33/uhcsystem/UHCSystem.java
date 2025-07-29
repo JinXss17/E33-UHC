@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import fr.jinxss.e33.E33UHC;
+import fr.jinxss.e33.PictoSystem.PictoSystem;
 import fr.jinxss.e33.uhcsystem.list.EGameStates;
 
 public class UHCSystem {

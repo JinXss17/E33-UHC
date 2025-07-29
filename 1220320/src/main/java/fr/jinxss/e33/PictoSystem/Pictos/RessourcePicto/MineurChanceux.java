@@ -3,6 +3,7 @@ package fr.jinxss.e33.PictoSystem.Pictos.RessourcePicto;
 import java.util.List;
 
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 import fr.jinxss.e33.PictoSystem.ENiveau;
 import fr.jinxss.e33.PictoSystem.Pictos.Picto;
@@ -20,6 +21,8 @@ public class MineurChanceux extends Picto {
 	private int DropBonusInstinct = 1;
 
 	public MineurChanceux() {
+		PictoItem = new ItemStack(Material.DIAMOND_PICKAXE);
+		PictoItemName = "Mineur Chanceux";
 		basicCout = BasicCout;
 		Cout = BasicCout;
 	}

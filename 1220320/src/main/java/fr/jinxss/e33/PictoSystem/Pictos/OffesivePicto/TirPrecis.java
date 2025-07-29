@@ -1,5 +1,8 @@
 package fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import fr.jinxss.e33.PictoSystem.ENiveau;
 import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 
@@ -11,6 +14,8 @@ public class TirPrecis extends Picto {
 	private float ArrowDamageBonusLvl3 = 5f;
 
 	public TirPrecis() {
+		PictoItem = new ItemStack(Material.ARROW);
+		PictoItemName = "Tir Précis";
 		basicCout = BasicCout;
 		Cout= basicCout;
 		DamageBoost += ArrowDamageBonusLvl1;

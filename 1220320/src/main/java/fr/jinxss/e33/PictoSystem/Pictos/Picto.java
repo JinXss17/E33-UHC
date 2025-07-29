@@ -1,10 +1,15 @@
 package fr.jinxss.e33.PictoSystem.Pictos;
 
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.jinxss.e33.PictoSystem.ENiveau;
 
 public class Picto{
+	
+	protected ItemStack PictoItem;
+	protected String PictoItemName = "Picto";
 	
 	protected int basicCout = 0;
 	public int Cout = 0;
@@ -19,6 +24,16 @@ public class Picto{
 	
 	public Picto() {
 		Cout = basicCout;
+	}
+	
+	public ItemStack getPictoItem() {
+		
+		ItemStack it = PictoItem.clone();
+		ItemMeta meta = it.getItemMeta();
+		meta.setDisplayName(PictoItemName);
+		it.setItemMeta(meta);
+		
+		return it;
 	}
 	
 	public ENiveau GetLevel() {

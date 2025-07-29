@@ -2,17 +2,17 @@ package fr.jinxss.e33.e33system.nevrons;
 
 import java.util.UUID;
 
-import fr.jinxss.e33.Roles;
-import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.Material;
-import org.bukkit.scheduler.BukkitRunnable;
+
+import fr.jinxss.e33.Roles;
 
 public class Demineur extends Roles {
 
     private boolean canUse = true;
-    private final long COOLDOWN = 5 * 60 * 20L; // 5 minutes in ticks
+    @SuppressWarnings("unused")
+	private final long COOLDOWN = 5 * 60 * 20L; // 5 minutes in ticks
     private final ItemStack explosiveArrowItem; // ✅ champ global ajouté ici
 
     public Demineur(UUID uuid, String name) {

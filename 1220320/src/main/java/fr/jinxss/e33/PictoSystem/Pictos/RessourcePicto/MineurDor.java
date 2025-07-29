@@ -26,6 +26,9 @@ public class MineurDor extends Picto {
 	private float BonusRateMaitrise = 20;
 
 	public MineurDor() {
+		PictoItem = new ItemStack(Material.GOLD_NUGGET);
+		PictoItemName = "Mineur D'or";
+		
 		basicCout = BasicCout;
 		Cout = BasicCout;
 	}

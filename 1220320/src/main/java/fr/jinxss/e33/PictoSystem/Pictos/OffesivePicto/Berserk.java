@@ -1,8 +1,10 @@
 package fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto;
 
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import fr.jinxss.e33.PictoSystem.ENiveau;
 import fr.jinxss.e33.PictoSystem.Pictos.Picto;
@@ -17,6 +19,8 @@ public class Berserk extends Picto {
 	private float DamageBonusLvl3 = 5;
 	
 	public Berserk() {
+		PictoItem = new ItemStack(Material.NETHER_WART);
+		PictoItemName = "Berserk";
 		DamageBoost = DamageBonusLvl1;
 		basicCout = BasicCout;
 		Cout = BasicCout;

@@ -1,4 +1,4 @@
-package fr.jinxss.e33.listeners;
+package fr.jinxss.e33.Listeners;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;

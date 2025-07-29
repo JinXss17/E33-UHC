@@ -17,6 +17,8 @@ public class E33UHC extends JavaPlugin {
 	
  	@Override
     public void onEnable() {
+    	//getServer().getPluginManager().registerEvents(new MobSpawnListener(), this);
+ 		new MobCustomSpawner(this).runTaskTimer(this, 20 * 10L, 20 * 5L); // 5 étant le nombre de secondes entre chaque spawn
  		pictoSystem = new PictoSystem(this);
         getLogger().info("MonPlugin est activé !");
         

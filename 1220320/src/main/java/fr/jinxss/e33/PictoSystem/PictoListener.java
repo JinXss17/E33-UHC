@@ -24,6 +24,7 @@ import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.EsquiveParfaite;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.GardeOptimal;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Inversion;
+import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Survivaliste;
 import fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto.TirPrecis;
 import fr.jinxss.e33.PictoSystem.Pictos.PictoMixtes.AgilliteFeline;
 import fr.jinxss.e33.PictoSystem.Pictos.PictoMixtes.ContreParfait;
@@ -87,6 +88,12 @@ public class PictoListener implements Listener {
 		
 		DamageCause cause = e.getCause();
 		double Damage = e.getDamage();
+		
+		if(e.getEntity() instanceof Player p && system.getPlayerPictos(p).HasPictoActivated(Survivaliste.class)) {
+			Survivaliste picto = (Survivaliste)system.getPlayerPictos(p).GetPictoActivated(Survivaliste.class);
+			Damage *= (1 -  picto.ResistanceBoost/100);
+		}
+		
 		
 		if(cause == DamageCause.FALL && e.getEntity() instanceof Player p) {
 			

@@ -25,7 +25,13 @@ public class PlayerPictos {
 	}
 	
 	public void addToPictoList(Picto picto) {
-		if(!Picto.contains(picto))Picto.add(picto);
+		
+		for(Picto pictos : Picto) {
+			if(picto.getClass() == pictos.getClass()) {
+				return;
+			}
+		}
+		Picto.add(picto);
 	}
 	
 	public void removeToPictoList(Picto picto) {
@@ -34,6 +40,7 @@ public class PlayerPictos {
 	}
 	
 	public void addToPictoActivated(Picto picto) {
+		
 		if(!ActivatedPicto.contains(picto))ActivatedPicto.add(picto);
 		if(picto instanceof Immortel e) e.Activate(e.getLinkedPlayer());
 	}

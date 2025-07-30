@@ -2,6 +2,7 @@ package fr.jinxss.e33.PictoSystem;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -52,10 +53,27 @@ public class PictoSystem {
 	public void GiveRandomPictoToPlayer(Player p) {
 		
 	try {
-		Picto picto = BasicPicto.get(0).newInstance();
+		Random r  = new Random();
+		int ChoosedPicto = r.nextInt(BasicPicto.size()-1);
+		Picto picto = BasicPicto.get(ChoosedPicto).newInstance();
+		boolean ValidatePicto = true;
+		int boucle = 0;
+		while(ValidatePicto) {
+			ValidatePicto = false;
+			ChoosedPicto = r.nextInt(BasicPicto.size()-1);
+			picto = BasicPicto.get(ChoosedPicto).newInstance();
+			for(Picto pictos : getPlayerPictos(p).getPictoList()) {
+				if(picto.getClass() == pictos.getClass())ValidatePicto=true;
+			}
+			if(boucle >= BasicPicto.size()) {
+				return;
+			}
+			boucle ++;
+		}
+		
 		getPlayerPictos(p).addToPictoList(picto);
 			
-		p.sendMessage("Picto as Added : " + getPlayerPictos(p));
+		p.sendMessage("Picto as Added : " + picto.toString());
 		} catch (InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

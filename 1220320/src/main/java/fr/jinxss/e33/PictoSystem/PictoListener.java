@@ -58,7 +58,10 @@ public class PictoListener implements Listener {
 					if (pictos.getActivatedPicto().contains( picto ) ) {
 						pictos.removeToPictoActivated(picto);
 					}else {
-						pictos.addToPictoActivated(picto);;
+						if(!pictos.canActivatePicto(picto)) {
+							p.sendMessage("Vous n'avez pas assez de lumina !");
+						}
+						pictos.addToPictoActivated(picto);
 					}
 				}
 				p.closeInventory();

@@ -20,10 +20,14 @@ public class Picto{
 	public float DamageBoost = 0;
 	public float ResistanceBoost = 0;
 
-	protected ENiveau Level;
+	protected ENiveau Level = ENiveau.Apprentissage;
 	
 	public Picto() {
 		Cout = basicCout;
+	}
+	
+	public String Describe() {
+		return "Ne fais Rien";
 	}
 	
 	public ItemStack getPictoItem() {

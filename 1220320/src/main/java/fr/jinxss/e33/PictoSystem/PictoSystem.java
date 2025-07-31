@@ -52,13 +52,22 @@ public class PictoSystem {
 	try {
 		Random r  = new Random();
 		int ChoosedPicto = r.nextInt(BasicPicto.size()-1);
-		Picto picto = BasicPicto.get(ChoosedPicto).newInstance();
+		Picto picto;
+		if(BasicPicto.get(ChoosedPicto) == Immortel.class) {
+			picto = new Immortel(p.getUniqueId());
+		}else {
+			picto = BasicPicto.get(ChoosedPicto).newInstance();
+		}
 		boolean ValidatePicto = true;
 		int boucle = 0;
 		while(ValidatePicto) {
 			ValidatePicto = false;
 			ChoosedPicto = r.nextInt(BasicPicto.size()-1);
-			picto = BasicPicto.get(ChoosedPicto).newInstance();
+			if(BasicPicto.get(ChoosedPicto) == Immortel.class) {
+				picto = new Immortel(p.getUniqueId());
+			}else {
+				picto = BasicPicto.get(ChoosedPicto).newInstance();
+			}
 			for(Picto pictos : getPlayerPictos(p).getPictoList()) {
 				if(picto.getClass() == pictos.getClass())ValidatePicto=true;
 			}

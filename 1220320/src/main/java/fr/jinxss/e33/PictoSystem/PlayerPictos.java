@@ -1,6 +1,7 @@
 package fr.jinxss.e33.PictoSystem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -43,11 +44,9 @@ public class PlayerPictos {
 		int LuminaUsed = getLuminaUsed();
 		LuminaUsed += picto.Cout;
 		if(LuminaUsed > playerLevel.getLumina()) {
-			System.out.println("Picto Can't be activated");
 			return false;
 		}
 		else {
-			System.out.println("Picto as been activated");
 			return true;
 		}
 		
@@ -109,6 +108,15 @@ public class PlayerPictos {
 			}else {
 				PictoMeta.setDisplayName("§c"+ PictoMeta.getDisplayName());
 			}
+			List<String> lore = PictoMeta.getLore();
+	        if (lore == null) {
+	            lore = new ArrayList<>();
+	        }
+	        lore.add("§dCout en Lumina : " + picto.Cout);
+	        lore.add("§eDesciption : " + picto.Describe());
+	        lore.add("§bNiveau : " + picto.GetLevel().toString() );
+	        PictoMeta.setLore(lore);
+	        
 			pictoItem.setItemMeta(PictoMeta);
 			PictoInv.addItem(pictoItem);
 		}

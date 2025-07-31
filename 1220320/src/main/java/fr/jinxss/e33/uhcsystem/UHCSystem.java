@@ -9,7 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import fr.jinxss.e33.E33UHC;
-import fr.jinxss.e33.PictoSystem.PictoSystem;
 import fr.jinxss.e33.uhcsystem.list.EGameStates;
 
 public class UHCSystem {
@@ -34,7 +33,7 @@ public class UHCSystem {
 	public UHCSystem(E33UHC plugin) {
 		this.plugin = plugin ;
 		GameState = EGameStates.Waiting;
-		Board = new UHCScoreBoard(plugin, this, new UHCBorder());
+		Board = new UHCScoreBoard(plugin, this, new UHCBorder(), plugin.getLevelSystem());
 		menuConfig = new UHCConfigMenu(this, Board.getBorder());
 		plugin.getServer().getPluginManager().registerEvents(menuConfig, plugin);
 	}
@@ -76,7 +75,7 @@ public class UHCSystem {
 	}
 	
 	public void RegisterScoreBoard() {
-		Board = new UHCScoreBoard(plugin, this, new UHCBorder());
+		Board = new UHCScoreBoard(plugin, this, new UHCBorder(), plugin.getLevelSystem());
 	}
 	
 	public boolean isPvpEnabled() {

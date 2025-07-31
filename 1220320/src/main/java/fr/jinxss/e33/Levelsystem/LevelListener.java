@@ -1,0 +1,36 @@
+package fr.jinxss.e33.Levelsystem;
+
+import java.util.Random;
+
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
+
+public class LevelListener implements Listener {
+
+	private LevelSystem levelSystem;
+	
+	public LevelListener(LevelSystem system) {
+		
+		this.levelSystem = system;
+		
+	}
+	
+	private int MidExpOnKillEntity = 25;
+	private int ExpRange= 10;
+	
+	@EventHandler
+	public void OnEntityDeath(EntityDeathEvent e) {
+		
+		if(e.getEntity() instanceof Player)return;
+		
+		if(e.getDamageSource() instanceof Player player) {
+			Random r = new Random();
+			
+			PlayerLevel pLevel = levelSystem.getPlayerLevel(player);
+			float AddExp = (float) (MidExpOnKillEntity + ( Math.sin(r.nextFloat())*ExpRange )) ;
+			pLevel.addExp(AddExp);
+		}
+	}
+}

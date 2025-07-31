@@ -85,11 +85,11 @@ public class PictoSystem {
 	}
 	
 	public PlayerPictos getPlayerPictos(Player player) {
-		return playerPicto.getOrDefault(player.getUniqueId(), new PlayerPictos());
+		return playerPicto.getOrDefault(player.getUniqueId(), new PlayerPictos(plugin.getLevelSystem().getPlayerLevel(player)));
 	}
 	private void setupPlayerPictos() {
 		for(Player p : Bukkit.getOnlinePlayers()) {
-			playerPicto.put(p.getUniqueId(), new PlayerPictos());
+			playerPicto.put(p.getUniqueId(), new PlayerPictos(plugin.getLevelSystem().getPlayerLevel(p)));
 		}
 	}
 	

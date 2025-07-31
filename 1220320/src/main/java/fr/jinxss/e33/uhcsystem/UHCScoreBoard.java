@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -14,6 +15,8 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
 import fr.jinxss.e33.E33UHC;
+import fr.jinxss.e33.Levelsystem.LevelSystem;
+import fr.jinxss.e33.Levelsystem.PlayerLevel;
 
 public class UHCScoreBoard {
 
@@ -24,6 +27,7 @@ public class UHCScoreBoard {
     public long PVP_ENABLE_TIME = 10; // en minutes
     private final UHCSystem uhcSystem;
     private final UHCBorder uhcBorder;
+    private final LevelSystem levelSystem;
     
     private boolean meetupStarted = false;
     
@@ -31,11 +35,11 @@ public class UHCScoreBoard {
     	return uhcBorder;
     }
 
-    public UHCScoreBoard(E33UHC plugin, UHCSystem uhcSystem, UHCBorder uhcBorder
-    		) {
+    public UHCScoreBoard(E33UHC plugin, UHCSystem uhcSystem, UHCBorder uhcBorder, LevelSystem levelSystem) {
         this.plugin = plugin;
         this.uhcBorder = uhcBorder;
 		this.uhcSystem = uhcSystem;
+		this.levelSystem = levelSystem;
     }
 
     public void createScoreboard(Player player) {
@@ -80,14 +84,17 @@ public class UHCScoreBoard {
 	    long seconds = elapsed % 60;
 	
 	    Location loc = player.getLocation();
-	    int alivePlayers = (int) Bukkit.getOnlinePlayers().stream().filter(p -> !p.isDead()).count();
+	    int alivePlayers = (int) Bukkit.getOnlinePlayers().stream().filter(p -> p.getGameMode() == GameMode.SURVIVAL).count();
+	    PlayerLevel level = levelSystem.getPlayerLevel(player);
 	
-	    obj.getScore(ChatColor.YELLOW + "Temps: " + minutes + "m" + seconds + "s").setScore(5);
-	    obj.getScore(ChatColor.GREEN + "Joueurs: " + alivePlayers).setScore(4);
-	    obj.getScore(ChatColor.AQUA + "X: " + loc.getBlockX()).setScore(3);
-	    obj.getScore(ChatColor.AQUA + "Y: " + loc.getBlockY()).setScore(2);
-	    obj.getScore(ChatColor.AQUA + "Z: " + loc.getBlockZ()).setScore(1);
-	    
+	    obj.getScore(ChatColor.YELLOW + "Temps: " + minutes + "m" + seconds + "s").setScore(8);
+	    obj.getScore(ChatColor.GREEN + "Joueurs: " + alivePlayers).setScore(7);
+	    obj.getScore(ChatColor.AQUA + "X: " + loc.getBlockX()).setScore(6);
+	    obj.getScore(ChatColor.AQUA + "Y: " + loc.getBlockY()).setScore(5);
+	    obj.getScore(ChatColor.AQUA + "Z: " + loc.getBlockZ()).setScore(4);
+	    obj.getScore(ChatColor.DARK_PURPLE + "Lumina: " +  level.getRestLumina() + "/" + level.getLumina()).setScore(3);
+	    obj.getScore(ChatColor.YELLOW + "Level: " +  level.getLevel()).setScore(2);
+	    obj.getScore(ChatColor.YELLOW + "Exp: " +  level.getExp() + "/" + level.getExpToLevelUp()).setScore(1);
 	    
 	    
 	    double borderSize = uhcBorder.getCurrentSize();

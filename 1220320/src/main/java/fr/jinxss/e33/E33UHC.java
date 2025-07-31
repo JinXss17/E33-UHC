@@ -2,6 +2,7 @@ package fr.jinxss.e33;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.jinxss.e33.Levelsystem.LevelSystem;
 import fr.jinxss.e33.Listeners.ExplosiveArrowListener;
 import fr.jinxss.e33.Listeners.PlayerListener;
 import fr.jinxss.e33.Listeners.RoleAttackListener;
@@ -15,6 +16,7 @@ import fr.jinxss.e33.uhcsystem.UHCSystem;
 public class E33UHC extends JavaPlugin {
 
 	private UHCSystem uhcSystem;
+	private LevelSystem levelSystem;
 	
 	@SuppressWarnings("unused")
 	private PictoSystem pictoSystem;
@@ -23,7 +25,7 @@ public class E33UHC extends JavaPlugin {
     public void onEnable() {
     	//getServer().getPluginManager().registerEvents(new MobSpawnListener(), this);
  		new MobCustomSpawner(this).runTaskTimer(this, 20 * 10L, 20 * 5L); // 5 étant le nombre de secondes entre chaque spawn
- 		pictoSystem = new PictoSystem(this);
+ 		
         getLogger().info("MonPlugin est activé !");
         
         // Enregistre les crafts
@@ -38,7 +40,11 @@ public class E33UHC extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new ExplosiveArrowListener(), this);
  		
+        
+        levelSystem = new LevelSystem(this);
+        pictoSystem = new PictoSystem(this);
  		uhcSystem = new UHCSystem(this);
+ 		
     }
  	
  	public static String GetPréffix() {
@@ -50,6 +56,10 @@ public class E33UHC extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info("MonPlugin est désactivé !");
+    }
+    
+    public LevelSystem getLevelSystem() {
+    	return levelSystem;
     }
     
     public UHCSystem getUHCSystem() {

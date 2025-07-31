@@ -8,6 +8,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import fr.jinxss.e33.Levelsystem.PlayerLevel;
 import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Immortel;
 
@@ -20,8 +21,30 @@ public class PlayerPictos {
 	private ArrayList<Picto> Picto = new ArrayList<Picto>();
 	private ArrayList<Picto> ActivatedPicto = new ArrayList<Picto>();
 	
+	private PlayerLevel playerLevel;
+	
+	public PlayerPictos(PlayerLevel level) {
+		playerLevel = level;
+	}
+	
 	public ArrayList<Picto> getPictoList() {
 		return Picto;
+	}
+	
+	public int getLuminaUsed() {
+		int LuminaUsed = 0;
+		for(Picto picto : ActivatedPicto) {
+			LuminaUsed += picto.Cout;
+		}
+		return LuminaUsed;
+	}
+	
+	public boolean canActivatePicto(Picto picto) {
+		int LuminaUsed = getLuminaUsed();
+		LuminaUsed += picto.Cout;
+		if(LuminaUsed > playerLevel.getLumina())return false;
+		else return true;
+		
 	}
 	
 	public void addToPictoList(Picto picto) {
@@ -41,8 +64,10 @@ public class PlayerPictos {
 	
 	public void addToPictoActivated(Picto picto) {
 		
-		if(!ActivatedPicto.contains(picto))ActivatedPicto.add(picto);
-		if(picto instanceof Immortel e) e.Activate(e.getLinkedPlayer());
+		if(canActivatePicto(picto)) {
+			if(!ActivatedPicto.contains(picto))ActivatedPicto.add(picto);
+			if(picto instanceof Immortel e) e.Activate(e.getLinkedPlayer());
+		}
 	}
 	
 	public void removeToPictoActivated(Picto picto) {

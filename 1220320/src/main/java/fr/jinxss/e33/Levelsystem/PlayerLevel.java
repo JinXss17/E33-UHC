@@ -28,8 +28,10 @@ public class PlayerLevel {
 		return Lumina;
 	}
 	
-	public int getRestLumina() {
-		return Lumina - playerPicto.getLuminaUsed();
+	public int getUsedLumina() {
+		
+		return playerPicto.getLuminaUsed();
+		
 	}
 	
 	public int getExp() {

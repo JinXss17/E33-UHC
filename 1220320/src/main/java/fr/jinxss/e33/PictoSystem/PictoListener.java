@@ -56,9 +56,9 @@ public class PictoListener implements Listener {
 				}else {
 					Picto picto = pictos.getPictoList().get(e.getSlot());
 					if (pictos.getActivatedPicto().contains( picto ) ) {
-						pictos.getActivatedPicto().remove(picto);
+						pictos.removeToPictoActivated(picto);
 					}else {
-						pictos.getActivatedPicto().add(picto);
+						pictos.addToPictoActivated(picto);;
 					}
 				}
 				p.closeInventory();

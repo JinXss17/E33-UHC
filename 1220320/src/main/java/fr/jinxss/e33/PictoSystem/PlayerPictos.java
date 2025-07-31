@@ -42,8 +42,14 @@ public class PlayerPictos {
 	public boolean canActivatePicto(Picto picto) {
 		int LuminaUsed = getLuminaUsed();
 		LuminaUsed += picto.Cout;
-		if(LuminaUsed > playerLevel.getLumina())return false;
-		else return true;
+		if(LuminaUsed > playerLevel.getLumina()) {
+			System.out.println("Picto Can't be activated");
+			return false;
+		}
+		else {
+			System.out.println("Picto as been activated");
+			return true;
+		}
 		
 	}
 	

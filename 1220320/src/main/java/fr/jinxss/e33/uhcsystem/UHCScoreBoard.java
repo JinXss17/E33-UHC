@@ -92,7 +92,7 @@ public class UHCScoreBoard {
 	    obj.getScore(ChatColor.AQUA + "X: " + loc.getBlockX()).setScore(6);
 	    obj.getScore(ChatColor.AQUA + "Y: " + loc.getBlockY()).setScore(5);
 	    obj.getScore(ChatColor.AQUA + "Z: " + loc.getBlockZ()).setScore(4);
-	    obj.getScore(ChatColor.DARK_PURPLE + "Lumina: " +  level.getRestLumina() + "/" + level.getLumina()).setScore(3);
+	    obj.getScore(ChatColor.DARK_PURPLE + "Lumina: " +  (level.getLumina() - level.getUsedLumina()) + "/" + level.getLumina()).setScore(3);
 	    obj.getScore(ChatColor.YELLOW + "Level: " +  level.getLevel()).setScore(2);
 	    obj.getScore(ChatColor.YELLOW + "Exp: " +  level.getExp() + "/" + level.getExpToLevelUp()).setScore(1);
 	    

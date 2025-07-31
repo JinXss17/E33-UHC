@@ -2,6 +2,7 @@ package fr.jinxss.e33.Levelsystem;
 
 import java.util.Random;
 
+import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,8 +25,8 @@ public class LevelListener implements Listener {
 	public void OnEntityDeath(EntityDeathEvent e) {
 		
 		if(e.getEntity() instanceof Player)return;
-		
-		if(e.getDamageSource() instanceof Player player) {
+		DamageSource damage = e.getDamageSource();
+		if(damage.getCausingEntity() instanceof Player player) {
 			Random r = new Random();
 			
 			PlayerLevel pLevel = levelSystem.getPlayerLevel(player);

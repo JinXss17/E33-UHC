@@ -9,6 +9,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import fr.jinxss.e33.E33UHC;
+import fr.jinxss.e33.Levelsystem.PlayerLevel;
+import fr.jinxss.e33.PictoSystem.PlayerPictos;
 import fr.jinxss.e33.uhcsystem.list.EGameStates;
 
 public class UHCSystem {
@@ -55,6 +57,14 @@ public class UHCSystem {
 			
 			p.teleport(new Location(Bukkit.getWorld("World"),lX, teleportHeight, lZ) );
 			_AlivePlayerList.add(p.getUniqueId());
+			
+			PlayerLevel playerLevel = new PlayerLevel(null);
+			PlayerPictos playerPicto = new PlayerPictos(playerLevel);
+			playerLevel.setPlayerPicto(playerPicto);
+			
+			plugin.getLevelSystem().registerPlayerLevel(p, playerLevel);
+			plugin.getPictoSystem().registerPlayerPictos(p, playerPicto);
+			
 		}
 		
 		Board.startUpdating();

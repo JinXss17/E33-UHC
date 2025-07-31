@@ -3,7 +3,6 @@ package fr.jinxss.e33.Levelsystem;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import fr.jinxss.e33.E33UHC;
@@ -16,18 +15,16 @@ public class LevelSystem {
 	
 	public LevelSystem(E33UHC system) {
 		this.system = system;
-		RegisterAllPlayerLevel();
 		this.system.getServer().getPluginManager().registerEvents(new LevelListener(this), system);
+		system.getCommand("level").setExecutor(new CommandLevel(this));
 	}
 	
 	public PlayerLevel getPlayerLevel(Player p ) {
-		PlayerLevel level = Levels.getOrDefault(p.getUniqueId(), new PlayerLevel());
+		PlayerLevel level = Levels.getOrDefault(p.getUniqueId(), new PlayerLevel(null));
 		return level;
 	}
 	
-	public void RegisterAllPlayerLevel() {
-		for(Player p : Bukkit.getOnlinePlayers()) {
-			Levels.put(p.getUniqueId(), new PlayerLevel());
-		}
+	public void registerPlayerLevel(Player p, PlayerLevel level) {
+		Levels.put(p.getUniqueId(), level);
 	}
 }

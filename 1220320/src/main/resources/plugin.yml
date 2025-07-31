@@ -11,3 +11,4 @@ commands:
     description: Assigne un Picto aléatoire à un joueur
     usage: /giveRandomPicto <joueur>
   picto:
+  Level:

@@ -1,5 +1,7 @@
 package fr.jinxss.e33.Levelsystem;
 
+import fr.jinxss.e33.PictoSystem.PlayerPictos;
+
 public class PlayerLevel {
 
 	private int Level = 1;
@@ -10,11 +12,16 @@ public class PlayerLevel {
 	
 	private int Lumina = 2;
 	private int LuminaOnLevelUp = 2;
-	private int LuminaRest;
 	
-	public PlayerLevel() {
+	private PlayerPictos playerPicto;
+	
+	public PlayerLevel(PlayerPictos playerPicto) {
 		ExpToLevelUp = baseExpToLevelUp;
-		LuminaRest = Lumina;
+		this.playerPicto = playerPicto;
+	}
+	
+	public void setPlayerPicto(PlayerPictos playerPicto) {
+		this.playerPicto = playerPicto;
 	}
 	
 	public int getLumina() {
@@ -22,7 +29,7 @@ public class PlayerLevel {
 	}
 	
 	public int getRestLumina() {
-		return LuminaRest;
+		return Lumina - playerPicto.getLuminaUsed();
 	}
 	
 	public int getExp() {

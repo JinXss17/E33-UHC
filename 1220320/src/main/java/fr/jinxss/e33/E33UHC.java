@@ -58,6 +58,10 @@ public class E33UHC extends JavaPlugin {
         getLogger().info("MonPlugin est désactivé !");
     }
     
+    public PictoSystem getPictoSystem() {
+    	return pictoSystem;
+    }
+    
     public LevelSystem getLevelSystem() {
     	return levelSystem;
     }

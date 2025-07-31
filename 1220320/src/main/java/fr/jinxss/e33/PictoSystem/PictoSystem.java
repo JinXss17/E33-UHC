@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import fr.jinxss.e33.E33UHC;
@@ -44,8 +43,6 @@ public class PictoSystem {
 		plugin.getCommand("Picto").setExecutor(new CommandPicto(this));
 		this.plugin.getServer().getPluginManager().registerEvents(new PictoListener(this.plugin, this), this.plugin);
 
-		
-		setupPlayerPictos();
 		
 	}
 	
@@ -87,10 +84,8 @@ public class PictoSystem {
 	public PlayerPictos getPlayerPictos(Player player) {
 		return playerPicto.getOrDefault(player.getUniqueId(), new PlayerPictos(plugin.getLevelSystem().getPlayerLevel(player)));
 	}
-	private void setupPlayerPictos() {
-		for(Player p : Bukkit.getOnlinePlayers()) {
-			playerPicto.put(p.getUniqueId(), new PlayerPictos(plugin.getLevelSystem().getPlayerLevel(p)));
-		}
+	public void registerPlayerPictos(Player p, PlayerPictos pictos) {
+			playerPicto.put(p.getUniqueId(), pictos);
 	}
 	
 }

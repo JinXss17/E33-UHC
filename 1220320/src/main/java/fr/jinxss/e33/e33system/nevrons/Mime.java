@@ -1,7 +1,8 @@
 package fr.jinxss.e33.e33system.nevrons;
 
 import fr.jinxss.e33.RoleManager;
-import fr.jinxss.e33.Roles;
+import fr.jinxss.e33.e33system.Roles;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;

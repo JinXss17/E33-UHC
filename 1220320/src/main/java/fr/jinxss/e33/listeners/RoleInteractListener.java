@@ -8,7 +8,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 import fr.jinxss.e33.RoleManager;
-import fr.jinxss.e33.Roles;
+import fr.jinxss.e33.e33system.Roles;
 import fr.jinxss.e33.e33system.nevrons.Demineur;
 import fr.jinxss.e33.e33system.roles.Gustave;
 import fr.jinxss.e33.e33system.roles.Lune;

@@ -2,7 +2,7 @@ package fr.jinxss.e33.e33system.nevrons;
 
 import java.util.UUID;
 
-import fr.jinxss.e33.Roles;
+import fr.jinxss.e33.e33system.Roles;
 
 public class Petank extends Roles {
 

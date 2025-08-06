@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
-import fr.jinxss.e33.Roles;
+import fr.jinxss.e33.e33system.Roles;
 
 public class Noco extends Roles {
 	

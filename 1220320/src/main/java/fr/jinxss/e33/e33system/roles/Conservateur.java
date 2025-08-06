@@ -6,7 +6,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import fr.jinxss.e33.Roles;
+import fr.jinxss.e33.e33system.Roles;
 
 public class Conservateur extends Roles {
 

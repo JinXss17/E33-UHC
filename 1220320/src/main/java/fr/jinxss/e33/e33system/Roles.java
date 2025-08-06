@@ -1,4 +1,4 @@
-package fr.jinxss.e33;
+package fr.jinxss.e33.e33system;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,6 +6,8 @@ import java.util.*;
 
 import java.util.UUID;
 
+import fr.jinxss.e33.e33system.Roles;
+
 public class RoleManager {
 
     private static final Set<String> assignedRoles = new HashSet<>();

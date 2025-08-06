@@ -10,7 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import fr.jinxss.e33.Roles;
+import fr.jinxss.e33.e33system.Roles;
 
 
 public class Lune extends Roles {

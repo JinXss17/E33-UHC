@@ -8,6 +8,11 @@ import fr.jinxss.e33.PictoSystem.ENiveau;
 
 public class Picto{
 	
+	public int Exp = 0;
+	public int ExpToLevelUp = 500;
+	public int ExpPerMobs = 20;
+	public float ExpUpMultiplier = 1;
+	
 	protected ItemStack PictoItem;
 	protected String PictoItemName = "Picto";
 	
@@ -50,15 +55,29 @@ public class Picto{
 		return false;
 	}
 	
+	public void AddExp() {
+		
+		if(Level == ENiveau.Instinctif)return;
+		
+		Exp += ExpPerMobs;
+		if(Exp >= ExpToLevelUp) {
+			
+			Exp -= ExpToLevelUp ;
+			LevelUp();
+		}
+	}
+	
 	public void LevelUp() {
 		if(Level == ENiveau.Instinctif)return;
-		if(Level == ENiveau.Apprentissage) {
-			Level = ENiveau.Maitrise;
-			Cout = (int) (basicCout/Coutlvl2Divisor);
-		}
 		if(Level == ENiveau.Maitrise) {
 			Level = ENiveau.Instinctif;
 			Cout = (int) (basicCout/Coutlvl3Divisor);
 		}
+		if(Level == ENiveau.Apprentissage) {
+			Level = ENiveau.Maitrise;
+			Cout = (int) (basicCout/Coutlvl2Divisor);
+		}
+		ExpUpMultiplier += 0.5f;
+		ExpToLevelUp *= ExpUpMultiplier;
 	}
 }

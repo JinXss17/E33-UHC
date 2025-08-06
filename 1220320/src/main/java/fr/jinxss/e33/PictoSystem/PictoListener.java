@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +15,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
@@ -40,6 +42,22 @@ public class PictoListener implements Listener {
 	public PictoListener(E33UHC plugin, PictoSystem system) {
 		this.plugin = plugin;
 		this.system = system;
+		
+	}
+	
+	@EventHandler
+	public void OnKillMobs(EntityDeathEvent e) {
+		
+		if(e.getEntity() instanceof Monster && e.getDamageSource().getCausingEntity() instanceof Player p) {
+			
+			PlayerPictos pictos = system.getPlayerPictos(p);
+			for(Picto picto : pictos.getActivatedPicto()) {
+				
+				picto.AddExp();
+				
+			}
+			
+		}
 		
 	}
 	

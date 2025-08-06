@@ -115,6 +115,7 @@ public class PlayerPictos {
 	        lore.add("§dCout en Lumina : " + picto.Cout);
 	        lore.add("§eDesciption : " + picto.Describe());
 	        lore.add("§bNiveau : " + picto.GetLevel().toString() );
+	        lore.add("§bExp : " + picto.Exp + "/" + picto.ExpToLevelUp);
 	        PictoMeta.setLore(lore);
 	        
 			pictoItem.setItemMeta(PictoMeta);

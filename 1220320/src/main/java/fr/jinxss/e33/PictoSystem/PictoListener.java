@@ -19,6 +19,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 import fr.jinxss.e33.E33UHC;
 import fr.jinxss.e33.RoleManager;
@@ -99,7 +100,11 @@ public class PictoListener implements Listener {
 		if(e.getItem().getType()== Material.GOLDEN_APPLE) {
 			if(system.getPlayerPictos(p).HasPictoActivated(Inversion.class)) {
 				Inversion picto = (Inversion)system.getPlayerPictos(p).GetPictoActivated(Inversion.class);
-				p.setAbsorptionAmount(picto.getRemovedAbso());
+				Bukkit.getScheduler().runTaskLater(plugin, () -> {
+					if(p.hasPotionEffect(PotionEffectType.ABSORPTION)) {
+						p.setAbsorptionAmount(picto.getRemovedAbso());
+					}
+				}, 1);
 			}
 		}
 	}

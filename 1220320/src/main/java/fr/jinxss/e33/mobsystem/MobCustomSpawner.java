@@ -1,25 +1,28 @@
 package fr.jinxss.e33.mobsystem;
 
-import org.bukkit.*;
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.entity.Player;
 
-import java.util.List;
-import java.util.Random;
+import fr.jinxss.e33.E33UHC;
 
-public class MobCustomSpawner extends BukkitRunnable {
+public class MobCustomSpawner extends MobSystem {
 
-    private final Plugin plugin;
-    private final Random random = new Random();
+    private final E33UHC plugin;
+    
+    private int TimeToSpawnCustomMobs = 5;
+    
 
-    public MobCustomSpawner(Plugin plugin) {
+    public MobCustomSpawner(E33UHC plugin) {
         this.plugin = plugin;
     }
 
@@ -42,16 +45,10 @@ public class MobCustomSpawner extends BukkitRunnable {
             spawnLancier(spawnLoc);
         }
     }
-
-    private Location findSafeLocationNear(Location origin) {
-        for (int i = 0; i < 10; i++) {
-            int dx = random.nextInt(16) - 8;
-            int dz = random.nextInt(16) - 8;
-            Location loc = origin.clone().add(dx, 0, dz);
-            loc.setY(loc.getWorld().getHighestBlockYAt(loc));
-            if (loc.getBlock().getType().isSolid()) return loc.add(0, 1, 0);
-        }
-        return null;
+    
+    @Override
+    public void StartSummonning() {
+    	runTaskTimer(plugin, 0, 20 * TimeToSpawnCustomMobs);
     }
 
     private void spawnLancier(Location loc) {
@@ -61,8 +58,8 @@ public class MobCustomSpawner extends BukkitRunnable {
         z.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
         z.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(6.0);
         z.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
-        z.setVisualFire(false);
-        z.getPersistentDataContainer().set(new NamespacedKey(plugin, "custom_mob"), PersistentDataType.STRING, "lancier");
+        z.setVisualFire(true);
+        z.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
     }
 
     private void spawnMobClair(Location loc) {
@@ -73,7 +70,7 @@ public class MobCustomSpawner extends BukkitRunnable {
         z.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(0.322);
         z.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
         z.setVisualFire(true);
-        z.getPersistentDataContainer().set(new NamespacedKey(plugin, "custom_mob"), PersistentDataType.STRING, "mob_clair");
+        z.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
     }
 
     private void spawnMobObscur(Location loc) {
@@ -82,7 +79,7 @@ public class MobCustomSpawner extends BukkitRunnable {
         z.setCustomNameVisible(true);
         z.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(8.0);
         z.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
-        z.setVisualFire(false);
-        z.getPersistentDataContainer().set(new NamespacedKey(plugin, "custom_mob"), PersistentDataType.STRING, "mob_obscur");
+        z.setVisualFire(true);
+        z.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
     }
 }

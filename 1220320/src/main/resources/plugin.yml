@@ -12,3 +12,4 @@ commands:
     usage: /giveRandomPicto <joueur>
   picto:
   Level:
+  invoke:

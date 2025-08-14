@@ -79,7 +79,7 @@ public class PictoSystem {
 		
 		getPlayerPictos(p).addToPictoList(picto);
 			
-		p.sendMessage("Picto as Added : " + picto.toString());
+		p.sendMessage("Vous avezz obtenu le picto " + picto.getClass().getName());
 		} catch (InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

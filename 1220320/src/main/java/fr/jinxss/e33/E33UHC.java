@@ -11,7 +11,10 @@ import fr.jinxss.e33.Listeners.RoleCraftListener;
 import fr.jinxss.e33.Listeners.RoleInteractListener;
 import fr.jinxss.e33.PictoSystem.PictoSystem;
 import fr.jinxss.e33.e33commands.RandomRoleCommand;
+import fr.jinxss.e33.mobsystem.AxonSpawner;
 import fr.jinxss.e33.mobsystem.BossSpawner;
+import fr.jinxss.e33.mobsystem.CustomMobsListener;
+import fr.jinxss.e33.mobsystem.InvokeMobsCommand;
 import fr.jinxss.e33.mobsystem.MobCustomSpawner;
 import fr.jinxss.e33.uhcsystem.UHCSystem;
 
@@ -26,6 +29,7 @@ public class E33UHC extends JavaPlugin {
 	private MobCustomSpawner customMobSpawner;
 	@SuppressWarnings("unused")
 	private BossSpawner bossSpawner;
+	private AxonSpawner axonSpawner;
 	private PictoSystem pictoSystem;
 	
  	@Override
@@ -33,6 +37,7 @@ public class E33UHC extends JavaPlugin {
     	//getServer().getPluginManager().registerEvents(new MobSpawnListener(), this);
  		customMobSpawner = new MobCustomSpawner(this);
  		bossSpawner = new BossSpawner(this);
+ 		axonSpawner = new AxonSpawner(this);
  		
         getLogger().info("MonPlugin est activé !");
         
@@ -40,13 +45,15 @@ public class E33UHC extends JavaPlugin {
         RoleRecipes.registerAll(this);
 
 		getCommand("giveRandomRole").setExecutor(new RandomRoleCommand());
-
+		getCommand("invoke").setExecutor(new InvokeMobsCommand(axonSpawner, bossSpawner));
+		
         // Enregistre les listeners
         getServer().getPluginManager().registerEvents(new RoleCraftListener(), this);
         getServer().getPluginManager().registerEvents(new RoleInteractListener(), this);
         getServer().getPluginManager().registerEvents(new RoleAttackListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new ExplosiveArrowListener(), this);
+        getServer().getPluginManager().registerEvents(new CustomMobsListener(this), this);
  		
         
         levelSystem = new LevelSystem(this);
@@ -62,9 +69,10 @@ public class E33UHC extends JavaPlugin {
  	}
  	
  	public void startSummoningCustomMobs() {
-// 		
-// 		customMobSpawner;
-// 		bossSpawner
+ 		
+ 		customMobSpawner.StartSummonning();;
+ 		bossSpawner.StartSummonning();
+ 		axonSpawner.StartSummonning();
  	}
 
     @Override

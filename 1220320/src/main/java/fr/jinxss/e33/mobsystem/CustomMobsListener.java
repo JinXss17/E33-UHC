@@ -14,7 +14,11 @@ import fr.jinxss.e33.E33UHC;
 public class CustomMobsListener implements Listener {
 
 	private E33UHC plugin;
-	private float PictoDropRate = 2;
+	private float PictoDropRate = 100;
+	
+	public CustomMobsListener(E33UHC plugin) {
+		this.plugin = plugin;
+	}
 	
 	@SuppressWarnings("deprecation")
 	@EventHandler
@@ -24,10 +28,23 @@ public class CustomMobsListener implements Listener {
 			Entity entity = e.getEntity();
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Boss")) {
 				plugin.getPictoSystem().GiveRandomPictoToPlayer(p);
+				p.sendMessage("Vous avez tuer un Boss !");
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Custom")) {
 				Random r = new Random();
 				if(r.nextFloat() * 100 <= PictoDropRate)plugin.getPictoSystem().GiveRandomPictoToPlayer(p);
+			}
+			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Visages") ) {
+				//Give Picto Incendie
+			}
+			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Sirene") ) {
+				//Give Picto Roulette	
+			}
+			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Faucheuse") ) {
+				//Give Picto Nouvelle Peinture
+			}
+			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Transporteuse") ) {
+				//Give Picto Puissance de Peintre
 			}
 			
 		}

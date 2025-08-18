@@ -32,6 +32,8 @@ public class CustomMobsListener implements Listener {
 		if(e.getDamageSource().getCausingEntity() instanceof Player p) {
 			Entity entity = e.getEntity();
 			
+			if(entity.getPersistentDataContainer() == null) return;
+			
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Boss")) {
 				plugin.getPictoSystem().GiveRandomPictoToPlayer(p);
 				p.sendMessage("§aVous avez tuer un Boss !");

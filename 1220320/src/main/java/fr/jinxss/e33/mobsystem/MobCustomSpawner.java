@@ -58,7 +58,7 @@ public class MobCustomSpawner extends MobSystem {
         z.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
         z.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(6.0);
         z.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
-        z.setVisualFire(true);
+        z.setVisualFire(false);
         z.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
     }
 
@@ -69,7 +69,7 @@ public class MobCustomSpawner extends MobSystem {
         z.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(3.0);
         z.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(0.322);
         z.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
-        z.setVisualFire(true);
+        z.setVisualFire(false);
         z.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
     }
 
@@ -79,7 +79,7 @@ public class MobCustomSpawner extends MobSystem {
         z.setCustomNameVisible(true);
         z.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(8.0);
         z.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
-        z.setVisualFire(true);
+        z.setVisualFire(false);
         z.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
     }
 }

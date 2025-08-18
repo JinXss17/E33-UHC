@@ -127,7 +127,7 @@ public class MobSpawnListener implements Listener {
     	zombie.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
     	zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(6.0);
     	zombie.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
-    	zombie.setVisualFire(true);
+    	zombie.setVisualFire(false);
     	zombie.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
         // Tu peux l'améliorer pour qu'il jette vraiment le trident avec une AI custom plus tard (voir note en bas)
     }
@@ -139,7 +139,7 @@ public class MobSpawnListener implements Listener {
     	zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(3.0);
     	zombie.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(0.322);
     	zombie.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
-    	zombie.setVisualFire(true);
+    	zombie.setVisualFire(false);
     	zombie.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
         
     }
@@ -150,7 +150,7 @@ public class MobSpawnListener implements Listener {
     	zombie.setCustomNameVisible(true);
     	zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(8.0);
     	zombie.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
-    	zombie.setVisualFire(true);
+    	zombie.setVisualFire(false);
     	zombie.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
     }
     

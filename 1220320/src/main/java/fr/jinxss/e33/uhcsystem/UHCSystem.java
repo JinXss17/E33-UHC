@@ -55,6 +55,7 @@ public class UHCSystem {
 		
 		Random r = new Random();
 		border.setBorderSize(border.InitialBorderSize, 0);
+		GameState = EGameStates.Playing;
 		
 		for(Player p : _PlayerList) {
 			
@@ -77,6 +78,7 @@ public class UHCSystem {
 		
 		Board.startUpdating();
 		RegisterScoreBoard();
+		plugin.startSummoningCustomMobs();
 	}
 	
 	public void setGameState(EGameStates pGameState) {

@@ -10,8 +10,8 @@ commands:
   givePicto:
     description: Assigne un Picto aléatoire à un joueur
     usage: /giveRandomPicto <joueur>
-	permission: e33.give
+    permission: e33.give
   picto:
   Level:
   invoke:
-	permission: e33.summon
+    permission: e33.summon

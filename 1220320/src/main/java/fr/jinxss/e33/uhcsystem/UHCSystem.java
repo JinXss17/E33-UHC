@@ -69,6 +69,7 @@ public class UHCSystem {
 			float lZ =  ((float) Math.cos(r.nextDouble())* GetTeleportRay() );
 			
 			p.teleport(new Location(Bukkit.getWorld("World"),lX, teleportHeight, lZ) );
+			p.getInventory().clear();
 			_AlivePlayerList.add(p.getUniqueId());
 			
 			PlayerLevel playerLevel = new PlayerLevel(null);

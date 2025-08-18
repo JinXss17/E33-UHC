@@ -20,6 +20,8 @@ public class PlayerPictos {
 	private static int MaxHealthPlayer = 50;
 	
 	private int Lumina = 0;
+	private boolean Marked = false;
+	private float MarkDamageMultiplier = 10;
 	private ArrayList<Picto> Picto = new ArrayList<Picto>();
 	private ArrayList<Picto> ActivatedPicto = new ArrayList<Picto>();
 	
@@ -31,6 +33,15 @@ public class PlayerPictos {
 	
 	public ArrayList<Picto> getPictoList() {
 		return Picto;
+	}
+	
+	public float getMarkDamageMultiplier() {
+		return 1 + (MarkDamageMultiplier /100);
+	}
+	
+	public boolean IsMarked() {
+		
+		return Marked;
 	}
 	
 	public int getLuminaUsed() {

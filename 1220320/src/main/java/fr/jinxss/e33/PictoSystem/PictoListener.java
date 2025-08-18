@@ -129,12 +129,16 @@ public class PictoListener implements Listener {
 			if(pictos.HasPictoActivated(AgilliteFeline.class)) {
 				AgilliteFeline picto = (AgilliteFeline) system.getPlayerPictos(p).GetPictoActivated(AgilliteFeline.class);
 				e.setDamage(Damage * picto.getFallDamageReduce() );
-				p.spawnParticle(Particle.POOF , p.getLocation(), 4);
+				p.spawnParticle(Particle.POOF , p.getLocation(), 1);
 			}
 			
 		}
 		
 		if(e instanceof EntityDamageByEntityEvent E) {
+			
+			if(E.getEntity() instanceof Player victim && system.getPlayerPictos(victim).IsMarked()) {
+				Damage *= system.getPlayerPictos(victim).getMarkDamageMultiplier();
+			}
 			
 			if(E.getDamager() instanceof Player p && system.getPlayerPictos(p).HasPictoActivated(Incendie.class)) {
 				Incendie picto = (Incendie) system.getPlayerPictos(p).GetPictoActivated(Incendie.class);
@@ -156,7 +160,7 @@ public class PictoListener implements Listener {
 					EsquiveParfaite dodge = (EsquiveParfaite)victimPicto.GetPictoActivated(EsquiveParfaite.class);
 					if(r.nextFloat() *100 < dodge.getEscapeRate()) {
 						e.setCancelled(true);
-						victim.spawnParticle(Particle.POOF , victim.getLocation(), 2);
+						victim.spawnParticle(Particle.POOF , victim.getLocation(), 1);
 					}
 				}
 				

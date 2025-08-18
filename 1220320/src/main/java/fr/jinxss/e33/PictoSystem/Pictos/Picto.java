@@ -14,7 +14,7 @@ public class Picto{
 	public float ExpUpMultiplier = 1;
 	
 	protected ItemStack PictoItem;
-	protected String PictoItemName = "Picto";
+	protected String PictoName = "Picto";
 	
 	protected int basicCout = 0;
 	public int Cout = 0;
@@ -39,7 +39,7 @@ public class Picto{
 		
 		ItemStack it = PictoItem.clone();
 		ItemMeta meta = it.getItemMeta();
-		meta.setDisplayName(PictoItemName);
+		meta.setDisplayName(PictoName);
 		it.setItemMeta(meta);
 		
 		return it;
@@ -48,6 +48,12 @@ public class Picto{
 	public ENiveau GetLevel() {
 		
 		return Level;
+		
+	}
+	
+	public String getPictoName() {
+		
+		return PictoName;
 		
 	}
 	

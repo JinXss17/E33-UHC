@@ -20,7 +20,7 @@ public class Berserk extends Picto {
 	
 	public Berserk() {
 		PictoItem = new ItemStack(Material.NETHER_WART);
-		PictoItemName = "Berserk";
+		PictoName = "Berserk";
 		DamageBoost = DamageBonusLvl1;
 		basicCout = BasicCout;
 		Cout = BasicCout;

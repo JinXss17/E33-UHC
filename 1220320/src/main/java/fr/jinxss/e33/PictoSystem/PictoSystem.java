@@ -22,6 +22,10 @@ import fr.jinxss.e33.PictoSystem.Pictos.PictoMixtes.AgilliteFeline;
 import fr.jinxss.e33.PictoSystem.Pictos.PictoMixtes.ContreParfait;
 import fr.jinxss.e33.PictoSystem.Pictos.RessourcePicto.MineurChanceux;
 import fr.jinxss.e33.PictoSystem.Pictos.RessourcePicto.MineurDor;
+import fr.jinxss.e33.PictoSystem.Pictos.Special.DrawerPower;
+import fr.jinxss.e33.PictoSystem.Pictos.Special.Incendie;
+import fr.jinxss.e33.PictoSystem.Pictos.Special.NouvellePeinture;
+import fr.jinxss.e33.PictoSystem.Pictos.Special.Roulette;
 
 public class PictoSystem {
 	
@@ -31,6 +35,8 @@ public class PictoSystem {
 			AgilliteFeline.class, ContreParfait.class,
 			MineurChanceux.class, MineurDor.class
 		);
+	@SuppressWarnings("unused")
+	private static List<Class<? extends Picto>> SpécialPictos = List.of(DrawerPower.class, Incendie.class, NouvellePeinture.class, Roulette.class);
 	
 	private static HashMap<UUID, PlayerPictos> playerPicto = new HashMap<UUID, PlayerPictos>();
 
@@ -79,7 +85,7 @@ public class PictoSystem {
 		
 		getPlayerPictos(p).addToPictoList(picto);
 			
-		p.sendMessage("Vous avezz obtenu le picto " + picto.getClass().getName());
+		p.sendMessage("§dVous avezz obtenu le picto " + picto.getPictoName());
 		} catch (InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -5,6 +5,7 @@ import java.util.Random;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
@@ -21,7 +22,7 @@ public class LevelListener implements Listener {
 	private int MidExpOnKillEntity = 25;
 	private int ExpRange= 10;
 	
-	@EventHandler
+	@EventHandler (priority = EventPriority.LOW)
 	public void OnEntityDeath(EntityDeathEvent e) {
 		
 		if(e.getEntity() instanceof Player)return;

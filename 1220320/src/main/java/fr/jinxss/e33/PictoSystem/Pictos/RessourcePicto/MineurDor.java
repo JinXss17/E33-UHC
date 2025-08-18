@@ -27,7 +27,7 @@ public class MineurDor extends Picto {
 
 	public MineurDor() {
 		PictoItem = new ItemStack(Material.GOLD_NUGGET);
-		PictoItemName = "Mineur D'or";
+		PictoName = "Mineur D'or";
 		
 		basicCout = BasicCout;
 		Cout = BasicCout;

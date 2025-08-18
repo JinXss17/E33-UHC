@@ -9,7 +9,9 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -41,7 +43,15 @@ public class PlayerListener implements Listener {
 		LaunchGameItemMeta.setDisplayName(ChatColor.DARK_GREEN + "Start Game");
 		LaunchGameItem.setItemMeta(LaunchGameItemMeta);
 	}
-	@EventHandler
+	@EventHandler (priority = EventPriority.MONITOR)
+	public void PlayerHit(EntityDamageByEntityEvent e) {
+		
+		if(e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
+				e.setCancelled( !plugin.getUHCSystem().isPvpEnabled() );
+		}
+	}
+	
+	@EventHandler (priority = EventPriority.MONITOR)
 	public void onPlayerLogin(PlayerJoinEvent e) {
 		
 		Player p = e.getPlayer();
@@ -55,7 +65,7 @@ public class PlayerListener implements Listener {
 		}
 	}
 	
-	@EventHandler
+	@EventHandler (priority = EventPriority.MONITOR)
 	public void onDisconect(PlayerQuitEvent e) {
 		
 		Player p = e.getPlayer();
@@ -66,7 +76,7 @@ public class PlayerListener implements Listener {
 		
 	}
 	
-	@EventHandler
+	@EventHandler (priority = EventPriority.MONITOR)
 	public void onClickItem(PlayerInteractEvent e) {
 		
 		ItemStack it = e.getItem();
@@ -79,7 +89,7 @@ public class PlayerListener implements Listener {
 		
 	}
 	
-	@EventHandler
+	@EventHandler (priority = EventPriority.MONITOR)
 	public void onDead(PlayerDeathEvent e) {
 		
 		Player p = e.getEntity();
@@ -96,7 +106,7 @@ public class PlayerListener implements Listener {
 		
 	}
 	
-	@EventHandler
+	@EventHandler (priority = EventPriority.MONITOR)
 	public void onPlayerRespawn(PlayerRespawnEvent e) {
 		Player p = e.getPlayer();
 		Bukkit.getScheduler().runTaskLater(plugin, () -> {p.setGameMode(GameMode.SPECTATOR);} , 1);

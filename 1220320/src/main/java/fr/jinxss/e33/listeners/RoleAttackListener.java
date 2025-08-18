@@ -6,6 +6,7 @@ import fr.jinxss.e33.e33system.roles.Lune.Element;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
@@ -13,7 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class RoleAttackListener implements Listener {
 
-    @EventHandler
+    @EventHandler (priority = EventPriority.HIGH)
     public void onHit(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player damager)) return;
         if (!(event.getEntity() instanceof Player target)) return;

@@ -5,11 +5,13 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -18,6 +20,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
@@ -34,6 +37,10 @@ import fr.jinxss.e33.PictoSystem.Pictos.PictoMixtes.ContreParfait;
 import fr.jinxss.e33.PictoSystem.Pictos.RessourcePicto.MineurChanceux;
 import fr.jinxss.e33.PictoSystem.Pictos.RessourcePicto.MineurDor;
 import fr.jinxss.e33.PictoSystem.Pictos.Special.DrawerPower;
+import fr.jinxss.e33.PictoSystem.Pictos.Special.Incendie;
+import fr.jinxss.e33.PictoSystem.Pictos.Special.NouvellePeinture;
+import fr.jinxss.e33.PictoSystem.Pictos.Special.Roulette;
+import fr.jinxss.e33.uhcsystem.list.EGameStates;
 
 public class PictoListener implements Listener {
 
@@ -46,23 +53,17 @@ public class PictoListener implements Listener {
 		
 	}
 	
-	@EventHandler
+	@EventHandler (priority = EventPriority.LOWEST)
 	public void OnKillMobs(EntityDeathEvent e) {
-		
 		if(e.getEntity() instanceof Monster && e.getDamageSource().getCausingEntity() instanceof Player p) {
-			
 			PlayerPictos pictos = system.getPlayerPictos(p);
 			for(Picto picto : pictos.getActivatedPicto()) {
-				
 				picto.AddExp();
-				
 			}
-			
 		}
-		
 	}
 	
-	@EventHandler
+	@EventHandler (priority = EventPriority.LOW)
 	public void OnClickInventory(InventoryClickEvent e) {
 		
 		if(e.getWhoClicked() instanceof Player p ) {
@@ -78,7 +79,7 @@ public class PictoListener implements Listener {
 						pictos.removeToPictoActivated(picto);
 					}else {
 						if(!pictos.canActivatePicto(picto)) {
-							p.sendMessage("Vous n'avez pas assez de lumina !");
+							p.sendMessage("Vous ne pouvez pas activé ce Picto !");
 						}
 						pictos.addToPictoActivated(picto);
 					}
@@ -109,7 +110,7 @@ public class PictoListener implements Listener {
 		}
 	}
 	
-	@EventHandler
+	@EventHandler (priority = EventPriority.HIGH)
 	public void OnDamageEntity(EntityDamageEvent e) {
 		
 		DamageCause cause = e.getCause();
@@ -128,11 +129,23 @@ public class PictoListener implements Listener {
 			if(pictos.HasPictoActivated(AgilliteFeline.class)) {
 				AgilliteFeline picto = (AgilliteFeline) system.getPlayerPictos(p).GetPictoActivated(AgilliteFeline.class);
 				e.setDamage(Damage * picto.getFallDamageReduce() );
+				p.spawnParticle(Particle.POOF , p.getLocation(), 4);
 			}
 			
 		}
 		
 		if(e instanceof EntityDamageByEntityEvent E) {
+			
+			if(E.getDamager() instanceof Player p && system.getPlayerPictos(p).HasPictoActivated(Incendie.class)) {
+				Incendie picto = (Incendie) system.getPlayerPictos(p).GetPictoActivated(Incendie.class);
+				for(Player all : plugin.getUHCSystem().getAlivePlayers()) {
+					if(all.getLocation().distanceSquared(p.getLocation()) <= picto.getFireRay()) {
+						all.setFireTicks(picto.getFireTick());
+						all.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE , all.getLocation(), 1);
+					}
+				}
+				
+			}
 			
 			if(E.getDamager() instanceof Player damager && E.getEntity() instanceof Player victim) {
 				PlayerPictos damagerPicto = system.getPlayerPictos(damager);
@@ -143,7 +156,14 @@ public class PictoListener implements Listener {
 					EsquiveParfaite dodge = (EsquiveParfaite)victimPicto.GetPictoActivated(EsquiveParfaite.class);
 					if(r.nextFloat() *100 < dodge.getEscapeRate()) {
 						e.setCancelled(true);
+						victim.spawnParticle(Particle.POOF , victim.getLocation(), 2);
 					}
+				}
+				
+				if(damagerPicto.HasPictoActivated(Roulette.class)) {
+					
+					Roulette picto = (Roulette) damagerPicto.GetPictoActivated(Roulette.class);
+					picto.damageRoll(Damage);
 				}
 				
 				Damage *= system.getPlayerPictos(damager).getTotalDamageBoost(damager);
@@ -165,9 +185,11 @@ public class PictoListener implements Listener {
 				Damage *= system.getPlayerPictos(victim).getTotalResistanceBoost();
 				Damage *= RoleManager.getRole(victim.getUniqueId()).getResi();
 				
-				if(damagerPicto.HasPictoActivated(DrawerPower.class) && E.getFinalDamage() > 6) {
+				if(!damagerPicto.HasPictoActivated(DrawerPower.class) && E.getFinalDamage() > 6) {
 					e.setDamage(6);
 				}
+				
+				
 			}
 			
 			if(E.getDamager() instanceof Arrow arrow) {
@@ -185,7 +207,22 @@ public class PictoListener implements Listener {
 		
 	}
 	
-	@EventHandler
+	@EventHandler (priority = EventPriority.MONITOR)
+	public void OnPlayerRespawn(PlayerRespawnEvent e) {
+		
+		Player p = e.getPlayer();
+		
+		if(system.getPlayerPictos(p).HasPictoActivated(NouvellePeinture.class)) {
+			
+			NouvellePeinture picto = (NouvellePeinture) system.getPlayerPictos(p).GetPictoActivated(NouvellePeinture.class);
+			Bukkit.getScheduler().runTaskLater(plugin, () ->  picto.Revive(), 1);
+			
+		}
+		
+		
+	}
+	
+	@EventHandler (priority = EventPriority.MONITOR)
 	public void OnBlockBreak(BlockBreakEvent e) {
 		
 		Player p = e.getPlayer();
@@ -193,6 +230,11 @@ public class PictoListener implements Listener {
 		int Exp = e.getExpToDrop(); 
 		Collection<ItemStack> drops = block.getDrops();
 		Random r = new Random();
+		
+		if(plugin.getUHCSystem().getGameState() == EGameStates.Waiting) {
+			e.setCancelled(true);
+			return;
+		}
 		
 		for(Picto picto : system.getPlayerPictos(p).getActivatedPicto()) {
 			if(picto instanceof MineurChanceux) {
@@ -206,7 +248,6 @@ public class PictoListener implements Listener {
 						block.getWorld().dropItemNaturally(block.getLocation(), it);
 					}
 				}
-				
 			}
 			if(picto instanceof MineurDor) {
 				
@@ -215,10 +256,7 @@ public class PictoListener implements Listener {
 					Bukkit.getScheduler().runTaskLater(plugin, () -> { mineur.DropBonus(block.getLocation()); }, 1);
 					
 				}
-				
 			}
-			
 		}
 	}
-	
 }

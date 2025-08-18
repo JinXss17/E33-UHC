@@ -19,7 +19,7 @@ public class EsquiveParfaite extends Picto {
 	public EsquiveParfaite() {
 		
 		PictoItem = new ItemStack(Material.FEATHER);
-		PictoItemName = "Esquive Parfaite";
+		PictoName = "Esquive Parfaite";
 		
 		basicCout = BasicCout;
 		Cout = basicCout;

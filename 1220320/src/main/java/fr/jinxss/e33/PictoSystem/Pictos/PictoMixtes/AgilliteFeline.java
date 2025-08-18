@@ -18,7 +18,7 @@ public class AgilliteFeline extends Picto {
 	
 	public AgilliteFeline() {
 		PictoItem = new ItemStack(Material.RABBIT_FOOT);
-		PictoItemName = "Agilité Féline";
+		PictoName = "Agilité Féline";
 		
 		basicCout = BasicCout;
 		Cout = basicCout;

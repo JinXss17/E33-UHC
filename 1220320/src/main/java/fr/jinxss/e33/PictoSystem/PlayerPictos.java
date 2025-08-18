@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import fr.jinxss.e33.Levelsystem.PlayerLevel;
 import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Immortel;
+import fr.jinxss.e33.PictoSystem.Pictos.Special.NouvellePeinture;
 
 public class PlayerPictos {
 
@@ -43,6 +44,13 @@ public class PlayerPictos {
 	public boolean canActivatePicto(Picto picto) {
 		int LuminaUsed = getLuminaUsed();
 		LuminaUsed += picto.Cout;
+		
+		if(picto instanceof NouvellePeinture pictos) {
+			if(pictos.isUsed) {
+				return false;
+			}
+		}
+		
 		if(LuminaUsed > playerLevel.getLumina()) {
 			return false;
 		}

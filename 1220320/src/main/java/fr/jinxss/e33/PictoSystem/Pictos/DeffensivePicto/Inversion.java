@@ -19,7 +19,7 @@ public class Inversion extends Picto {
 	
 	public Inversion() {
 		PictoItem = new ItemStack(Material.GOLDEN_APPLE);
-		PictoItemName = "Inversion";
+		PictoName = "Inversion";
 		
 		basicCout = BasicCout;
 		Cout = basicCout;

@@ -16,7 +16,7 @@ public class GardeOptimal extends Picto {
 	private double HealthBonus = 0;
 	
 	public GardeOptimal() {
-		PictoItemName = "Garde Optimal";
+		PictoName = "Garde Optimal";
 		PictoItem = new ItemStack(Material.SHIELD);
 		
 		basicCout = BasicCout;

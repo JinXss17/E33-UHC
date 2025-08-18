@@ -15,7 +15,7 @@ public class TirPrecis extends Picto {
 
 	public TirPrecis() {
 		PictoItem = new ItemStack(Material.ARROW);
-		PictoItemName = "Tir Précis";
+		PictoName = "Tir Précis";
 		basicCout = BasicCout;
 		Cout= basicCout;
 		DamageBoost += ArrowDamageBonusLvl1;

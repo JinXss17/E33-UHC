@@ -26,7 +26,7 @@ public class Immortel extends Picto {
 	
 	public Immortel(UUID uuid) {
 		PictoItem = new ItemStack(Material.TOTEM_OF_UNDYING);
-		PictoItemName = "Immortel";
+		PictoName = "Immortel";
 		
 		basicCout = BasicCout;
 		Cout = basicCout;

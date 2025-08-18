@@ -16,7 +16,7 @@ public class Survivaliste extends Picto {
 	
 	public Survivaliste() {
 		PictoItem = new ItemStack(Material.LEATHER_HELMET);
-		PictoItemName = "Survivaliste";
+		PictoName = "Survivaliste";
 		basicCout = BasicCout;
 		Cout = basicCout;
 		ResistanceBoost += ResistanceBoostLvl1;

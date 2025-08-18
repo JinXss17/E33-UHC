@@ -16,10 +16,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -30,6 +32,8 @@ import fr.jinxss.e33.E33UHC;
 // Ne sert a rien
 
 public class MobSpawnListener implements Listener {
+	
+	private E33UHC plugin;
 	private static LivingEntity getNearestPlayer(Zombie zombie) {
 	    double closest = Double.MAX_VALUE;
 	    LivingEntity nearest = null;
@@ -48,6 +52,8 @@ public class MobSpawnListener implements Listener {
     
     public MobSpawnListener(E33UHC systeme) {
         // Tâche répétitive qui gère l'attaque à distance des Lanciers
+    	
+    	plugin = systeme;
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -92,7 +98,7 @@ public class MobSpawnListener implements Listener {
         zombie.getWorld().playSound(zombie.getLocation(), "entity.trident.throw", 1.0f, 1.0f);
     }
 
-    @EventHandler
+    @EventHandler (priority = EventPriority.MONITOR)
     public void onMobSpawn(CreatureSpawnEvent event) {
         if (event.getEntity().getWorld().getName().equalsIgnoreCase("world_nether")) return;
 
@@ -116,36 +122,39 @@ public class MobSpawnListener implements Listener {
 
     // 🔱 MAGE LANCIER
     private void makeLancier(Zombie zombie) {
-        zombie.setCustomName("§3Lancier");
-        zombie.setCustomNameVisible(true);
-        zombie.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
-        zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(6.0);
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false)); // Pas de brûlure au soleil
-        zombie.setVisualFire(false);
+    	zombie.setCustomName("§3Lancier");
+    	zombie.setCustomNameVisible(true);
+    	zombie.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
+    	zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(6.0);
+    	zombie.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
+    	zombie.setVisualFire(true);
+    	zombie.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
         // Tu peux l'améliorer pour qu'il jette vraiment le trident avec une AI custom plus tard (voir note en bas)
     }
 
     // ☀️ MOB CLAIR
     private void makeMobClair(Zombie zombie) {
-        zombie.setCustomName("§fMob Clair");
-        zombie.setCustomNameVisible(true);
-        zombie.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(2.0);
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
-        zombie.setVisualFire(false);
-        zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(4.0);
+    	zombie.setCustomName("§fClair");
+    	zombie.setCustomNameVisible(true);
+    	zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(3.0);
+    	zombie.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(0.322);
+    	zombie.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
+    	zombie.setVisualFire(true);
+    	zombie.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
         
     }
 
     // 🌑 MOB OBSCUR
     private void makeMobObscur(Zombie zombie) {
-        zombie.setCustomName("§8Mob Obscur");
-        zombie.setCustomNameVisible(true);
-        zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(10.0);
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
-        zombie.setVisualFire(false);
+    	zombie.setCustomName("§8Obscur");
+    	zombie.setCustomNameVisible(true);
+    	zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(8.0);
+    	zombie.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
+    	zombie.setVisualFire(true);
+    	zombie.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
     }
     
-    @EventHandler
+    @EventHandler (priority = EventPriority.LOWEST)
     //Modif pour les pictos
     public void onMobDeath(EntityDeathEvent event) {
         Entity entity = event.getEntity();
@@ -157,15 +166,12 @@ public class MobSpawnListener implements Listener {
         switch (name) {
             case "§3Lancier" -> {
                 event.getDrops().clear();
-                event.getDrops().add(new ItemStack(Material.TRIDENT));
             }
-            case "§fMob Clair" -> {
+            case "§fClair" -> {
                 event.getDrops().clear();
-                event.getDrops().add(new ItemStack(Material.GLOWSTONE_DUST, 2));
             }
-            case "§8Mob Obscur" -> {
+            case "§8Obscur" -> {
                 event.getDrops().clear();
-                event.getDrops().add(new ItemStack(Material.ENDER_PEARL, 1));
             }
         }
     }

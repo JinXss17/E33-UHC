@@ -25,7 +25,7 @@ public class ContreParfait extends Picto {
 	
 	public ContreParfait() {
 		PictoItem = new ItemStack(Material.SHIELD);
-		PictoItemName = "Contre Parfait";
+		PictoName = "Contre Parfait";
 		
 		basicCout = BasicCout;
 		Cout = basicCout;

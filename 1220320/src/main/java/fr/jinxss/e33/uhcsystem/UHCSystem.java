@@ -21,7 +21,6 @@ public class UHCSystem {
 	private static ArrayList<UUID> _DeadPlayerList = new ArrayList<UUID>();
 	private static ArrayList<UUID> _AlivePlayerList = new ArrayList<UUID>();
 	
-	private float randomTeleportRay = 400;
 	private float teleportHeight = 120;
 	
 	private boolean PvP = false;
@@ -30,12 +29,14 @@ public class UHCSystem {
 	
 	private UHCScoreBoard Board;
 	private UHCConfigMenu menuConfig;
+	UHCBorder border;
 	
 	
 	public UHCSystem(E33UHC plugin) {
 		this.plugin = plugin ;
 		GameState = EGameStates.Waiting;
-		Board = new UHCScoreBoard(plugin, this, new UHCBorder(), plugin.getLevelSystem());
+		border = new UHCBorder();
+		Board = new UHCScoreBoard(plugin, this, border , plugin.getLevelSystem());
 		menuConfig = new UHCConfigMenu(this, Board.getBorder());
 		plugin.getServer().getPluginManager().registerEvents(menuConfig, plugin);
 	}
@@ -44,16 +45,23 @@ public class UHCSystem {
 		return menuConfig;
 	}
 	
+	private float GetTeleportRay() {
+		
+		return (float)border.getCurrentSize();
+		
+	}
+	
 	public void StartGame() {
 		
 		Random r = new Random();
+		border.setBorderSize(border.InitialBorderSize, 0);
 		
 		for(Player p : _PlayerList) {
 			
 			r.setSeed(r.nextLong());
 			
-			float lX =  ((float) Math.sin(r.nextDouble()* randomTeleportRay ) );
-			float lZ =  ((float) Math.cos(r.nextDouble()* randomTeleportRay ) );
+			float lX =  ((float) Math.sin(r.nextDouble())* GetTeleportRay() );
+			float lZ =  ((float) Math.cos(r.nextDouble())* GetTeleportRay() );
 			
 			p.teleport(new Location(Bukkit.getWorld("World"),lX, teleportHeight, lZ) );
 			_AlivePlayerList.add(p.getUniqueId());
@@ -82,6 +90,12 @@ public class UHCSystem {
 		
 		return Board;
 	
+	}
+	
+	public UHCBorder getBorder() {
+		
+		return border;
+		
 	}
 	
 	public void RegisterScoreBoard() {

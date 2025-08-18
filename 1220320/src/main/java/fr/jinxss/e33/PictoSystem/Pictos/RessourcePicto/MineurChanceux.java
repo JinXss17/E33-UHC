@@ -22,7 +22,7 @@ public class MineurChanceux extends Picto {
 
 	public MineurChanceux() {
 		PictoItem = new ItemStack(Material.DIAMOND_PICKAXE);
-		PictoItemName = "Mineur Chanceux";
+		PictoName = "Mineur Chanceux";
 		basicCout = BasicCout;
 		Cout = BasicCout;
 	}

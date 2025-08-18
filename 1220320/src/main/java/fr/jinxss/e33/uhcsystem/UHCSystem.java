@@ -57,6 +57,10 @@ public class UHCSystem {
 		border.setBorderSize(border.InitialBorderSize, 0);
 		GameState = EGameStates.Playing;
 		
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			addPlayerToGame(p);
+		}
+		
 		for(Player p : _PlayerList) {
 			
 			r.setSeed(r.nextLong());

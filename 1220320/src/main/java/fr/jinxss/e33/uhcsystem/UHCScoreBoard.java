@@ -49,7 +49,7 @@ public class UHCScoreBoard {
         Scoreboard board = scoreboardManager.getNewScoreboard();
         @SuppressWarnings("deprecation")
 		Objective obj = board.registerNewObjective("uhc", "dummy", ChatColor.GOLD + "UHC");
-        obj.setDisplayName(ChatColor.GOLD + "UHC");
+        obj.setDisplayName(ChatColor.GOLD + "E33UHC Test");
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         scoreboards.put(player, board);

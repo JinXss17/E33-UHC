@@ -8,7 +8,6 @@ import fr.jinxss.e33.Listeners.ExplosiveArrowListener;
 import fr.jinxss.e33.Listeners.MobSpawnListener;
 import fr.jinxss.e33.Listeners.PlayerListener;
 import fr.jinxss.e33.PictoSystem.PictoSystem;
-import fr.jinxss.e33.e33commands.RandomRoleCommand;
 import fr.jinxss.e33.mobsystem.AxonSpawner;
 import fr.jinxss.e33.mobsystem.BossSpawner;
 import fr.jinxss.e33.mobsystem.CustomMobsListener;
@@ -43,7 +42,7 @@ public class E33UHC extends JavaPlugin {
         //RoleRecipes.registerAll(this);
 
         
-		getCommand("giveRandomRole").setExecutor(new RandomRoleCommand());
+		//getCommand("giveRandomRole").setExecutor(new RandomRoleCommand());
 		getCommand("invoke").setExecutor(new InvokeMobsCommand(axonSpawner, bossSpawner));
 		
         // Enregistre les listeners

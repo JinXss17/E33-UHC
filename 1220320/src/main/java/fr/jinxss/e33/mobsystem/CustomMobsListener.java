@@ -32,7 +32,7 @@ public class CustomMobsListener implements Listener {
 		if(e.getDamageSource().getCausingEntity() instanceof Player p) {
 			Entity entity = e.getEntity();
 			
-			if(entity.getPersistentDataContainer() == null) return;
+			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING) == null) return;
 			
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Boss")) {
 				plugin.getPictoSystem().GiveRandomPictoToPlayer(p);
@@ -48,12 +48,12 @@ public class CustomMobsListener implements Listener {
 				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new Incendie());
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Sirene") ) {
-				p.sendMessage("§dVous avez tuer la Sirene !");
+				p.sendMessage("§dVous avez tuer Sirène !");
 				Bukkit.broadcastMessage("§dLa Sirene a été éliminée !");
 				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new Roulette());
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Faucheuse") ) {
-				p.sendMessage("§dVous avez tuer la Faucheuse !");
+				p.sendMessage("§dVous avez tuer Faucheuse !");
 				Bukkit.broadcastMessage("§dLa Faucheuse a été éliminée !");
 				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new NouvellePeinture(p,
 						plugin.getPictoSystem().getPlayerPictos(p),

@@ -194,7 +194,6 @@ public class PictoListener implements Listener {
 							all.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE , all.getLocation(), 20);
 						}
 					}
-					
 				}
 				
 				Damage *= system.getPlayerPictos(damager).getTotalDamageBoost(damager);

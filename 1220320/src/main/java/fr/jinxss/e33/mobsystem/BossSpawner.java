@@ -43,24 +43,7 @@ public class BossSpawner extends MobSystem{
 				Math.sin(random.nextFloat()) * MaxDistanceToSpawn,
 				300,
 				Math.cos(random.nextFloat()) * MaxDistanceToSpawn);
-		boolean blockIsGround = false;
-		int Y = SpawnLoc.getBlockY();
-		int count = 0;
-		while (false || count < 250) {
-			SpawnLoc = new Location(Bukkit.getWorld("world"),
-					Math.sin(random.nextFloat()) * MaxDistanceToSpawn,
-					300,
-					Math.cos(random.nextFloat()) * MaxDistanceToSpawn);
-			if(SpawnLoc.getBlock().isEmpty() || SpawnLoc.getBlock().isLiquid()) {
-				SpawnLoc.setY(--Y);
-			}else {
-				blockIsGround = true;
-			}
-			count++;
-			if(count == 250 && !blockIsGround) {
-				SpawnLoc = null;
-			}
-		}
+		findSafeLocationNear(SpawnLoc);
 		
 		return SpawnLoc;
 	}

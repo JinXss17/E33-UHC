@@ -19,7 +19,7 @@ public class MobCustomSpawner extends MobSystem {
 
     private final E33UHC plugin;
     
-    private int TimeToSpawnCustomMobs = 5;
+    private int TimeToSpawnCustomMobs = 30;
     
 
     public MobCustomSpawner(E33UHC plugin) {

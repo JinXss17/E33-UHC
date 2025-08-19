@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -51,6 +52,16 @@ public class PlayerListener implements Listener {
 		if(e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
 				e.setCancelled( !plugin.getUHCSystem().isPvpEnabled() );
 		}
+		
+	}
+	
+	@EventHandler (priority = EventPriority.MONITOR)
+	public void OnDamage(EntityDamageEvent e) {
+		
+		if(plugin.getUHCSystem().getGameState() == EGameStates.Waiting) {
+			e.setCancelled(true);
+		}
+		
 	}
 	
 	@EventHandler (priority = EventPriority.HIGHEST)
@@ -63,6 +74,11 @@ public class PlayerListener implements Listener {
 			
 			p.getInventory().clear();
 			p.getAttribute(Attribute.MAX_HEALTH).setBaseValue(20.0d);
+			p.setHealth(20.0d);
+			p.setLevel(0);
+			p.setExp(0);
+			p.setFoodLevel(20);
+			p.setGameMode(GameMode.SURVIVAL);
 			p.teleport(new Location(Bukkit.getWorld("world"), 0, 180, 0) );
 			for(PotionEffect effect : p.getActivePotionEffects()) {
 				p.removePotionEffect(effect.getType());

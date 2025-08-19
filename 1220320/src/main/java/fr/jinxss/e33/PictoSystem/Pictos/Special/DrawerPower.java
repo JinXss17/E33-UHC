@@ -10,7 +10,7 @@ public class DrawerPower extends Picto {
 	public DrawerPower() {
 		
 		PictoItem = new ItemStack(Material.PAINTING);
-		PictoName = "Pouvoir de Peintre";
+		PictoName = "Puissance Surpeinte";
 		
 	}
 

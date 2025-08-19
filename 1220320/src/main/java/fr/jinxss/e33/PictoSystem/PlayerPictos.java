@@ -125,7 +125,7 @@ public class PlayerPictos {
 	
 	public Inventory getPictoMenu() {
 		
-		Inventory PictoInv = Bukkit.createInventory(null, 18, "Pictos");
+		Inventory PictoInv = Bukkit.createInventory(null, 27, "Pictos");
 		
 		for(Picto picto : getPictoList()) {
 			

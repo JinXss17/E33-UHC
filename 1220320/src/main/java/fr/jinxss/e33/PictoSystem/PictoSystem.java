@@ -17,6 +17,7 @@ import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Immortel;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Inversion;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Survivaliste;
 import fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto.Berserk;
+import fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto.TirMarquant;
 import fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto.TirPrecis;
 import fr.jinxss.e33.PictoSystem.Pictos.PictoMixtes.AgilliteFeline;
 import fr.jinxss.e33.PictoSystem.Pictos.PictoMixtes.ContreParfait;
@@ -31,7 +32,7 @@ public class PictoSystem {
 	
 	private static List<Class<? extends Picto>> BasicPicto = List.of(
 			EsquiveParfaite.class, GardeOptimal.class, Immortel.class, Inversion.class, Survivaliste.class,
-			Berserk.class, TirPrecis.class,
+			Berserk.class, TirPrecis.class, TirMarquant.class,
 			AgilliteFeline.class, ContreParfait.class,
 			MineurChanceux.class, MineurDor.class
 		);

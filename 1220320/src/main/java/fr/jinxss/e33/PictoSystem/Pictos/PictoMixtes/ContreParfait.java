@@ -51,6 +51,13 @@ public class ContreParfait extends Picto {
 	}
 	
 	@Override
+	public String Describe() {
+		return "Pour chaque parrade avec votre bouclier\n"
+				+ "vous renvoyer " + DamageMultiplier*100 + "% des dégats avec un\n"
+				+ "cooldown de " + CoolDownTimer + "sec";
+	}
+	
+	@Override
 	public void LevelUp() {
 		super.LevelUp();
 		

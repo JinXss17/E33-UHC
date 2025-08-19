@@ -17,6 +17,7 @@ import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Immortel;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Inversion;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Survivaliste;
 import fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto.Berserk;
+import fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto.CompressionDeLumina;
 import fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto.TirMarquant;
 import fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto.TirPrecis;
 import fr.jinxss.e33.PictoSystem.Pictos.PictoMixtes.AgilliteFeline;
@@ -32,7 +33,7 @@ public class PictoSystem {
 	
 	private static List<Class<? extends Picto>> BasicPicto = List.of(
 			EsquiveParfaite.class, GardeOptimal.class, Immortel.class, Inversion.class, Survivaliste.class,
-			Berserk.class, TirPrecis.class, TirMarquant.class,
+			Berserk.class, TirPrecis.class, TirMarquant.class, CompressionDeLumina.class,
 			AgilliteFeline.class, ContreParfait.class,
 			MineurChanceux.class, MineurDor.class
 		);
@@ -62,6 +63,8 @@ public class PictoSystem {
 		Picto picto;
 		if(BasicPicto.get(ChoosedPicto) == Immortel.class) {
 			picto = new Immortel(p.getUniqueId());
+		}else if(BasicPicto.get(ChoosedPicto) == CompressionDeLumina.class) {
+			picto = new CompressionDeLumina(getPlayerPictos(p));
 		}else {
 			picto = BasicPicto.get(ChoosedPicto).newInstance();
 		}
@@ -72,6 +75,8 @@ public class PictoSystem {
 			ChoosedPicto = r.nextInt(BasicPicto.size()-1);
 			if(BasicPicto.get(ChoosedPicto) == Immortel.class) {
 				picto = new Immortel(p.getUniqueId());
+			}else if(BasicPicto.get(ChoosedPicto) == CompressionDeLumina.class) {
+				picto = new CompressionDeLumina(getPlayerPictos(p));
 			}else {
 				picto = BasicPicto.get(ChoosedPicto).newInstance();
 			}
@@ -98,7 +103,7 @@ public class PictoSystem {
 	}
 	
 	public PlayerPictos getPlayerPictos(Player player) {
-		return playerPicto.getOrDefault(player.getUniqueId(), new PlayerPictos(plugin.getLevelSystem().getPlayerLevel(player)));
+		return playerPicto.getOrDefault(player.getUniqueId(), null);
 	}
 	public void registerPlayerPictos(Player p, PlayerPictos pictos) {
 			playerPicto.put(p.getUniqueId(), pictos);

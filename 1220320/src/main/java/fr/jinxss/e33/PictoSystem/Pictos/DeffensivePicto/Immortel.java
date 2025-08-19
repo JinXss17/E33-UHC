@@ -54,6 +54,11 @@ public class Immortel extends Picto {
 		p.getAttribute(Attribute.MAX_HEALTH).setBaseValue(Health - HealthBoost);
 	}
 	
+	@Override
+	public String Describe() {
+		return "Ajoute " + HealthBoost/2 + " coeurs";
+	}
+	
 	
 	@Override
 	public void LevelUp() {

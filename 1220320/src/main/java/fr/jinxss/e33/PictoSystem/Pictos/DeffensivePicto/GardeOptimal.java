@@ -26,7 +26,7 @@ public class GardeOptimal extends Picto {
 	}
 	
 	public double getHealBonus() {
-		return HealthBonus;
+		return HealthBonus * 2;
 	}
 	
 	@Override
@@ -36,6 +36,12 @@ public class GardeOptimal extends Picto {
 		if(Level == ENiveau.Maitrise)HealthBonus += HealthBonusLvl2;
 		if(Level == ENiveau.Instinctif)HealthBonus += HealthBonusLvl3;
 		
+	}
+	
+	@Override
+	public String Describe() {
+		return "Chaque fois que vous parez un coup\n"
+				+ "vous régénérez " + HealthBonus + " Coeur(s) ";
 	}
 	
 }

@@ -39,6 +39,12 @@ public class Berserk extends Picto {
 	}
 	
 	@Override
+	public String Describe() {
+		return "Offre " + DamageBoost + "% de dégâts suplémentaire\n"
+				+ "lorsque la vie est divisé par " + HealthDivideToBoost;
+	}
+	
+	@Override
 	public void LevelUp() {
 		super.LevelUp();
 		

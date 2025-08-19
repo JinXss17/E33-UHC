@@ -58,6 +58,31 @@ public class MineurDor extends Picto {
 	}
 	
 	@Override
+	public String Describe() {
+		
+		String describe = "Pour chaque minerais de fer ou diamant\n"
+				+ "miner vous avez "+ DropRate + "% de chance d'obtenir\n";
+		
+		switch (Level) {
+		case ENiveau.Apprentissage: {
+			describe += "1 Nugget d'or";
+			return describe;
+		}
+		case ENiveau.Maitrise: {
+			describe += "entre 1 et 5 Nugget d'or";
+			return describe;
+		}
+		case ENiveau.Instinctif: {
+			describe += "1 lingot d'or";
+			return describe;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + Level);
+		}
+		
+	}
+	
+	@Override
 	public void LevelUp() {
 		super.LevelUp();
 		

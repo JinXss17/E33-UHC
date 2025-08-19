@@ -32,6 +32,13 @@ public class Inversion extends Picto {
 	}
 	
 	@Override
+	public String Describe() {
+		return "Enlève " + AbsoRemove + " coeurs d'absorption\n"
+				+ "au moment de manger une pomme d'or\n"
+				+ "mais reduit les dégats de " + ResistanceBoost + "%" ;
+	}
+	
+	@Override
 	public void LevelUp() {
 		
 		super.LevelUp();

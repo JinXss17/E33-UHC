@@ -58,7 +58,7 @@ public class Picto{
 	}
 	
 	public boolean IsToggleDamageBoost(Player p) {
-		return false;
+		return true;
 	}
 	
 	public void AddExp() {

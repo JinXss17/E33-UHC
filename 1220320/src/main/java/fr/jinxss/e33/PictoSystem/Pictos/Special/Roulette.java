@@ -28,6 +28,13 @@ public class Roulette extends Picto {
 		
 	}
 	
+	@Override
+	public String Describe() {
+		return "A chaque coup vous avez :\n"
+				+ "-" + BonusRate + "% de chance d'aumentez vos dégâts de "+ BonusDamage*100 + "%\n"
+				+ "-" + MalusRate + "% de chance de réduire vos dégâts de "+ MalusDamage*100 + "%";
+	}
+	
 	public double damageRoll(double damage) {
 		Random r = new Random();
 		double FinalDamage = damage;

@@ -22,6 +22,11 @@ public class TirPrecis extends Picto {
 	}
 	
 	@Override
+	public String Describe() {
+		return "Augmente les dégats de l'arc de " + DamageBoost + "%";
+	}
+	
+	@Override
 	public void LevelUp() {
 		super.LevelUp();
 		

@@ -28,4 +28,9 @@ public class Survivaliste extends Picto {
 		if(Level== ENiveau.Maitrise)ResistanceBoost += ResistanceBoostLvl2;
 		if(Level== ENiveau.Instinctif)ResistanceBoost += ResistanceBoostLvl3;
 	}
+	
+	@Override
+	public String Describe() {
+		return "Réduit de " + ResistanceBoost + "% tout type de dégât";
+	}
 }

@@ -26,6 +26,12 @@ public class Incendie extends Picto {
 		return (int) Math.pow(FireRay, 2);
 	}
 	
+	@Override
+	public String Describe() {
+		return "Enflamme tout les joueurs dans un\n"
+				+ "rayon de " + FireRay + " a chaque coup";
+	}
+	
 	public int getFireTick() {
 		
 		return FireSec * 20;

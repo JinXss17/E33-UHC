@@ -13,5 +13,10 @@ public class DrawerPower extends Picto {
 		PictoName = "Puissance Surpeinte";
 		
 	}
+	
+	@Override
+	public String Describe() {
+		return "Permet d'outrepassé la limite de dégats";
+	}
 
 }

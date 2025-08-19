@@ -37,6 +37,12 @@ public class MineurChanceux extends Picto {
 	}
 	
 	@Override
+	public String Describe() {
+		return "Pour chaque minerais miner, vous avez " + DropRate + "% de\n"
+				+ "chance de multiplier par" + DropMultiplicate + " votre butin";
+	}
+	
+	@Override
 	public void LevelUp() {
 		super.LevelUp();
 		

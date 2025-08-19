@@ -38,4 +38,10 @@ public class EsquiveParfaite extends Picto {
 		if(Level == ENiveau.Instinctif)EscapeRate += EscapeRateLvl3;
 	}
 	
+	@Override
+	public String Describe() {
+		return "A chaque coup reçus, vous avez " + EscapeRate + "% de chance \n"
+				+ "d'esquiver le coup";
+	}
+	
 }

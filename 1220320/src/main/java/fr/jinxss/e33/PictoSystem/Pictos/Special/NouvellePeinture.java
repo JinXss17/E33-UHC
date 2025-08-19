@@ -44,6 +44,10 @@ public class NouvellePeinture extends Picto {
 		
 	}
 	
+	@Override
+	public String Describe() {
+		return "Permet de ressucité (1 fois)";
+	}
 	
 	public void Revive() {
 		

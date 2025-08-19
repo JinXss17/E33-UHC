@@ -30,6 +30,11 @@ public class AgilliteFeline extends Picto {
 	}
 	
 	@Override
+	public String Describe() {
+		return "Réduit les dégâts de chute de " + FallDamageReduce + "%";
+	}
+	
+	@Override
 	public void LevelUp() {
 		super.LevelUp();
 		

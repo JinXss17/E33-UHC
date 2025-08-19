@@ -40,6 +40,18 @@ public class TirMarquant extends Picto {
 	}
 	
 	@Override
+	public String Describe() {
+		
+		String describe = "Lorsque vous touchez un joueur a l'arc\n"
+				+ "vous lui appliquer une marque";
+		
+		if(Level != ENiveau.Apprentissage)describe += "et lui\n"
+				+ "retirez " + ArrowHealthSteal + " coeurs pendant " + HealthStealTime + "sec";
+		
+		return describe;
+	}
+	
+	@Override
 	public void LevelUp() {
 		super.LevelUp();
 		

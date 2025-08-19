@@ -40,5 +40,11 @@ public class CompressionDeLumina extends Picto {
 		
 	}
 	
+	@Override
+	public String Describe() {
+		return "Augmente de " + BonusDamage + "% les dégats par \n"
+				+ "point de Lumina restant";
+	}
+	
 	
 }

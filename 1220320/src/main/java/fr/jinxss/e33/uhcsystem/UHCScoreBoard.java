@@ -92,13 +92,14 @@ public class UHCScoreBoard {
 	    obj.getScore(ChatColor.AQUA + "X: " + loc.getBlockX()).setScore(6);
 	    obj.getScore(ChatColor.AQUA + "Y: " + loc.getBlockY()).setScore(5);
 	    obj.getScore(ChatColor.AQUA + "Z: " + loc.getBlockZ()).setScore(4);
-	    obj.getScore(ChatColor.DARK_PURPLE + "Lumina: " +  (level.getLumina() - level.getUsedLumina()) + "/" + level.getLumina()).setScore(3);
-	    obj.getScore(ChatColor.YELLOW + "Level: " +  level.getLevel()).setScore(2);
-	    obj.getScore(ChatColor.YELLOW + "Exp: " +  level.getExp() + "/" + level.getExpToLevelUp()).setScore(1);
+	    obj.getScore(ChatColor.DARK_RED + "Marqué : " + plugin.getPictoSystem().getPlayerPictos(player).IsMarked() ).setScore(3);
+	    obj.getScore(ChatColor.DARK_PURPLE + "Lumina: " +  (level.getLumina() - level.getUsedLumina()) + "/" + level.getLumina()).setScore(2);
+	    obj.getScore(ChatColor.YELLOW + "Level: " +  level.getLevel()).setScore(1);
+	    obj.getScore(ChatColor.YELLOW + "Exp: " +  level.getExp() + "/" + level.getExpToLevelUp()).setScore(0);
 	    
 	    
 	    double borderSize = uhcBorder.getCurrentSize();
-	    obj.getScore(ChatColor.DARK_GREEN + "Bordure: " + (int) borderSize).setScore(-1);
+	    obj.getScore(ChatColor.DARK_GREEN + "Bordure: " + (int) borderSize).setScore(-2);
 	
 	     // Activer le PvP si le temps est dépassé et qu'il ne l'est pas encore
 	     if (!uhcSystem.isPvpEnabled() && elapsed >= PVP_ENABLE_TIME * 60) {
@@ -110,9 +111,9 @@ public class UHCScoreBoard {
 		    long lseconds = remaining % 60;
 	
 		    String formatted = String.format("%02d:%02d", lminutes, lseconds);
-		    obj.getScore(ChatColor.LIGHT_PURPLE + "PvP dans: " + formatted).setScore(0);
+		    obj.getScore(ChatColor.LIGHT_PURPLE + "PvP dans: " + formatted).setScore(-1);
 	     } else {
-	    	    obj.getScore(ChatColor.LIGHT_PURPLE + "PvP: Activé").setScore(0);
+	    	    obj.getScore(ChatColor.LIGHT_PURPLE + "PvP: Activé").setScore(-1);
 	     }
 	     if (!meetupStarted && elapsed >= uhcBorder.MinuteToMeetUp * 60) {
 		    meetupStarted = true;
@@ -127,9 +128,9 @@ public class UHCScoreBoard {
 			long lseconds = remaining % 60;
 			
 			String formatted = String.format("%02d:%02d", lminutes, lseconds);
-			obj.getScore(ChatColor.GOLD + "MeetUp dans: " + formatted).setScore(-2);
+			obj.getScore(ChatColor.GOLD + "MeetUp dans: " + formatted).setScore(-3);
 	     } else {
-	    	 obj.getScore(ChatColor.GOLD + "MeetUp: En cours").setScore(-2);
+	    	 obj.getScore(ChatColor.GOLD + "MeetUp: En cours").setScore(-3);
 	     }
     }
 }

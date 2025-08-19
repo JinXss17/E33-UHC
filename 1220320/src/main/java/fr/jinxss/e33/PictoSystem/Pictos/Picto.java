@@ -9,7 +9,7 @@ import fr.jinxss.e33.PictoSystem.ENiveau;
 public class Picto{
 	
 	public int Exp = 0;
-	public int ExpToLevelUp = 500;
+	public int ExpToLevelUp = 750;
 	public int ExpPerMobs = 20;
 	public float ExpUpMultiplier = 1;
 	
@@ -83,7 +83,7 @@ public class Picto{
 			Level = ENiveau.Maitrise;
 			Cout = (int) (basicCout/Coutlvl2Divisor);
 		}
-		ExpUpMultiplier += 0.5f;
+		ExpUpMultiplier += 1f;
 		ExpToLevelUp *= ExpUpMultiplier;
 	}
 }

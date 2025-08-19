@@ -31,6 +31,7 @@ import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.EsquiveParfaite;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.GardeOptimal;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Inversion;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Survivaliste;
+import fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto.TirMarquant;
 import fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto.TirPrecis;
 import fr.jinxss.e33.PictoSystem.Pictos.PictoMixtes.AgilliteFeline;
 import fr.jinxss.e33.PictoSystem.Pictos.PictoMixtes.ContreParfait;
@@ -47,10 +48,12 @@ public class PictoListener implements Listener {
 	private PictoSystem system;
 	private E33UHC plugin;
 	
+	private String PictoNotActivate = "Vous ne pouvez pas activé ce Picto !";
+	private String PictoInvName = "Pictos";
+	
 	public PictoListener(E33UHC plugin, PictoSystem system) {
 		this.plugin = plugin;
 		this.system = system;
-		
 	}
 	
 	@EventHandler (priority = EventPriority.LOWEST)
@@ -67,7 +70,7 @@ public class PictoListener implements Listener {
 	public void OnClickInventory(InventoryClickEvent e) {
 		
 		if(e.getWhoClicked() instanceof Player p ) {
-			if(e.getView().getTitle().equalsIgnoreCase("Pictos")) {
+			if(e.getView().getTitle().equalsIgnoreCase(PictoInvName)) {
 				
 				e.setCancelled(true);
 				PlayerPictos pictos = system.getPlayerPictos(p);
@@ -79,15 +82,13 @@ public class PictoListener implements Listener {
 						pictos.removeToPictoActivated(picto);
 					}else {
 						if(!pictos.canActivatePicto(picto)) {
-							p.sendMessage("Vous ne pouvez pas activé ce Picto !");
+							p.sendMessage(PictoNotActivate);
 						}
 						pictos.addToPictoActivated(picto);
 					}
 				}
 				p.closeInventory();
 				Bukkit.getScheduler().runTaskLater(plugin, () -> {p.openInventory(pictos.getPictoMenu()); }, 1);
-				
-	
 			}
 		}
 		
@@ -203,6 +204,11 @@ public class PictoListener implements Listener {
 						Damage *= system.getPlayerPictos(damager).GetPictoActivated(TirPrecis.class).DamageBoost;
 						Damage *= system.getPlayerPictos(victim).getTotalResistanceBoost();
 						Damage *= RoleManager.getRole(victim.getUniqueId()).getResi();
+					}
+					
+					if(system.getPlayerPictos(damager).HasPictoActivated(TirMarquant.class)) {
+						system.getPlayerPictos(damager).applyMark();
+						((TirMarquant)system.getPlayerPictos(damager).GetPictoActivated(TirMarquant.class)).StealHealth(victim);
 					}
 					
 				}

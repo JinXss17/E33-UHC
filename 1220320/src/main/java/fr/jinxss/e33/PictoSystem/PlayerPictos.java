@@ -22,6 +22,7 @@ public class PlayerPictos {
 	private int Lumina = 0;
 	private boolean Marked = false;
 	private float MarkDamageMultiplier = 10;
+	private int MarkTime = 30;
 	private ArrayList<Picto> Picto = new ArrayList<Picto>();
 	private ArrayList<Picto> ActivatedPicto = new ArrayList<Picto>();
 	
@@ -33,6 +34,15 @@ public class PlayerPictos {
 	
 	public ArrayList<Picto> getPictoList() {
 		return Picto;
+	}
+	
+	public void applyMark() {
+		
+		Marked = true;
+		Bukkit.getScheduler().runTaskLater(null, () -> {
+			Marked = false;
+		}, 20 * MarkTime);
+		
 	}
 	
 	public float getMarkDamageMultiplier() {

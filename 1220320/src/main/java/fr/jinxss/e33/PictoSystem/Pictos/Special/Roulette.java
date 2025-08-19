@@ -1,5 +1,6 @@
 package fr.jinxss.e33.PictoSystem.Pictos.Special;
 
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Material;
@@ -29,10 +30,12 @@ public class Roulette extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "A chaque coup vous avez :\n"
-				+ "-" + BonusRate + "% de chance d'aumentez vos dégâts de "+ BonusDamage*100 + "%\n"
-				+ "-" + MalusRate + "% de chance de réduire vos dégâts de "+ MalusDamage*100 + "%";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("A chaque coup vous avez :",
+				"-" + BonusRate + "% de chance d'aumentez vos dégâts de "+ BonusDamage*100 + "%",
+				"-" + MalusRate + "% de chance de réduire vos dégâts de "+ MalusDamage*100 + "%");
+		return describe;
 	}
 	
 	public double damageRoll(double damage) {

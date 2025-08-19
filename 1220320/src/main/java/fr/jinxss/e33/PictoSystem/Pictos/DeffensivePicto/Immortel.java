@@ -1,5 +1,6 @@
 package fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -55,8 +56,10 @@ public class Immortel extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "Ajoute " + HealthBoost/2 + " coeurs";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("Ajoute " + HealthBoost/2 + " coeurs");
+		return describe;
 	}
 	
 	

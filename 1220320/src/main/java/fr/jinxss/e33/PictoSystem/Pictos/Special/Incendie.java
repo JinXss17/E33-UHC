@@ -1,5 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos.Special;
 
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,9 +29,11 @@ public class Incendie extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "Enflamme tout les joueurs dans un\n"
-				+ "rayon de " + FireRay + " a chaque coup";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("Enflamme tout les joueurs dans un",
+				"rayon de " + FireRay + " a chaque coup");
+		return describe;
 	}
 	
 	public int getFireTick() {

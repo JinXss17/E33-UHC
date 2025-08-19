@@ -3,10 +3,10 @@ package fr.jinxss.e33.Listeners;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -19,9 +19,11 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
 
 import fr.jinxss.e33.E33UHC;
 import fr.jinxss.e33.uhcsystem.UHCSystem;
+import fr.jinxss.e33.uhcsystem.list.EGameStates;
 
 public class PlayerListener implements Listener {
 	
@@ -51,18 +53,30 @@ public class PlayerListener implements Listener {
 		}
 	}
 	
-	@EventHandler (priority = EventPriority.MONITOR)
+	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onPlayerLogin(PlayerJoinEvent e) {
 		
 		Player p = e.getPlayer();
-		UHCSystem uhcSystem = plugin.getUHCSystem();
-		if(!uhcSystem.getPlayers().contains(p)) {
-			uhcSystem.addPlayerToGame(p);
+		
+		if(plugin.getUHCSystem().getGameState() == EGameStates.Waiting) {
+			UHCSystem uhcSystem = plugin.getUHCSystem();
+			
+			p.getInventory().clear();
+			p.getAttribute(Attribute.MAX_HEALTH).setBaseValue(20.0d);
+			p.teleport(new Location(Bukkit.getWorld("world"), 0, 180, 0) );
+			for(PotionEffect effect : p.getActivePotionEffects()) {
+				p.removePotionEffect(effect.getType());
+			}
+			
+			if(!uhcSystem.getPlayers().contains(p)) {
+				uhcSystem.addPlayerToGame(p);
+			}
+			if(p.isOp()) {
+				p.getInventory().setItem(4, LaunchGameItem);
+			}
 		}
 		
-		if(p.isOp()) {
-			p.getInventory().addItem(LaunchGameItem);
-		}
+		
 	}
 	
 	@EventHandler (priority = EventPriority.MONITOR)
@@ -95,9 +109,7 @@ public class PlayerListener implements Listener {
 		Player p = e.getEntity();
 		String deathMSG = E33UHC.GetPréffix() + " §c"+ p.getName() + " est mort !";
 		e.setDeathMessage(deathMSG);
-		if(p.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY) != true) {
-			p.getWorld().setGameRule(GameRule.KEEP_INVENTORY, true);
-		}
+		e.setKeepInventory(true);
 		Location DropLocation = p.getLocation();
 		World world = p.getWorld();
 		for(ItemStack drop : p.getInventory()) {

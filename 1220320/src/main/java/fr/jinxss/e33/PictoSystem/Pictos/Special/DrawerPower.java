@@ -1,5 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos.Special;
 
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -15,8 +17,10 @@ public class DrawerPower extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "Permet d'outrepassé la limite de dégats";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of( "Permet d'outrepassé la limite de dégats");
+		return describe;
 	}
 
 }

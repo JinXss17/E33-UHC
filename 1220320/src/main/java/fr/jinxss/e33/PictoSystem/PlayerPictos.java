@@ -9,6 +9,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import fr.jinxss.e33.E33UHC;
 import fr.jinxss.e33.Levelsystem.PlayerLevel;
 import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.Immortel;
@@ -27,9 +28,11 @@ public class PlayerPictos {
 	private ArrayList<Picto> ActivatedPicto = new ArrayList<Picto>();
 	
 	private PlayerLevel playerLevel;
+	private E33UHC plugin;
 	
-	public PlayerPictos(PlayerLevel level) {
+	public PlayerPictos(PlayerLevel level, E33UHC plugin) {
 		playerLevel = level;
+		this.plugin = plugin;
 	}
 	
 	public ArrayList<Picto> getPictoList() {
@@ -39,7 +42,7 @@ public class PlayerPictos {
 	public void applyMark() {
 		
 		Marked = true;
-		Bukkit.getScheduler().runTaskLater(null, () -> {
+		Bukkit.getScheduler().runTaskLater(plugin, () -> {
 			Marked = false;
 		}, 20 * MarkTime);
 		
@@ -142,7 +145,10 @@ public class PlayerPictos {
 	            lore = new ArrayList<>();
 	        }
 	        lore.add("§dCout en Lumina : " + picto.Cout);
-	        lore.add("§eDesciption : " + picto.Describe());
+	        lore.add("§eDesciption :");
+	        for(String Lore : picto.Describe()) {
+	        	lore.add(Lore);
+	        }
 	        lore.add("§bNiveau : " + picto.GetLevel().toString() );
 	        lore.add("§bExp : " + picto.Exp + "/" + picto.ExpToLevelUp);
 	        PictoMeta.setLore(lore);

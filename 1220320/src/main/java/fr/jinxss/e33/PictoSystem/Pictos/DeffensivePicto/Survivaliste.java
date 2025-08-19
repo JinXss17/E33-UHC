@@ -1,5 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto;
 
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,7 +32,9 @@ public class Survivaliste extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "Réduit de " + ResistanceBoost + "% tout type de dégât";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("Réduit de " + ResistanceBoost + "% tout type de dégât");
+		return describe;
 	}
 }

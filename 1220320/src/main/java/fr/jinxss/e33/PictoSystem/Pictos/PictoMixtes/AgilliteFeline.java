@@ -1,5 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos.PictoMixtes;
 
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -26,12 +28,14 @@ public class AgilliteFeline extends Picto {
 	}
 
 	public float getFallDamageReduce() {
-		return FallDamageReduce/100f;
+		return 1 - FallDamageReduce/100f;
 	}
 	
 	@Override
-	public String Describe() {
-		return "Réduit les dégâts de chute de " + FallDamageReduce + "%";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("Réduit les dégâts de chute de " + FallDamageReduce + "%");
+		return describe;
 	}
 	
 	@Override

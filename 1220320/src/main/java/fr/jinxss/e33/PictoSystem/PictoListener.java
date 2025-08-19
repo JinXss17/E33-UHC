@@ -26,7 +26,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
 import fr.jinxss.e33.E33UHC;
-import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.EsquiveParfaite;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.GardeOptimal;
@@ -131,10 +130,14 @@ public class PictoListener implements Listener {
 			
 			PlayerPictos pictos = system.getPlayerPictos(p);
 			
+			if(p.getFallDistance() >= 30) {
+				e.setCancelled(true);
+			}
+			
 			if(pictos.HasPictoActivated(AgilliteFeline.class)) {
 				AgilliteFeline picto = (AgilliteFeline) system.getPlayerPictos(p).GetPictoActivated(AgilliteFeline.class);
 				e.setDamage(Damage * picto.getFallDamageReduce() );
-				p.spawnParticle(Particle.POOF , p.getLocation(), 1);
+				p.spawnParticle(Particle.POOF , p.getLocation(), 20);
 			}
 			
 		}
@@ -142,7 +145,7 @@ public class PictoListener implements Listener {
 	//Entity Hit By Entity
 		if(e instanceof EntityDamageByEntityEvent E) {
 			
-	//Entity Hit Player		
+			//Entity Hit Player		
 			if(E.getEntity() instanceof Player victim) {
 				
 				PlayerPictos victimPicto = system.getPlayerPictos(victim);
@@ -156,7 +159,7 @@ public class PictoListener implements Listener {
 					EsquiveParfaite dodge = (EsquiveParfaite)victimPicto.GetPictoActivated(EsquiveParfaite.class);
 					if(r.nextFloat() *100 < dodge.getEscapeRate()) {
 						e.setCancelled(true);
-						victim.spawnParticle(Particle.POOF , victim.getLocation(), 1);
+						victim.spawnParticle(Particle.POOF , victim.getLocation(), 20);
 					}
 				}
 				if(victim.isBlocking() && victimPicto.HasPictoActivated(GardeOptimal.class)) {
@@ -164,10 +167,10 @@ public class PictoListener implements Listener {
 					victim.setHealth(victim.getHealth() + garde.getHealBonus());
 				}
 				Damage *= system.getPlayerPictos(victim).getTotalResistanceBoost();
-				Damage *= RoleManager.getRole(victim.getUniqueId()).getResi();
+				//Damage *= RoleManager.getRole(victim.getUniqueId()).getResi();
 			}
 	
-	//Player Hit Entity 		
+			//Player Hit Entity 		
 			if(E.getDamager() instanceof Player damager) {
 				PlayerPictos damagerPicto = system.getPlayerPictos(damager);
 				
@@ -188,14 +191,14 @@ public class PictoListener implements Listener {
 					for(Player all : plugin.getUHCSystem().getAlivePlayers()) {
 						if(all.getLocation().distanceSquared(damager.getLocation()) <= picto.getFireRay()) {
 							all.setFireTicks(picto.getFireTick());
-							all.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE , all.getLocation(), 1);
+							all.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE , all.getLocation(), 20);
 						}
 					}
 					
 				}
 				
 				Damage *= system.getPlayerPictos(damager).getTotalDamageBoost(damager);
-				Damage *= RoleManager.getRole(damager.getUniqueId()).getForce();
+				//Damage *= RoleManager.getRole(damager.getUniqueId()).getForce();
 				
 				if(!damagerPicto.HasPictoActivated(DrawerPower.class) && E.getFinalDamage() > 6) {
 					e.setDamage(6);
@@ -203,7 +206,7 @@ public class PictoListener implements Listener {
 				
 			}
 			
-	//Player Hit Player		
+			//Player Hit Player		
 			if(E.getEntity() instanceof Player victim && E.getDamager() instanceof Player damager) {
 				
 				@SuppressWarnings("unused")
@@ -221,17 +224,18 @@ public class PictoListener implements Listener {
 			}
 			
 			
-	//Player's Arrow Hit Entity
+			//Player's Arrow Hit Entity
 			if(E.getDamager() instanceof Arrow arrow &&
-					arrow.getShooter() instanceof Player damager && E.getEntity() instanceof Player victim) {
+					arrow.getShooter() instanceof Player damager &&
+					E.getEntity() instanceof Player victim) {
 				if(system.getPlayerPictos(damager).HasPictoActivated(TirPrecis.class)) {
 					Damage *= system.getPlayerPictos(damager).GetPictoActivated(TirPrecis.class).DamageBoost;
 					Damage *= system.getPlayerPictos(victim).getTotalResistanceBoost();
-					Damage *= RoleManager.getRole(victim.getUniqueId()).getResi();
+					//Damage *= RoleManager.getRole(victim.getUniqueId()).getResi();
 				}
 				if(system.getPlayerPictos(damager).HasPictoActivated(TirMarquant.class)) {
-					system.getPlayerPictos(damager).applyMark();
-					((TirMarquant)system.getPlayerPictos(damager).GetPictoActivated(TirMarquant.class)).StealHealth(victim);
+					system.getPlayerPictos(victim).applyMark();
+					((TirMarquant)system.getPlayerPictos(damager).GetPictoActivated(TirMarquant.class)).StealHealth(victim, plugin);
 				}
 			}
 		}

@@ -1,5 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto;
 
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import fr.jinxss.e33.PictoSystem.PlayerPictos;
@@ -41,9 +43,11 @@ public class CompressionDeLumina extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "Augmente de " + BonusDamage + "% les dégats par \n"
-				+ "point de Lumina restant";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("Augmente de " + BonusDamage + "% les dégats par",
+				"point de Lumina restant");
+		return describe;
 	}
 	
 	

@@ -73,7 +73,7 @@ public class UHCSystem {
 			_AlivePlayerList.add(p.getUniqueId());
 			
 			PlayerLevel playerLevel = new PlayerLevel(null, p);
-			PlayerPictos playerPicto = new PlayerPictos(playerLevel);
+			PlayerPictos playerPicto = new PlayerPictos(playerLevel, plugin);
 			playerLevel.setPlayerPicto(playerPicto);
 			
 			plugin.getLevelSystem().registerPlayerLevel(p, playerLevel);

@@ -1,5 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto;
 
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -39,9 +41,11 @@ public class GardeOptimal extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "Chaque fois que vous parez un coup\n"
-				+ "vous régénérez " + HealthBonus + " Coeur(s) ";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("Chaque fois que vous parez un coup\n",
+				"vous régénérez " + HealthBonus + " Coeur(s) ");
+		return describe;
 	}
 	
 }

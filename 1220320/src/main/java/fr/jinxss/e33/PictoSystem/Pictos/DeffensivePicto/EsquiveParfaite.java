@@ -1,5 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto;
 
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -39,9 +41,11 @@ public class EsquiveParfaite extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "A chaque coup reçus, vous avez " + EscapeRate + "% de chance \n"
-				+ "d'esquiver le coup";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("A chaque coup reçus, vous avez " + EscapeRate + "% de chance",
+				"d'esquiver le coup");
+		return describe;
 	}
 	
 }

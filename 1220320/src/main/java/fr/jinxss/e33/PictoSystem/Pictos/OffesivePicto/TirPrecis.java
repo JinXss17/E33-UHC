@@ -1,5 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto;
 
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -22,8 +24,10 @@ public class TirPrecis extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "Augmente les dégats de l'arc de " + DamageBoost + "%";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("Augmente les dégats de l'arc de " + DamageBoost + "%");
+		return describe;
 	}
 	
 	@Override

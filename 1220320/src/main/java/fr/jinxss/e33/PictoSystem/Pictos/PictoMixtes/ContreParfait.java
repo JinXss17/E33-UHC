@@ -1,5 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos.PictoMixtes;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -51,10 +53,12 @@ public class ContreParfait extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "Pour chaque parrade avec votre bouclier\n"
-				+ "vous renvoyer " + DamageMultiplier*100 + "% des dégats avec un\n"
-				+ "cooldown de " + CoolDownTimer + "sec";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("Pour chaque parrade avec votre bouclier",
+				"vous renvoyer " + DamageMultiplier*100 + "% des dégats avec un",
+				"cooldown de " + CoolDownTimer + "sec");
+		return describe;
 	}
 	
 	@Override

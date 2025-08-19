@@ -1,5 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos.OffesivePicto;
 
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -39,9 +41,11 @@ public class Berserk extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "Offre " + DamageBoost + "% de dégâts suplémentaire\n"
-				+ "lorsque la vie est divisé par " + HealthDivideToBoost;
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("Offre " + DamageBoost + "% de dégâts suplémentaire",
+				"lorsque la vie est divisé par " + HealthDivideToBoost);
+		return describe;
 	}
 	
 	@Override

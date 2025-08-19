@@ -58,22 +58,21 @@ public class MineurDor extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
+	public List<String> Describe() {
 		
-		String describe = "Pour chaque minerais de fer ou diamant\n"
-				+ "miner vous avez "+ DropRate + "% de chance d'obtenir\n";
-		
+		List<String> describe = List.of("Pour chaque minerais de fer ou diamant",
+				"miner vous avez "+ DropRate + "% de chance d'obtenir");
 		switch (Level) {
 		case ENiveau.Apprentissage: {
-			describe += "1 Nugget d'or";
+			describe.add("1 Nugget d'or");
 			return describe;
 		}
 		case ENiveau.Maitrise: {
-			describe += "entre 1 et 5 Nugget d'or";
+			describe.add("entre 1 et 5 Nugget d'or");
 			return describe;
 		}
 		case ENiveau.Instinctif: {
-			describe += "1 lingot d'or";
+			describe.add("1 lingot d'or");
 			return describe;
 		}
 		default:

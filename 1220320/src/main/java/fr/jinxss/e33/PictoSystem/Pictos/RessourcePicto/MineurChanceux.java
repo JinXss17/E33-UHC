@@ -37,9 +37,11 @@ public class MineurChanceux extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "Pour chaque minerais miner, vous avez " + DropRate + "% de\n"
-				+ "chance de multiplier par" + DropMultiplicate + " votre butin";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("Pour chaque minerais miner, vous avez " + DropRate + "% de",
+				"chance de multiplier par" + DropMultiplicate + " votre butin");
+		return describe;
 	}
 	
 	@Override

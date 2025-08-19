@@ -1,5 +1,6 @@
 package fr.jinxss.e33.PictoSystem.Pictos.Special;
 
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -45,8 +46,10 @@ public class NouvellePeinture extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "Permet de ressucité (1 fois)";
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("Permet de ressucité (1 fois)");
+		return describe;
 	}
 	
 	public void Revive() {

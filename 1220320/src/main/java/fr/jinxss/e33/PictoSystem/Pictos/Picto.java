@@ -1,5 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos;
 
+import java.util.List;
+
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -31,8 +33,8 @@ public class Picto{
 		Cout = basicCout;
 	}
 	
-	public String Describe() {
-		return "Ne fais Rien";
+	public List<String> Describe() {
+		return List.of("Ne fais Rien");
 	}
 	
 	public ItemStack getPictoItem() {

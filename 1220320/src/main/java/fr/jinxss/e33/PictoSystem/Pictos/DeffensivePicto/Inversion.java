@@ -1,5 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto;
 
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -32,10 +34,13 @@ public class Inversion extends Picto {
 	}
 	
 	@Override
-	public String Describe() {
-		return "Enlève " + AbsoRemove + " coeurs d'absorption\n"
-				+ "au moment de manger une pomme d'or\n"
-				+ "mais reduit les dégats de " + ResistanceBoost + "%" ;
+	public List<String> Describe() {
+		
+		List<String> describe = List.of("Donne " + AbsoRemove + " coeurs d'absorption",
+				"au moment de manger une pomme d'or",
+				"mais reduit les dégats de " + ResistanceBoost + "%")  ;
+		
+		return describe;
 	}
 	
 	@Override

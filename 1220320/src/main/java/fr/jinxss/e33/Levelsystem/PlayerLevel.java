@@ -61,7 +61,8 @@ public class PlayerLevel {
 	public void addExp(float xp) {
 		
 		Exp += xp;
-		if(Exp >= ExpToLevelUp) {
+		
+		while(Exp >= ExpToLevelUp){
 			LevelUp();
 		}
 	}

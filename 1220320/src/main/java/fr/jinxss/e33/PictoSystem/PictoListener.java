@@ -198,10 +198,12 @@ public class PictoListener implements Listener {
 				Damage *= system.getPlayerPictos(damager).getTotalDamageBoost(damager);
 				//Damage *= RoleManager.getRole(damager.getUniqueId()).getForce();
 				
+				e.setDamage(Damage);
 				if(!damagerPicto.HasPictoActivated(DrawerPower.class) && E.getFinalDamage() > 6) {
-					e.setDamage(6);
+					Damage = 6;
+					e.setDamage(Damage);
 				}
-				
+				damager.sendMessage("Damage : " + Damage);
 			}
 			
 			//Player Hit Player		
@@ -217,8 +219,7 @@ public class PictoListener implements Listener {
 					e.setCancelled(true);
 					return;
 				}
-				
-				
+				victim.sendMessage("Damage : " + Damage);
 			}
 			
 			
@@ -227,7 +228,7 @@ public class PictoListener implements Listener {
 					arrow.getShooter() instanceof Player damager &&
 					E.getEntity() instanceof Player victim) {
 				if(system.getPlayerPictos(damager).HasPictoActivated(TirPrecis.class)) {
-					Damage *= system.getPlayerPictos(damager).GetPictoActivated(TirPrecis.class).DamageBoost;
+					Damage *= 1 + (system.getPlayerPictos(damager).GetPictoActivated(TirPrecis.class).DamageBoost/100);
 					Damage *= system.getPlayerPictos(victim).getTotalResistanceBoost();
 					//Damage *= RoleManager.getRole(victim.getUniqueId()).getResi();
 				}
@@ -235,6 +236,10 @@ public class PictoListener implements Listener {
 					system.getPlayerPictos(victim).applyMark();
 					((TirMarquant)system.getPlayerPictos(damager).GetPictoActivated(TirMarquant.class)).StealHealth(victim, plugin);
 				}
+				
+				e.setDamage(Damage);
+				damager.sendMessage("Damage : " + Damage);
+				
 			}
 		}
 	}

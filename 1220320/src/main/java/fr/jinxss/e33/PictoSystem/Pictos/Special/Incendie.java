@@ -19,7 +19,7 @@ public class Incendie extends Picto {
 		basicCout = BasicCout;
 		Cout = basicCout;
 		
-		PictoItem = new ItemStack(Material.FIRE);
+		PictoItem = new ItemStack(Material.FLINT_AND_STEEL);
 		PictoName = "Incendie";
 		
 	}

@@ -21,6 +21,9 @@ public class CustomMobsListener implements Listener {
 	private E33UHC plugin;
 	private float PictoDropRate = 5;
 	
+	private float BossExp = 500;
+	private float AxonExp = 1000;
+	
 	public CustomMobsListener(E33UHC plugin) {
 		this.plugin = plugin;
 	}
@@ -35,6 +38,7 @@ public class CustomMobsListener implements Listener {
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING) == null) return;
 			
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Boss")) {
+				plugin.getLevelSystem().getPlayerLevel(p).addExp(BossExp);
 				plugin.getPictoSystem().GiveRandomPictoToPlayer(p);
 				p.sendMessage("§aVous avez tuer un Boss !");
 			}
@@ -46,11 +50,13 @@ public class CustomMobsListener implements Listener {
 				p.sendMessage("§dVous avez tuer Visages !");
 				Bukkit.broadcastMessage("§dVisages a été éliminé !");
 				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new Incendie());
+				plugin.getLevelSystem().getPlayerLevel(p).addExp(AxonExp);
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Sirene") ) {
 				p.sendMessage("§dVous avez tuer Sirène !");
 				Bukkit.broadcastMessage("§dLa Sirene a été éliminée !");
 				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new Roulette());
+				plugin.getLevelSystem().getPlayerLevel(p).addExp(AxonExp);
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Faucheuse") ) {
 				p.sendMessage("§dVous avez tuer Faucheuse !");
@@ -58,11 +64,13 @@ public class CustomMobsListener implements Listener {
 				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new NouvellePeinture(p,
 						plugin.getPictoSystem().getPlayerPictos(p),
 						plugin.getUHCSystem().getBorder()));
+				plugin.getLevelSystem().getPlayerLevel(p).addExp(AxonExp);
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Transporteuse") ) {
 				p.sendMessage("§dVous avez tuer la Transporteuse !");
 				Bukkit.broadcastMessage("§dLa Transporteuse a été éliminée !");
 				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new DrawerPower());
+				plugin.getLevelSystem().getPlayerLevel(p).addExp(AxonExp);
 			}
 			
 		}

@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -188,11 +189,9 @@ public class PictoListener implements Listener {
 				
 				if(system.getPlayerPictos(damager).HasPictoActivated(Incendie.class)) {
 					Incendie picto = (Incendie) system.getPlayerPictos(damager).GetPictoActivated(Incendie.class);
-					for(Player all : plugin.getUHCSystem().getAlivePlayers()) {
-						if(all.getLocation().distanceSquared(damager.getLocation()) <= picto.getFireRay()) {
-							all.setFireTicks(picto.getFireTick());
-							all.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE , all.getLocation(), 20);
-						}
+					for(Entity entity : damager.getNearbyEntities(picto.getFireRay(), picto.getFireRay(), picto.getFireRay())) {
+							entity.setFireTicks(picto.getFireTick());
+							Bukkit.getWorld("world").spawnParticle(Particle.CAMPFIRE_COSY_SMOKE , entity.getLocation(), 20);
 					}
 				}
 				

@@ -64,8 +64,8 @@ public class AxonSpawner extends MobSystem {
 	public void spawnAxon(Location loc) {
 		
 		PickAxon++;
-		if(PickAxon > 4) {
-			PickAxon = 1;
+		if(PickAxon > 3) {
+			PickAxon = 0;
 			Collections.shuffle(AxonOrder);
 		}
 		

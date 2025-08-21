@@ -25,7 +25,7 @@ public class Incendie extends Picto {
 	}
 	
 	public int getFireRay() {
-		return (int) Math.pow(FireRay, 2);
+		return FireRay;
 	}
 	
 	@Override

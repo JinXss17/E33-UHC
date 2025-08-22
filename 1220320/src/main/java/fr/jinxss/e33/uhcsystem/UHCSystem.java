@@ -31,6 +31,8 @@ public class UHCSystem {
 	private UHCConfigMenu menuConfig;
 	UHCBorder border;
 	
+	private int FirstBossSpawn = 10; //en MIN
+	
 	
 	public UHCSystem(E33UHC plugin) {
 		this.plugin = plugin ;
@@ -83,7 +85,7 @@ public class UHCSystem {
 		
 		Board.startUpdating();
 		RegisterScoreBoard();
-		plugin.startSummoningCustomMobs();
+		plugin.startSummoningCustomMobs(FirstBossSpawn);
 	}
 	
 	public void setGameState(EGameStates pGameState) {

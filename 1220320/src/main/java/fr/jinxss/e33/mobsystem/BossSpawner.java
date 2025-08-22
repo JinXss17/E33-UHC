@@ -15,7 +15,8 @@ public class BossSpawner extends MobSystem{
 
 	private E33UHC plugin;
 	private int TimeToSpawnBoss = 10;
-	private int MaxDistanceToSpawn = 200;
+	
+	private int BossSpawned = 0;
 	
 	public BossSpawner(E33UHC plugin){
 		this.plugin = plugin;
@@ -28,6 +29,12 @@ public class BossSpawner extends MobSystem{
 		while(SpawnLoc == null) {
 			SpawnLoc = getRandomLocation();
 		}
+		BossSpawned++;
+		
+		if(BossSpawned % 3 == 0) {
+			return;
+		}
+		
 		spawnBoss(SpawnLoc);
 		Bukkit.broadcastMessage("Un Boss est apparu en :§a" + SpawnLoc.getBlockX() + ", " + SpawnLoc.getBlockY() + ", " + SpawnLoc.getBlockZ());
 		
@@ -38,12 +45,19 @@ public class BossSpawner extends MobSystem{
     	runTaskTimer(plugin, 0, 20 * 60 *TimeToSpawnBoss);
     }
 	
-	private Location getRandomLocation() {
-		Location SpawnLoc = new Location(Bukkit.getWorld("world"),
-				Math.sin(random.nextFloat()) * MaxDistanceToSpawn,
-				300,
-				Math.cos(random.nextFloat()) * MaxDistanceToSpawn);
-		findSafeLocationNear(SpawnLoc);
+		private Location getRandomLocation() {
+		
+		double X = Math.sin(random.nextFloat()) * (plugin.getUHCSystem().getBorder().getCurrentSize() - 50);
+		double Y = 300;
+		double Z = Math.cos(random.nextFloat()) * (plugin.getUHCSystem().getBorder().getCurrentSize() - 50);
+		Location SpawnLoc = new Location(Bukkit.getWorld("world"),X,Y,Z);
+		Y = SpawnLoc.getY();
+		SpawnLoc = findSafeLocationNear(SpawnLoc);
+		while(SpawnLoc == null || Y <= 50) {
+			Y -= 1;
+			SpawnLoc = new Location(Bukkit.getWorld("world"),X,Y,Z);
+			SpawnLoc = findSafeLocationNear(SpawnLoc);
+		}
 		
 		return SpawnLoc;
 	}

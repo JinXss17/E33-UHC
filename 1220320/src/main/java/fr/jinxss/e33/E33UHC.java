@@ -3,6 +3,7 @@ package fr.jinxss.e33;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -153,11 +154,11 @@ public class E33UHC extends JavaPlugin {
  		
  	}
  	
- 	public void startSummoningCustomMobs() {
+ 	public void startSummoningCustomMobs(int Delay) {
  		
- 		customMobSpawner.StartSummonning();;
- 		bossSpawner.StartSummonning();
- 		axonSpawner.StartSummonning();
+ 		customMobSpawner.StartSummonning();
+ 		Bukkit.getScheduler().runTaskLater(this, () -> {bossSpawner.StartSummonning();}, Delay * 20 * 60);
+ 		Bukkit.getScheduler().runTaskLater(this, () -> {axonSpawner.StartSummonning();}, Delay * 20 * 60 *  3);
  	}
 
     @Override

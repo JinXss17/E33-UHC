@@ -22,7 +22,6 @@ public class AxonSpawner extends MobSystem {
 	
 	private E33UHC plugin;
 	private int TimeToSpawnBoss = 30;
-	private int MaxDistanceToSpawn = 200;
 	
 	private ArrayList<Integer> AxonOrder = new ArrayList<Integer>();
 	private int PickAxon = 0;
@@ -31,6 +30,7 @@ public class AxonSpawner extends MobSystem {
 		this.plugin = plugin;
 		AxonOrder.addAll( List.of(1,2,3,4) );
 		Collections.shuffle(AxonOrder);
+		
 	}
 	
 	@Override
@@ -51,11 +51,18 @@ public class AxonSpawner extends MobSystem {
     }
 	
 	private Location getRandomLocation() {
-		Location SpawnLoc = new Location(Bukkit.getWorld("world"),
-				Math.sin(random.nextFloat()) * MaxDistanceToSpawn,
-				300,
-				Math.cos(random.nextFloat()) * MaxDistanceToSpawn);
-		findSafeLocationNear(SpawnLoc);
+		
+		double X = Math.sin(random.nextFloat()) * (plugin.getUHCSystem().getBorder().getCurrentSize() - 50) ;
+		double Y = 300;
+		double Z = Math.cos(random.nextFloat()) * (plugin.getUHCSystem().getBorder().getCurrentSize() - 50) ;
+		Location SpawnLoc = new Location(Bukkit.getWorld("world"),X,Y,Z);
+		Y = SpawnLoc.getY();
+		SpawnLoc = findSafeLocationNear(SpawnLoc);
+		while(SpawnLoc == null || Y <= 50) {
+			Y -= 1;
+			SpawnLoc = new Location(Bukkit.getWorld("world"),X,Y,Z);
+			SpawnLoc = findSafeLocationNear(SpawnLoc);
+		}
 		
 		return SpawnLoc;
 	}

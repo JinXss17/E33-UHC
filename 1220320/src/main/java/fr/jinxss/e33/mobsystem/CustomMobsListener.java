@@ -19,7 +19,6 @@ import fr.jinxss.e33.PictoSystem.Pictos.Special.Roulette;
 public class CustomMobsListener implements Listener {
 
 	private E33UHC plugin;
-	private float PictoDropRate = 5;
 	
 	private float BossExp = 500;
 	private float AxonExp = 1000;
@@ -44,7 +43,7 @@ public class CustomMobsListener implements Listener {
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Custom")) {
 				Random r = new Random();
-				if(r.nextFloat() * 100 <= PictoDropRate)plugin.getPictoSystem().GiveRandomPictoToPlayer(p);
+				if(r.nextFloat() * 100 <= plugin.getPictoDropRate())plugin.getPictoSystem().GiveRandomPictoToPlayer(p);
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Visages") ) {
 				p.sendMessage("§dVous avez tuer Visages !");

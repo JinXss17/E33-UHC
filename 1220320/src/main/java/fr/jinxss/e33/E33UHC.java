@@ -1,13 +1,21 @@
 package fr.jinxss.e33;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.jinxss.e33.Levelsystem.LevelSystem;
 import fr.jinxss.e33.Listeners.ExplosiveArrowListener;
 import fr.jinxss.e33.Listeners.MobSpawnListener;
 import fr.jinxss.e33.Listeners.PlayerListener;
+import fr.jinxss.e33.Listeners.RoleAttackListener;
+import fr.jinxss.e33.Listeners.RoleCraftListener;
+import fr.jinxss.e33.Listeners.RoleInteractListener;
 import fr.jinxss.e33.PictoSystem.PictoSystem;
+import fr.jinxss.e33.e33commands.RandomRoleCommand;
 import fr.jinxss.e33.mobsystem.AxonSpawner;
 import fr.jinxss.e33.mobsystem.BossSpawner;
 import fr.jinxss.e33.mobsystem.CustomMobsListener;
@@ -28,43 +36,116 @@ public class E33UHC extends JavaPlugin {
 	private AxonSpawner axonSpawner;
 	private PictoSystem pictoSystem;
 	
+	private String RoleConfigPath = "System.Roles";
+	private String MobConfigPath = "System.Mobs";
+	private String PictoDropRatePath = "System.Picto.DropRate";
+	
+	private String ConfigFileName = "config";
+	
+	File config;
+	YamlConfiguration yamlConfiguration;
+	
  	@Override
     public void onEnable() {
-    	
- 		customMobSpawner = new MobCustomSpawner(this);
- 		bossSpawner = new BossSpawner(this);
- 		axonSpawner = new AxonSpawner(this);
  		
-        
-        
-        // Enregistre les crafts
- 		//Temporairement Désactivée
-        //RoleRecipes.registerAll(this);
-
-        
-		//getCommand("giveRandomRole").setExecutor(new RandomRoleCommand());
-		getCommand("invoke").setExecutor(new InvokeMobsCommand(axonSpawner, bossSpawner));
-		
-        // Enregistre les listeners
-		
-		//Desactivation des roles temporairement
-//        getServer().getPluginManager().registerEvents(new RoleCraftListener(), this);
-//        getServer().getPluginManager().registerEvents(new RoleInteractListener(), this);
-//        getServer().getPluginManager().registerEvents(new RoleAttackListener(), this);
-        
-        getServer().getPluginManager().registerEvents(new MobSpawnListener(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
-        getServer().getPluginManager().registerEvents(new ExplosiveArrowListener(), this);
-        getServer().getPluginManager().registerEvents(new CustomMobsListener(this), this);
+ 		File file = new File(getDataFolder(), String.valueOf(ConfigFileName) + ".yml");
+ 		if(!file.exists()) {
+ 			createFile(ConfigFileName);
+ 	 		
+ 	 		
+ 	 		setDefault(MobConfigPath);
+ 	 		setDefault(RoleConfigPath);
+ 	 		setDefault(PictoDropRatePath);
+ 		}
+ 		config = getFile(ConfigFileName);
+ 		yamlConfiguration = YamlConfiguration.loadConfiguration(getFile(ConfigFileName));
  		
+ 		
+ 		
+ 		getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+ 		
+ 		// System de Roles
+ 		if(isRolesToggled()) {
+			getCommand("giveRandomRole").setExecutor(new RandomRoleCommand());
+	        getServer().getPluginManager().registerEvents(new RoleCraftListener(), this);
+	        getServer().getPluginManager().registerEvents(new RoleInteractListener(), this);
+	        getServer().getPluginManager().registerEvents(new RoleAttackListener(), this);
+	        getServer().getPluginManager().registerEvents(new ExplosiveArrowListener(), this);
+	        
+	        // Enregistre les crafts
+	        RoleRecipes.registerAll(this);
+		}
         
-        levelSystem = new LevelSystem(this);
-        pictoSystem = new PictoSystem(this);
+        
+ 		if(isMobsToggled()) {
+ 			getCommand("invoke").setExecutor(new InvokeMobsCommand(axonSpawner, bossSpawner));
+ 			customMobSpawner = new MobCustomSpawner(this);
+ 	 		bossSpawner = new BossSpawner(this);
+ 	 		axonSpawner = new AxonSpawner(this);
+ 	 		
+ 	 		getServer().getPluginManager().registerEvents(new MobSpawnListener(this), this);
+ 	 		getServer().getPluginManager().registerEvents(new CustomMobsListener(this), this);
+ 		}
+ 		
+ 	        
+ 		pictoSystem = new PictoSystem(this);
+ 		levelSystem = new LevelSystem(this);
  		uhcSystem = new UHCSystem(this);
  		
  		getLogger().info(ChatColor.LIGHT_PURPLE + "UHC Ready !");
  		
-    }
+ 	}
+ 	
+ 	private void setDefault(String ConfigPath) {
+ 		if(ConfigPath.equals(PictoDropRatePath)) {
+				yamlConfiguration.set(ConfigPath, 0.5f);
+			}else {
+				yamlConfiguration.set(ConfigPath, false);
+			}	
+ 		try {
+ 	          yamlConfiguration.save(getFile(ConfigFileName));
+ 		} catch (IOException e) {
+ 	          e.printStackTrace();
+ 		} 
+ 	}
+ 	
+ 	private void createFile(String name) {
+	    if (!getDataFolder().exists())
+	      getDataFolder().mkdir(); 
+	    File file = new File(getDataFolder(), String.valueOf(name) + ".yml");
+	    if (!file.exists())
+	      try {
+	        file.createNewFile();
+	      } catch (IOException e) {
+	        e.printStackTrace();
+	      }  
+ 	}
+ 	
+ 	private File getFile(String name) {
+	    return new File(getDataFolder(), String.valueOf(name) + ".yml");
+ 	}
+ 	
+ 	public YamlConfiguration getConfigFile() {
+ 		return yamlConfiguration;
+ 	}
+ 	
+ 	public boolean isRolesToggled() {
+ 		
+ 		return getConfigFile().getBoolean(RoleConfigPath);
+ 		
+ 	}
+ 	
+ 	public boolean isMobsToggled() {
+ 		
+ 		return getConfigFile().getBoolean(MobConfigPath);
+ 		
+ 	}
+ 	
+ 	public float getPictoDropRate() {
+ 		
+ 		return (float)getConfigFile().getDouble(PictoDropRatePath);
+ 		
+ 	}
  	
  	public static String GetPréffix() {
  		

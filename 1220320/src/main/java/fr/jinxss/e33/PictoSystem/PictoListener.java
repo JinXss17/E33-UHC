@@ -27,6 +27,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
 import fr.jinxss.e33.E33UHC;
+import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.EsquiveParfaite;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.GardeOptimal;
@@ -58,13 +59,19 @@ public class PictoListener implements Listener {
 		this.system = system;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler (priority = EventPriority.LOWEST)
 	public void OnKillMobs(EntityDeathEvent e) {
 		if(e.getEntity() instanceof Monster && e.getDamageSource().getCausingEntity() instanceof Player p) {
+			Random r = new Random();
 			PlayerPictos pictos = system.getPlayerPictos(p);
 			for(Picto picto : pictos.getActivatedPicto()) {
 				picto.AddExp();
 			}
+			if(r.nextFloat() *100 <= plugin.getPictoDropRate() && !plugin.isMobsToggled()) {
+				system.GiveRandomPictoToPlayer(p);
+			}
+			
 		}
 	}
 	
@@ -168,7 +175,9 @@ public class PictoListener implements Listener {
 					victim.setHealth(victim.getHealth() + garde.getHealBonus());
 				}
 				Damage *= system.getPlayerPictos(victim).getTotalResistanceBoost();
-				//Damage *= RoleManager.getRole(victim.getUniqueId()).getResi();
+				if(plugin.isRolesToggled() && RoleManager.getRole(victim.getUniqueId()) != null) {
+					Damage *= RoleManager.getRole(victim.getUniqueId()).getResi();
+				}
 			}
 	
 			//Player Hit Entity 		
@@ -196,7 +205,10 @@ public class PictoListener implements Listener {
 				}
 				
 				Damage *= system.getPlayerPictos(damager).getTotalDamageBoost(damager);
-				//Damage *= RoleManager.getRole(damager.getUniqueId()).getForce();
+				
+				if(plugin.isRolesToggled() && RoleManager.getRole(damager.getUniqueId()) != null) {
+					Damage *= RoleManager.getRole(damager.getUniqueId()).getForce();
+				}
 				
 				e.setDamage(Damage);
 				if(!damagerPicto.HasPictoActivated(DrawerPower.class) && E.getFinalDamage() > 6) {
@@ -230,7 +242,11 @@ public class PictoListener implements Listener {
 				if(system.getPlayerPictos(damager).HasPictoActivated(TirPrecis.class)) {
 					Damage *= 1 + (system.getPlayerPictos(damager).GetPictoActivated(TirPrecis.class).DamageBoost/100);
 					Damage *= system.getPlayerPictos(victim).getTotalResistanceBoost();
-					//Damage *= RoleManager.getRole(victim.getUniqueId()).getResi();
+					
+					if(plugin.isRolesToggled() && RoleManager.getRole(victim.getUniqueId()) != null) {
+						Damage *= RoleManager.getRole(victim.getUniqueId()).getResi();
+					}
+					
 				}
 				if(system.getPlayerPictos(damager).HasPictoActivated(TirMarquant.class)) {
 					system.getPlayerPictos(victim).applyMark();

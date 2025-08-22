@@ -3,10 +3,10 @@ version: 1.0
 main: fr.jinxss.e33.E33UHC
 api-version: 1.21
 commands:
-#  giveRandomRole:                                           Temporairement Désactivé
-#    description: Assigne un rôle aléatoire à un joueur
-#    usage: /giveRandomRole <joueur>
-#    permission: e33.give
+  giveRandomRole:
+    description: Assigne un rôle aléatoire à un joueur
+    usage: /giveRandomRole <joueur>
+    permission: e33.give
   givePicto:
     description: Assigne un Picto aléatoire à un joueur
     usage: /giveRandomPicto <joueur>

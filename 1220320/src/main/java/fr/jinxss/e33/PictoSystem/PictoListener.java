@@ -27,7 +27,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
 import fr.jinxss.e33.E33UHC;
-import fr.jinxss.e33.RoleManager;
 import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.EsquiveParfaite;
 import fr.jinxss.e33.PictoSystem.Pictos.DeffensivePicto.GardeOptimal;
@@ -44,6 +43,7 @@ import fr.jinxss.e33.PictoSystem.Pictos.Special.DrawerPower;
 import fr.jinxss.e33.PictoSystem.Pictos.Special.Incendie;
 import fr.jinxss.e33.PictoSystem.Pictos.Special.NouvellePeinture;
 import fr.jinxss.e33.PictoSystem.Pictos.Special.Roulette;
+import fr.jinxss.e33.RolesSystem.RoleManager;
 import fr.jinxss.e33.uhcsystem.list.EGameStates;
 
 public class PictoListener implements Listener {

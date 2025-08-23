@@ -1,0 +1,112 @@
+package fr.jinxss.e33.RolesSystem;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import fr.jinxss.e33.RolesSystem.Nevrons.Clair;
+import fr.jinxss.e33.RolesSystem.Nevrons.Demineur;
+import fr.jinxss.e33.RolesSystem.Nevrons.Matthieu_Le_Coloss;
+import fr.jinxss.e33.RolesSystem.Nevrons.Noco;
+import fr.jinxss.e33.RolesSystem.Nevrons.Obscur;
+
+public class RandomRoleCommand implements CommandExecutor {
+
+    private final Set<String> uniqueRolesLeft = new HashSet<>(Arrays.asList(
+            "petank", "noco", "matthieu_le_coloss", "demineur"//, "mime", "trompetiste", "sakapattate"
+    ));
+
+    private final List<String> multiRoles = Arrays.asList(
+            "obscur", "clair"
+    );
+
+    private final Random random = new Random();
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (args.length != 1) {
+            sender.sendMessage(ChatColor.RED + "Utilisation: /giveRandomRole <joueur>");
+            return true;
+        }
+
+        Player target = Bukkit.getPlayerExact(args[0]);
+        if (target == null || !target.isOnline()) {
+            sender.sendMessage(ChatColor.RED + "Ce joueur n'est pas en ligne.");
+            return true;
+        }
+
+        UUID uuid = target.getUniqueId();
+        if (RoleManager.hasRole(uuid)) {
+            sender.sendMessage(ChatColor.RED + "Ce joueur a déjà un rôle.");
+            return true;
+        }
+
+        // Mélanger tous les rôles disponibles (uniques + multiples)
+        List<String> availableRoles = new ArrayList<>(uniqueRolesLeft);
+        availableRoles.addAll(multiRoles);
+
+        if (availableRoles.isEmpty()) {
+            sender.sendMessage(ChatColor.RED + "Plus aucun rôle disponible.");
+            return true;
+        }
+
+        String selectedRole = availableRoles.get(random.nextInt(availableRoles.size()));
+        assignRoleToPlayer(uuid, selectedRole);
+
+        // Si c’est un rôle unique → on le retire
+        if (uniqueRolesLeft.contains(selectedRole)) {
+            uniqueRolesLeft.remove(selectedRole);
+        }
+
+        sender.sendMessage(ChatColor.GREEN + "Rôle '" + selectedRole + "' assigné à " + target.getName() + ".");
+        target.sendMessage(ChatColor.GOLD + "Tu as reçu le rôle: §e" + selectedRole);
+        return true;
+    }
+
+    private void assignRoleToPlayer(UUID uuid, String roleName) {
+        switch (roleName.toLowerCase()) {
+            //case "petank" -> RoleManager.assignRole(uuid, "petank", new Petank(uuid, "petank"));
+            //case "mime" -> RoleManager.assignRole(uuid, "mime", new Mime(uuid, "mime"));
+            case "clair" -> {
+	            Clair clair = new Clair(uuid, "clair");
+	            RoleManager.assignRole(uuid, "clair", clair);
+	            clair.onAssign();
+	        }
+	        case "obscur" -> {
+	            Obscur obscur= new Obscur(uuid, "obscur");
+	            RoleManager.assignRole(uuid, "obscur", obscur);
+	            obscur.onAssign();
+	        }
+            case "noco" -> {
+	            Noco noco= new Noco(uuid, "noco");
+	            RoleManager.assignRole(uuid, "noco", noco);
+	            noco.onAssign();
+	        }
+            //case "sakapattate" -> RoleManager.assignRole(uuid, "sakapattate", new Sakapattate(uuid, "sakapattate"));
+	        case "demineur" -> {
+	        	Demineur demineur = new Demineur(uuid, "demineur");
+	            RoleManager.assignRole(uuid, "demineur", demineur);
+	            demineur.onAssign();
+	        }
+            //case "trompetiste" -> RoleManager.assignRole(uuid, "trompetiste", new Trompetiste(uuid, "trompetiste"));
+	        case "matthieu_le_coloss" -> {
+	        	Matthieu_Le_Coloss matthieu_le_coloss = new Matthieu_Le_Coloss(uuid, "matthieu_le_coloss");
+	            RoleManager.assignRole(uuid, "matthieu_le_coloss", matthieu_le_coloss);
+	            matthieu_le_coloss.onAssign();
+	        }
+            default -> Bukkit.getPlayer(uuid).sendMessage(ChatColor.RED + "Erreur : rôle inconnu.");
+        }
+
+    }
+}

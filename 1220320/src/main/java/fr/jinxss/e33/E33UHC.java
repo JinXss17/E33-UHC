@@ -9,19 +9,20 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.jinxss.e33.Levelsystem.LevelSystem;
-import fr.jinxss.e33.Listeners.ExplosiveArrowListener;
-import fr.jinxss.e33.Listeners.MobSpawnListener;
-import fr.jinxss.e33.Listeners.PlayerListener;
-import fr.jinxss.e33.Listeners.RoleAttackListener;
-import fr.jinxss.e33.Listeners.RoleCraftListener;
-import fr.jinxss.e33.Listeners.RoleInteractListener;
 import fr.jinxss.e33.PictoSystem.PictoSystem;
-import fr.jinxss.e33.e33commands.RandomRoleCommand;
+import fr.jinxss.e33.RolesSystem.RandomRoleCommand;
+import fr.jinxss.e33.RolesSystem.RoleRecipes;
+import fr.jinxss.e33.RolesSystem.Listeners.ExplosiveArrowListener;
+import fr.jinxss.e33.RolesSystem.Listeners.RoleAttackListener;
+import fr.jinxss.e33.RolesSystem.Listeners.RoleCraftListener;
+import fr.jinxss.e33.RolesSystem.Listeners.RoleInteractListener;
 import fr.jinxss.e33.mobsystem.AxonSpawner;
 import fr.jinxss.e33.mobsystem.BossSpawner;
 import fr.jinxss.e33.mobsystem.CustomMobsListener;
 import fr.jinxss.e33.mobsystem.InvokeMobsCommand;
 import fr.jinxss.e33.mobsystem.MobCustomSpawner;
+import fr.jinxss.e33.mobsystem.MobSpawnListener;
+import fr.jinxss.e33.uhcsystem.PlayerListener;
 import fr.jinxss.e33.uhcsystem.UHCSystem;
 import net.md_5.bungee.api.ChatColor;
 

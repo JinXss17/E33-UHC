@@ -128,7 +128,7 @@ public class PictoListener implements Listener {
 		DamageCause cause = e.getCause();
 		double Damage = e.getDamage();
 		
-		if(e.getEntity() instanceof Player p && system.getPlayerPictos(p).HasPictoActivated(Survivaliste.class)) {
+		if(e.getEntity() instanceof Player p && system.getPlayerPictos(p) != null && system.getPlayerPictos(p).HasPictoActivated(Survivaliste.class)) {
 			Survivaliste picto = (Survivaliste)system.getPlayerPictos(p).GetPictoActivated(Survivaliste.class);
 			Damage *= (1 -  picto.ResistanceBoost/100);
 		}
@@ -141,6 +141,8 @@ public class PictoListener implements Listener {
 			if(p.getFallDistance() >= 30) {
 				e.setCancelled(true);
 			}
+			
+			if(pictos == null) return;
 			
 			if(pictos.HasPictoActivated(AgilliteFeline.class)) {
 				AgilliteFeline picto = (AgilliteFeline) system.getPlayerPictos(p).GetPictoActivated(AgilliteFeline.class);
@@ -193,7 +195,7 @@ public class PictoListener implements Listener {
 				if(damagerPicto.HasPictoActivated(Roulette.class)) {
 					
 					Roulette picto = (Roulette) damagerPicto.GetPictoActivated(Roulette.class);
-					picto.damageRoll(Damage);
+					Damage = picto.damageRoll(Damage);
 				}
 				
 				if(system.getPlayerPictos(damager).HasPictoActivated(Incendie.class)) {

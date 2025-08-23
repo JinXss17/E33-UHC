@@ -118,6 +118,8 @@ public class PlayerPictos {
 	
 	public boolean HasPictoActivated(Class<? extends Picto> Class) {
 		
+		if(getActivatedPicto().size() == 0)return false;
+		
 		for(Picto picto : getActivatedPicto()) {
 			if(picto.getClass() == Class) {
 				return true;

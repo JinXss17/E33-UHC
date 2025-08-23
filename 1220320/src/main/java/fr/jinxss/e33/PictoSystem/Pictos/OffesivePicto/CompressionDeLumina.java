@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
+import fr.jinxss.e33.Levelsystem.PlayerLevel;
 import fr.jinxss.e33.PictoSystem.PlayerPictos;
 import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 
@@ -15,22 +17,22 @@ public class CompressionDeLumina extends Picto {
 	private float BonusDamageLvl = 0.5f;
 	
 	private float BonusDamage;
-	private PlayerPictos pictos;
+	private PlayerLevel level;
 	
-	public CompressionDeLumina(PlayerPictos pictos) {
+	public CompressionDeLumina(PlayerLevel level) {
 		PictoItem = new ItemStack(Material.ARROW);
 		PictoName = "Compression de Lumina";
 		basicCout = BasicCout;
 		Cout = basicCout;
 		
-		this.pictos = pictos;
+		this.level = level;
 		
 		BonusDamage = BonusDamageLvl;
 	}
 	
 	public float getBonusDamage() {
 		
-		return 1 + (BonusDamage* (pictos.getLumina() - pictos.getLuminaUsed())/100) ;
+		return 1 + (BonusDamage* (level.getLumina() - level.getUsedLumina())/100) ;
 		
 	}
 	

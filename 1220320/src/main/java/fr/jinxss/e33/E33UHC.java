@@ -59,43 +59,69 @@ public class E33UHC extends JavaPlugin {
  	 		setDefault(RoleConfigPath);
  	 		setDefault(PictoDropRatePath);
  		}
+ 		
+ 		
+ 		
  		config = getFile(ConfigFileName);
  		yamlConfiguration = YamlConfiguration.loadConfiguration(getFile(ConfigFileName));
- 		
- 		
- 		
  		getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
  		
- 		// System de Roles
- 		if(isRolesToggled()) {
-			getCommand("giveRandomRole").setExecutor(new RandomRoleCommand());
-	        getServer().getPluginManager().registerEvents(new RoleCraftListener(), this);
-	        getServer().getPluginManager().registerEvents(new RoleInteractListener(), this);
-	        getServer().getPluginManager().registerEvents(new RoleAttackListener(), this);
-	        getServer().getPluginManager().registerEvents(new ExplosiveArrowListener(), this);
-	        
-	        // Enregistre les crafts
-	        RoleRecipes.registerAll(this);
-		}
-        
-        
- 		if(isMobsToggled()) {
- 			getCommand("invoke").setExecutor(new InvokeMobsCommand(axonSpawner, bossSpawner));
- 			customMobSpawner = new MobCustomSpawner(this);
- 	 		bossSpawner = new BossSpawner(this);
- 	 		axonSpawner = new AxonSpawner(this);
- 	 		
- 	 		getServer().getPluginManager().registerEvents(new MobSpawnListener(this), this);
- 	 		getServer().getPluginManager().registerEvents(new CustomMobsListener(this), this);
- 		}
+ 		loadPictoSystem();
  		
- 	        
- 		pictoSystem = new PictoSystem(this);
- 		levelSystem = new LevelSystem(this);
  		uhcSystem = new UHCSystem(this);
+ 		
+ 		
  		
  		getLogger().info(ChatColor.LIGHT_PURPLE + "UHC Ready !");
  		
+ 	}
+ 	
+ 	public void ToggleRoles() {
+ 		
+ 		yamlConfiguration.set(RoleConfigPath, !yamlConfiguration.getBoolean(RoleConfigPath) );
+ 		try {
+	          yamlConfiguration.save(getFile(ConfigFileName));
+		} catch (IOException e) {
+	          e.printStackTrace();
+		} 
+ 	}
+ 	
+ 	public void ToggleMobs() {
+ 		
+ 		yamlConfiguration.set(MobConfigPath, !yamlConfiguration.getBoolean(MobConfigPath) );
+ 		try {
+	          yamlConfiguration.save(getFile(ConfigFileName));
+		} catch (IOException e) {
+	          e.printStackTrace();
+		} 
+ 	}
+ 	
+ 	public void loadPictoSystem() {
+ 		pictoSystem = new PictoSystem(this);
+ 		levelSystem = new LevelSystem(this);
+ 	}
+ 	
+ 	public void loadRolesSystem() {
+ 		getCommand("giveRandomRole").setExecutor(new RandomRoleCommand());
+        getServer().getPluginManager().registerEvents(new RoleCraftListener(), this);
+        getServer().getPluginManager().registerEvents(new RoleInteractListener(), this);
+        getServer().getPluginManager().registerEvents(new RoleAttackListener(), this);
+        getServer().getPluginManager().registerEvents(new ExplosiveArrowListener(), this);
+        
+        // Enregistre les crafts
+        RoleRecipes.registerAll(this);
+ 	}
+ 	
+ 	public void loadMobSystem() {
+ 		
+		customMobSpawner = new MobCustomSpawner(this);
+ 		bossSpawner = new BossSpawner(this);
+ 		axonSpawner = new AxonSpawner(this);
+ 		
+ 		getServer().getPluginManager().registerEvents(new MobSpawnListener(this), this);
+ 		getServer().getPluginManager().registerEvents(new CustomMobsListener(this), this);
+ 		
+ 		getCommand("invoke").setExecutor(new InvokeMobsCommand(axonSpawner, bossSpawner));
  	}
  	
  	private void setDefault(String ConfigPath) {

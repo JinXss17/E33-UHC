@@ -21,7 +21,7 @@ public class UHCSystem {
 	private static ArrayList<UUID> _DeadPlayerList = new ArrayList<UUID>();
 	private static ArrayList<UUID> _AlivePlayerList = new ArrayList<UUID>();
 	
-	private float teleportHeight = 120;
+	private float teleportHeight = 300;
 	
 	private boolean PvP = false;
 	
@@ -35,11 +35,11 @@ public class UHCSystem {
 	
 	
 	public UHCSystem(E33UHC plugin) {
-		this.plugin = plugin ;
+		this.plugin = plugin;
 		GameState = EGameStates.Waiting;
 		border = new UHCBorder();
 		Board = new UHCScoreBoard(plugin, this, border , plugin.getLevelSystem());
-		menuConfig = new UHCConfigMenu(this, Board.getBorder());
+		menuConfig = new UHCConfigMenu(plugin, this);
 		plugin.getServer().getPluginManager().registerEvents(menuConfig, plugin);
 	}
 	
@@ -59,6 +59,10 @@ public class UHCSystem {
 		border.setBorderSize(border.InitialBorderSize, 0);
 		GameState = EGameStates.Playing;
 		
+
+ 		
+ 		
+ 		
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			addPlayerToGame(p);
 		}
@@ -84,8 +88,15 @@ public class UHCSystem {
 		}
 		
 		Board.startUpdating();
-		RegisterScoreBoard();
-		plugin.startSummoningCustomMobs(FirstBossSpawn);
+		// System de Roles
+		if(plugin.isRolesToggled()) {
+			plugin.loadRolesSystem();
+		}
+ 		// System de Mobs Custom
+ 		if(plugin.isMobsToggled()) {
+ 			plugin.loadMobSystem();
+ 			plugin.startSummoningCustomMobs(FirstBossSpawn);
+ 		}
 	}
 	
 	public void setGameState(EGameStates pGameState) {

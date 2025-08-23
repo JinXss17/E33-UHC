@@ -64,7 +64,7 @@ public class PictoSystem {
 		if(BasicPicto.get(ChoosedPicto) == Immortel.class) {
 			picto = new Immortel(p.getUniqueId());
 		}else if(BasicPicto.get(ChoosedPicto) == CompressionDeLumina.class) {
-			picto = new CompressionDeLumina(getPlayerPictos(p));
+			picto = new CompressionDeLumina(plugin.getLevelSystem().getPlayerLevel(p));
 		}else {
 			picto = BasicPicto.get(ChoosedPicto).newInstance();
 		}
@@ -76,7 +76,7 @@ public class PictoSystem {
 			if(BasicPicto.get(ChoosedPicto) == Immortel.class) {
 				picto = new Immortel(p.getUniqueId());
 			}else if(BasicPicto.get(ChoosedPicto) == CompressionDeLumina.class) {
-				picto = new CompressionDeLumina(getPlayerPictos(p));
+				picto = new CompressionDeLumina(plugin.getLevelSystem().getPlayerLevel(p));
 			}else {
 				picto = BasicPicto.get(ChoosedPicto).newInstance();
 			}

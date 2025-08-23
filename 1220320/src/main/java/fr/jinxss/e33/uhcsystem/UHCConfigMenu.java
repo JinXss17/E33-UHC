@@ -13,17 +13,20 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import fr.jinxss.e33.E33UHC;
+
 public class UHCConfigMenu implements Listener {
 
     private final UHCSystem uhcSystem;
     private final UHCBorder uhcBorder;
     private final Inventory menu;
+    private final E33UHC plugin;
 
-    public UHCConfigMenu(UHCSystem uhcSystem, UHCBorder uhcBorder) {
-        this.uhcSystem = uhcSystem;
-        this.uhcBorder = uhcBorder;
+    public UHCConfigMenu(E33UHC plugin, UHCSystem system) {
+    	this.plugin = plugin;
+        this.uhcSystem = system;
+        this.uhcBorder = uhcSystem.getBorder();
         this.menu = Bukkit.createInventory(null, 45, ChatColor.DARK_GREEN + "Configuration UHC");
-        setupItems();
     }
 
     private void setupItems() {
@@ -41,6 +44,18 @@ public class UHCConfigMenu implements Listener {
         menu.setItem(28, createItem(Material.RED_CONCRETE, "⬅ MeetUp -", (uhcBorder.MeetUpBorderSize-25) + ""));
         menu.setItem(29, createItem(Material.BARRIER, "Taille MeetUp", uhcBorder.MeetUpBorderSize + ""));
         menu.setItem(30, createItem(Material.LIME_CONCRETE, "➡ MeetUp +", (uhcBorder.MeetUpBorderSize+25) + ""));
+        
+        // Bouton Toggle Roles / Mobs
+        if(plugin.isRolesToggled()) 
+        	menu.setItem(37, createItem(Material.GREEN_CONCRETE, "§a~ Roles : Activé ~" ) );
+        else 
+        	menu.setItem(37, createItem(Material.RED_CONCRETE, "§c~ Roles : Désactivé ~") );
+        
+        if(plugin.isMobsToggled()) 
+        	menu.setItem(39, createItem(Material.GREEN_CONCRETE, "§a~ Custom Mobs : Activé ~" ) );
+        else 
+        	menu.setItem(39, createItem(Material.RED_CONCRETE, "§c~ CustomMobs : Désactivé ~") );
+        
 
         // Bouton de lancement
         menu.setItem(24, createItem(Material.LIME_WOOL, "✅ Lancer la partie"));
@@ -83,6 +98,12 @@ public class UHCConfigMenu implements Listener {
                 // Taille MeetUp
                 case 28 -> uhcBorder.MeetUpBorderSize = Math.max(25, uhcBorder.MeetUpBorderSize - 25);
                 case 30 -> uhcBorder.MeetUpBorderSize += 25;
+                
+                //Toggle Roles / Mobs System
+                case 37 -> plugin.ToggleRoles();
+                
+                case 39 -> plugin.ToggleMobs();
+                
 
                 // Lancer la partie
                 case 24 -> {

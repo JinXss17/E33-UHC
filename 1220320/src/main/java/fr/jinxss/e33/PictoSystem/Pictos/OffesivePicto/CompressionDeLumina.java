@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import fr.jinxss.e33.Levelsystem.PlayerLevel;
-import fr.jinxss.e33.PictoSystem.PlayerPictos;
 import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 
 public class CompressionDeLumina extends Picto {

@@ -5,6 +5,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.jinxss.e33.mobsystem.Spawner.AxonSpawner;
+import fr.jinxss.e33.mobsystem.Spawner.BossSpawner;
+
 public class InvokeMobsCommand implements CommandExecutor  {
 
 	private String SummonBoss = "Boss";

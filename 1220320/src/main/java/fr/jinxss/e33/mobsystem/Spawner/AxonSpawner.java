@@ -1,4 +1,4 @@
-package fr.jinxss.e33.mobsystem;
+package fr.jinxss.e33.mobsystem.Spawner;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +16,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import fr.jinxss.e33.E33UHC;
+import fr.jinxss.e33.mobsystem.MobSystem;
 
 public class AxonSpawner extends MobSystem {
 

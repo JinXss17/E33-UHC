@@ -45,8 +45,8 @@ public class TirMarquant extends Picto {
 	@Override
 	public List<String> Describe() {
 		
-		List<String> describe = List.of("Lorsque vous touchez un joueur a l'arc\n"
-				+ "vous lui appliquer une marque");
+		List<String> describe = List.of("Lorsque vous touchez un joueur a l'arc",
+				"vous lui appliquer une marque");
 		
 		if(Level != ENiveau.Apprentissage)describe.addAll(List.of("et lui",
 				"retirez " + ArrowHealthSteal + " coeurs pendant " + HealthStealTime + "sec") );

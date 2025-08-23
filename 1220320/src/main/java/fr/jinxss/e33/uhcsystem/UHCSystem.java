@@ -71,8 +71,8 @@ public class UHCSystem {
 			
 			r.setSeed(r.nextLong());
 			
-			float lX =  ((float) Math.sin(r.nextDouble())* GetTeleportRay() );
-			float lZ =  ((float) Math.cos(r.nextDouble())* GetTeleportRay() );
+			float lX =  ((float) Math.sin(r.nextInt())* GetTeleportRay() );
+			float lZ =  ((float) Math.cos(r.nextInt())* GetTeleportRay() );
 			
 			p.teleport(new Location(Bukkit.getWorld("World"),lX, teleportHeight, lZ) );
 			p.getInventory().clear();

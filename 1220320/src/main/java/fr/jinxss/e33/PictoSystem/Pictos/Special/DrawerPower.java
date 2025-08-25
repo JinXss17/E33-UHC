@@ -9,7 +9,12 @@ import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 
 public class DrawerPower extends Picto {
 	
+	private int BasicCout = 30;
+	
 	public DrawerPower() {
+		super();
+		basicCout = BasicCout;
+		Cout = basicCout;
 		
 		PictoItem = new ItemStack(Material.PAINTING);
 		PictoName = "Puissance Surpeinte";

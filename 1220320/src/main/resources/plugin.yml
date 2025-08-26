@@ -15,3 +15,6 @@ commands:
   Level:
   invoke:
     permission: e33.summon
+  Team:
+    description: Permet de choisir son équipe
+    usage: /Team (Create <TeamName> <Color>)

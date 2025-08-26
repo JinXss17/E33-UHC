@@ -16,6 +16,9 @@ import fr.jinxss.e33.RolesSystem.Listeners.ExplosiveArrowListener;
 import fr.jinxss.e33.RolesSystem.Listeners.RoleAttackListener;
 import fr.jinxss.e33.RolesSystem.Listeners.RoleCraftListener;
 import fr.jinxss.e33.RolesSystem.Listeners.RoleInteractListener;
+import fr.jinxss.e33.TeamSystem.TeamCommand;
+import fr.jinxss.e33.TeamSystem.TeamSystem;
+import fr.jinxss.e33.TeamSystem.TeamTabCompleterCommand;
 import fr.jinxss.e33.mobsystem.InvokeMobsCommand;
 import fr.jinxss.e33.mobsystem.Listeners.CustomMobsListener;
 import fr.jinxss.e33.mobsystem.Listeners.MobSpawnListener;
@@ -32,6 +35,7 @@ public class E33UHC extends JavaPlugin {
 	
 	private UHCSystem uhcSystem;
 	private LevelSystem levelSystem;
+	private TeamSystem teamSystem;
 	
 	private MobCustomSpawner customMobSpawner;
 	private BossSpawner bossSpawner;
@@ -61,7 +65,6 @@ public class E33UHC extends JavaPlugin {
  		}
  		
  		
- 		
  		config = getFile(ConfigFileName);
  		yamlConfiguration = YamlConfiguration.loadConfiguration(getFile(ConfigFileName));
  		getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
@@ -70,8 +73,10 @@ public class E33UHC extends JavaPlugin {
  		
  		uhcSystem = new UHCSystem(this);
  		
+ 		teamSystem = new TeamSystem(this);
  		
- 		
+ 		getCommand("Team").setExecutor(new TeamCommand(teamSystem));
+ 		getCommand("Team").setTabCompleter(new TeamTabCompleterCommand());
  		getLogger().info(ChatColor.LIGHT_PURPLE + "UHC Ready !");
  		
  	}
@@ -102,7 +107,9 @@ public class E33UHC extends JavaPlugin {
  	}
  	
  	public void loadRolesSystem() {
+ 		
  		getCommand("giveRandomRole").setExecutor(new RandomRoleCommand());
+ 		
         getServer().getPluginManager().registerEvents(new RoleCraftListener(), this);
         getServer().getPluginManager().registerEvents(new RoleInteractListener(), this);
         getServer().getPluginManager().registerEvents(new RoleAttackListener(), this);

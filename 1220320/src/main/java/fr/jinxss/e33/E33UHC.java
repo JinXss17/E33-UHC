@@ -8,6 +8,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.jinxss.e33.Grades.GradeCommandExecutor;
+import fr.jinxss.e33.Grades.GradeManager;
 import fr.jinxss.e33.Levelsystem.LevelSystem;
 import fr.jinxss.e33.PictoSystem.PictoSystem;
 import fr.jinxss.e33.RolesSystem.RandomRoleCommand;
@@ -20,6 +22,7 @@ import fr.jinxss.e33.TeamSystem.TeamCommand;
 import fr.jinxss.e33.TeamSystem.TeamSystem;
 import fr.jinxss.e33.TeamSystem.TeamTabCompleterCommand;
 import fr.jinxss.e33.mobsystem.InvokeMobsCommand;
+import fr.jinxss.e33.mobsystem.InvokeMobsTabCompleter;
 import fr.jinxss.e33.mobsystem.Listeners.CustomMobsListener;
 import fr.jinxss.e33.mobsystem.Listeners.MobSpawnListener;
 import fr.jinxss.e33.mobsystem.Spawner.AxonSpawner;
@@ -36,6 +39,7 @@ public class E33UHC extends JavaPlugin {
 	private UHCSystem uhcSystem;
 	private LevelSystem levelSystem;
 	private TeamSystem teamSystem;
+	private GradeManager gradeManager;
 	
 	private MobCustomSpawner customMobSpawner;
 	private BossSpawner bossSpawner;
@@ -45,6 +49,7 @@ public class E33UHC extends JavaPlugin {
 	private String RoleConfigPath = "System.Roles";
 	private String MobConfigPath = "System.Mobs";
 	private String PictoDropRatePath = "System.Picto.DropRate";
+	private String GradesPath = "System.Grades";
 	
 	private String ConfigFileName = "config";
 	
@@ -72,11 +77,12 @@ public class E33UHC extends JavaPlugin {
  		loadPictoSystem();
  		
  		uhcSystem = new UHCSystem(this);
- 		
  		teamSystem = new TeamSystem(this);
+ 		gradeManager = new GradeManager(this);
  		
  		getCommand("Team").setExecutor(new TeamCommand(teamSystem));
  		getCommand("Team").setTabCompleter(new TeamTabCompleterCommand());
+ 		getCommand("Grade").setExecutor(new GradeCommandExecutor(gradeManager));
  		getLogger().info(ChatColor.LIGHT_PURPLE + "UHC Ready !");
  		
  	}
@@ -129,19 +135,16 @@ public class E33UHC extends JavaPlugin {
  		getServer().getPluginManager().registerEvents(new CustomMobsListener(this), this);
  		
  		getCommand("invoke").setExecutor(new InvokeMobsCommand(axonSpawner, bossSpawner));
+ 		getCommand("invoke").setTabCompleter(new InvokeMobsTabCompleter());
  	}
  	
  	private void setDefault(String ConfigPath) {
  		if(ConfigPath.equals(PictoDropRatePath)) {
-				yamlConfiguration.set(ConfigPath, 0.5f);
-			}else {
-				yamlConfiguration.set(ConfigPath, false);
-			}	
- 		try {
- 	          yamlConfiguration.save(getFile(ConfigFileName));
- 		} catch (IOException e) {
- 	          e.printStackTrace();
- 		} 
+			yamlConfiguration.set(ConfigPath, 0.5f);
+		}
+ 		else {
+			yamlConfiguration.set(ConfigPath, false);
+		}	
  	}
  	
  	private void createFile(String name) {
@@ -162,6 +165,18 @@ public class E33UHC extends JavaPlugin {
  	
  	public YamlConfiguration getConfigFile() {
  		return yamlConfiguration;
+ 	}
+ 	
+ 	public void saveConfig() {
+ 		try {
+	          yamlConfiguration.save(getFile(ConfigFileName));
+		} catch (IOException e) {
+	          e.printStackTrace();
+		} 
+ 	}
+ 	
+ 	public String getGradeConfigPath() {
+ 		return GradesPath;
  	}
  	
  	public boolean isRolesToggled() {
@@ -214,6 +229,10 @@ public class E33UHC extends JavaPlugin {
 
 	public NamespacedKey getCustomKey() {
 		return CustomKey;
+	}
+
+	public GradeManager getGradeManager() {
+		return gradeManager;
 	}
 	
 }

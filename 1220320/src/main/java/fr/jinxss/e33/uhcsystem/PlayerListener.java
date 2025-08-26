@@ -71,6 +71,9 @@ public class PlayerListener implements Listener {
 		Player p = e.getPlayer();
 		
 		if(plugin.getUHCSystem().getGameState() == EGameStates.Waiting) {
+			
+			plugin.getGradeManager().registerPlayerGrade(p);
+			
 			UHCSystem uhcSystem = plugin.getUHCSystem();
 			
 			p.getInventory().clear();

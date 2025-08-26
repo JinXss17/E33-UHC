@@ -18,3 +18,6 @@ commands:
   Team:
     description: Permet de choisir son équipe
     usage: /Team (Create <TeamName> <Color>)
+  Grade:
+    description: permet de géré les grades des joueurs
+    usage: /Grade <Player> <GradeName>

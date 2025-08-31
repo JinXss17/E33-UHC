@@ -21,3 +21,6 @@ commands:
   Grade:
     description: permet de géré les grades des joueurs
     usage: /Grade <Player> <GradeName>
+  revive:
+    description: permet de revive un/des joueur(s) mort
+    permession: e33.revive

@@ -20,7 +20,7 @@ public class MobCustomSpawner extends MobSystem {
 
     private final E33UHC plugin;
     
-    private int TimeToSpawnCustomMobs = 30;
+    private int TimeToSpawnCustomMobs = 60;
     
 
     public MobCustomSpawner(E33UHC plugin) {
@@ -57,7 +57,7 @@ public class MobCustomSpawner extends MobSystem {
         z.setCustomName("§3Lancier");
         z.setCustomNameVisible(true);
         z.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
-        z.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(6.0);
+        z.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(2.0);
         z.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
         z.setVisualFire(false);
         z.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
@@ -78,7 +78,7 @@ public class MobCustomSpawner extends MobSystem {
         Zombie z = loc.getWorld().spawn(loc, Zombie.class);
         z.setCustomName("§8Obscur");
         z.setCustomNameVisible(true);
-        z.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(8.0);
+        z.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(2.0);
         z.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
         z.setVisualFire(false);
         z.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");

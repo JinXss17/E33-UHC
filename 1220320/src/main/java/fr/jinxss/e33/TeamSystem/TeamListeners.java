@@ -19,7 +19,7 @@ public class TeamListeners implements Listener {
 	@EventHandler (priority = EventPriority.LOWEST)
 	public void OnDamage(EntityDamageByEntityEvent e) {
 		if(e.getEntity() instanceof Player victim && e.getDamager() instanceof Player damager) {
-			if(system.getPlayerTeam(victim) == system.getPlayerTeam(damager)) {
+			if(system.getPlayerTeam(victim) == system.getPlayerTeam(damager) && system.getPlayerTeam(victim) != null) {
 				e.setDamage(0);
 			}
 		}

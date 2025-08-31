@@ -205,7 +205,7 @@ public class PictoListener implements Listener {
 						Incendie picto = (Incendie) system.getPlayerPictos(damager).GetPictoActivated(Incendie.class);
 						for(Entity entity : damager.getNearbyEntities(picto.getFireRay(), picto.getFireRay(), picto.getFireRay())) {
 								entity.setFireTicks(picto.getFireTick());
-								Bukkit.getWorld("world").spawnParticle(Particle.CAMPFIRE_COSY_SMOKE , entity.getLocation(), 20);
+								Bukkit.getWorld("world").spawnParticle(Particle.CAMPFIRE_COSY_SMOKE , entity.getLocation(), 2);
 						}
 					}
 					
@@ -220,7 +220,6 @@ public class PictoListener implements Listener {
 						Damage = 6;
 						e.setDamage(Damage);
 					}
-					damager.sendMessage("Damage : " + Damage);
 				}
 			}
 			
@@ -237,7 +236,6 @@ public class PictoListener implements Listener {
 						e.setCancelled(true);
 						return;
 					}
-					victim.sendMessage("Damage : " + Damage);
 				}
 				
 				
@@ -265,7 +263,7 @@ public class PictoListener implements Listener {
 				}
 				
 				e.setDamage(Damage);
-				damager.sendMessage("Damage : " + Damage);
+				damager.sendMessage(victim.getName() + "'s HP :" + victim.getHealth());
 				
 			}
 		}

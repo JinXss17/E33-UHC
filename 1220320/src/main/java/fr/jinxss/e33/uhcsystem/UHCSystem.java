@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -47,6 +48,16 @@ public class UHCSystem {
 		return menuConfig;
 	}
 	
+	public void revive(Player p) {
+		if(getDeadPlayers().contains(p)) {
+			p.setGameMode(GameMode.SURVIVAL);
+			randomTeleport(p);
+			
+			removePlayerDead(p);
+			addPlayerAlive(p);
+		}
+	}
+	
 	private float GetTeleportRay() {
 		
 		return (float)border.getCurrentSize();
@@ -54,27 +65,16 @@ public class UHCSystem {
 	}
 	
 	public void StartGame() {
-		
-		Random r = new Random();
 		border.setBorderSize(border.InitialBorderSize, 0);
 		GameState = EGameStates.Playing;
 		
-
- 		
- 		
- 		
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			addPlayerToGame(p);
 		}
 		
 		for(Player p : _PlayerList) {
 			
-			r.setSeed(r.nextLong());
-			
-			float lX =  ((float) Math.sin(r.nextInt())* GetTeleportRay() );
-			float lZ =  ((float) Math.cos(r.nextInt())* GetTeleportRay() );
-			
-			p.teleport(new Location(Bukkit.getWorld("World"),lX, teleportHeight, lZ) );
+			randomTeleport(p);
 			p.getInventory().clear();
 			_AlivePlayerList.add(p.getUniqueId());
 			
@@ -99,9 +99,20 @@ public class UHCSystem {
  		}
 	}
 	
+	public void randomTeleport(Player p) {
+		Random r = new Random();
+		r.setSeed(r.nextLong());
+		
+		float lX =  ((float) Math.sin(r.nextInt())* GetTeleportRay() );
+		float lZ =  ((float) Math.cos(r.nextInt())* GetTeleportRay() );
+		
+		p.teleport(new Location(Bukkit.getWorld("World"),lX, teleportHeight, lZ) );
+	}
+	
 	public void setGameState(EGameStates pGameState) {
 		this.GameState = pGameState;
 	}
+	
 	public EGameStates getGameState() {
 		return this.GameState;
 	}
@@ -133,14 +144,47 @@ public class UHCSystem {
 	public void addPlayerToGame(Player pPlayer) {
 		if(!_PlayerList.contains(pPlayer))_PlayerList.add(pPlayer);
 	}
+	
 	public void RemovePlayerToGame(Player pPlayer) {
 		
 		if(_PlayerList.contains(pPlayer))_PlayerList.remove(pPlayer); 
 		
 	}
+	
 	public ArrayList<Player> getPlayers() {
 		return _PlayerList;
 	}
+	
+	public void PlayerKill(Player p ) {
+		removePlayerAlive(p);
+		addPlayerDead(p);
+		
+	}
+	
+	public void addPlayerDead(Player p ) {
+		if(!_DeadPlayerList.contains(p.getUniqueId())) {
+			_DeadPlayerList.add(p.getUniqueId());
+		}
+	}
+	
+	public void addPlayerAlive(Player p ) {
+		if(!_AlivePlayerList.contains(p.getUniqueId())) {
+			_AlivePlayerList.add(p.getUniqueId());
+		}
+	}
+	
+	public void removePlayerDead(Player p) {
+		if(_DeadPlayerList.contains(p.getUniqueId())) {
+			_DeadPlayerList.remove(p.getUniqueId());
+		}
+	}
+	
+	public void removePlayerAlive(Player p) {
+		if(_AlivePlayerList.contains(p.getUniqueId())) {
+			_AlivePlayerList.remove(p.getUniqueId());
+		}
+	}
+	
 	public ArrayList<Player> getDeadPlayers() {
 		
 		ArrayList<Player> lDeadPlayerList = new ArrayList<Player>();
@@ -152,6 +196,7 @@ public class UHCSystem {
 		
 		return lDeadPlayerList;
 	}
+	
 	public ArrayList<Player> getAlivePlayers() {
 		ArrayList<Player> lAlivePlayerList = new ArrayList<Player>();
 		

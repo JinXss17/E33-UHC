@@ -19,8 +19,8 @@ public class LevelListener implements Listener {
 		
 	}
 	
-	private int MidExpOnKillEntity = 25;
-	private int ExpRange= 10;
+	private int MidExpOnKillEntity = 50;
+	private int ExpRange= 25;
 	
 	@EventHandler (priority = EventPriority.LOW)
 	public void OnEntityDeath(EntityDeathEvent e) {

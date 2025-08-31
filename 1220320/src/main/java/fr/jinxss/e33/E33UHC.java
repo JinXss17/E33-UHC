@@ -29,6 +29,8 @@ import fr.jinxss.e33.mobsystem.Spawner.AxonSpawner;
 import fr.jinxss.e33.mobsystem.Spawner.BossSpawner;
 import fr.jinxss.e33.mobsystem.Spawner.MobCustomSpawner;
 import fr.jinxss.e33.uhcsystem.PlayerListener;
+import fr.jinxss.e33.uhcsystem.ReviveCommand;
+import fr.jinxss.e33.uhcsystem.ReviveTabCompleter;
 import fr.jinxss.e33.uhcsystem.UHCSystem;
 import net.md_5.bungee.api.ChatColor;
 
@@ -83,6 +85,8 @@ public class E33UHC extends JavaPlugin {
  		getCommand("Team").setExecutor(new TeamCommand(teamSystem));
  		getCommand("Team").setTabCompleter(new TeamTabCompleterCommand());
  		getCommand("Grade").setExecutor(new GradeCommandExecutor(gradeManager));
+ 		getCommand("revive").setExecutor(new ReviveCommand(uhcSystem));
+ 		getCommand("revive").setTabCompleter(new ReviveTabCompleter(uhcSystem));
  		getLogger().info(ChatColor.LIGHT_PURPLE + "UHC Ready !");
  		
  	}

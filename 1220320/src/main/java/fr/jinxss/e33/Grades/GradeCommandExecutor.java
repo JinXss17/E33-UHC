@@ -21,7 +21,7 @@ public class GradeCommandExecutor implements CommandExecutor {
 			
 			if(args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
 				
-				manager.setGradeToPlayer(p, args[1]);
+				manager.setGradeToPlayer(Bukkit.getPlayer(args[0]), args[1]);
 				return true;
 			}
 			

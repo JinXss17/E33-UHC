@@ -125,7 +125,7 @@ public class MobSpawnListener implements Listener {
     	zombie.setCustomName("§3Lancier");
     	zombie.setCustomNameVisible(true);
     	zombie.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
-    	zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(6.0);
+    	zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(2.0);
     	zombie.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
     	zombie.setVisualFire(false);
     	zombie.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");
@@ -136,7 +136,7 @@ public class MobSpawnListener implements Listener {
     private void makeMobClair(Zombie zombie) {
     	zombie.setCustomName("§fClair");
     	zombie.setCustomNameVisible(true);
-    	zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(3.0);
+    	zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(2.0);
     	zombie.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(0.322);
     	zombie.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
     	zombie.setVisualFire(false);
@@ -148,7 +148,7 @@ public class MobSpawnListener implements Listener {
     private void makeMobObscur(Zombie zombie) {
     	zombie.setCustomName("§8Obscur");
     	zombie.setCustomNameVisible(true);
-    	zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(8.0);
+    	zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(2.0);
     	zombie.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, false, false));
     	zombie.setVisualFire(false);
     	zombie.getPersistentDataContainer().set(plugin.getCustomKey(), PersistentDataType.STRING, "Custom");

@@ -74,8 +74,6 @@ public class PlayerListener implements Listener {
 			
 			plugin.getGradeManager().registerPlayerGrade(p);
 			
-			UHCSystem uhcSystem = plugin.getUHCSystem();
-			
 			p.getInventory().clear();
 			p.getAttribute(Attribute.MAX_HEALTH).setBaseValue(20.0d);
 			p.setHealth(20.0d);
@@ -88,8 +86,8 @@ public class PlayerListener implements Listener {
 				p.removePotionEffect(effect.getType());
 			}
 			
-			if(!uhcSystem.getPlayers().contains(p)) {
-				uhcSystem.addPlayerToGame(p);
+			if(!plugin.getUHCSystem().getPlayers().contains(p)) {
+				plugin.getUHCSystem().addPlayerToGame(p);
 			}
 			if(p.isOp()) {
 				p.getInventory().setItem(4, LaunchGameItem);
@@ -103,9 +101,8 @@ public class PlayerListener implements Listener {
 	public void onDisconect(PlayerQuitEvent e) {
 		
 		Player p = e.getPlayer();
-		UHCSystem uhcSystem = plugin.getUHCSystem();
-		if(uhcSystem.getPlayers().contains(p)) {
-			uhcSystem.RemovePlayerToGame(p);
+		if(plugin.getUHCSystem().getPlayers().contains(p)) {
+			plugin.getUHCSystem().RemovePlayerToGame(p);
 		}
 		
 	}
@@ -140,6 +137,9 @@ public class PlayerListener implements Listener {
 		e.setKeepInventory(true);
 		Location DropLocation = p.getLocation();
 		World world = p.getWorld();
+		
+		plugin.getUHCSystem().PlayerKill(p);
+		
 		for(ItemStack drop : p.getInventory()) {
 			world.dropItem(DropLocation, drop);
 		}

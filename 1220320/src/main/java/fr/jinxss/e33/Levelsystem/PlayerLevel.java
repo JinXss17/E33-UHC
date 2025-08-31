@@ -14,7 +14,7 @@ public class PlayerLevel {
 
 	private int Level = 1;
 	private int Exp = 0;
-	private int baseExpToLevelUp = 100;
+	private int baseExpToLevelUp = 50;
 	private int ExpToLevelUp;
 	private float ExpToLevelUpMultiplier = 1.2f;
 	

@@ -1,6 +1,7 @@
 package fr.jinxss.e33.PictoSystem.Pictos;
 
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -11,7 +12,7 @@ import fr.jinxss.e33.PictoSystem.ENiveau;
 public class Picto{
 	
 	public int Exp = 0;
-	public int ExpToLevelUp = 750;
+	public int ExpToLevelUp = 500;
 	public int ExpPerMobs = 20;
 	public float ExpUpMultiplier = 1;
 	
@@ -66,8 +67,8 @@ public class Picto{
 	public void AddExp() {
 		
 		if(Level == ENiveau.Instinctif)return;
-		
-		Exp += ExpPerMobs;
+		Random r = new Random();
+		Exp += ExpPerMobs  + ( 10 * Math.sin(r.nextInt()) );
 		if(Exp >= ExpToLevelUp) {
 			
 			Exp -= ExpToLevelUp ;

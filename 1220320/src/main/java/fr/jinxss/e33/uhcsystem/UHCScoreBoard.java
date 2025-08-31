@@ -84,7 +84,7 @@ public class UHCScoreBoard {
 	    long seconds = elapsed % 60;
 	
 	    Location loc = player.getLocation();
-	    int alivePlayers = (int) Bukkit.getOnlinePlayers().stream().filter(p -> p.getGameMode() == GameMode.SURVIVAL).count();
+	    int alivePlayers = (int) uhcSystem.getAlivePlayers().stream().filter(p -> p.getGameMode() == GameMode.SURVIVAL).count();
 	    PlayerLevel level = levelSystem.getPlayerLevel(player);
 	
 	    obj.getScore(ChatColor.YELLOW + "Temps: " + minutes + "m" + seconds + "s").setScore(8);

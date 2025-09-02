@@ -1,14 +1,12 @@
-package fr.jinxss.e33.RolesSystem.Nevrons;
+package fr.jinxss.e33.RolesSystem;
 
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
 
-import fr.jinxss.e33.RolesSystem.Nevron;
+public abstract class Nevron extends Roles {
 
-public class Trompetiste extends Nevron {
-
-	public Trompetiste(UUID uuid, String name) {
+	public Nevron(UUID uuid, String name) {
 		super(uuid, name);
 		// TODO Auto-generated constructor stub
 	}
@@ -24,11 +22,7 @@ public class Trompetiste extends Nevron {
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public void getPowerToMonoco(Player p) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	public abstract void getPowerToMonoco(Player p);
 
 }

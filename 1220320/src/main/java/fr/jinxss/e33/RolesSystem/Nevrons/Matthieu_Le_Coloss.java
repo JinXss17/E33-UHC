@@ -6,9 +6,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import fr.jinxss.e33.RolesSystem.Roles;
+import fr.jinxss.e33.RolesSystem.Nevron;
 
-public class Matthieu_Le_Coloss extends Roles {
+public class Matthieu_Le_Coloss extends Nevron {
 	
     public Matthieu_Le_Coloss(UUID uuid, String name) {
         super(uuid, name);
@@ -44,6 +44,12 @@ public class Matthieu_Le_Coloss extends Roles {
 	public void onPowerUse() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void getPowerToMonoco(Player p) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -3,31 +3,22 @@ package fr.jinxss.e33.RolesSystem.Nevrons;
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
-import fr.jinxss.e33.RolesSystem.Roles;
+import fr.jinxss.e33.RolesSystem.Nevron;
+import fr.jinxss.e33.RolesSystem.RoleManager;
+import fr.jinxss.e33.RolesSystem.roles.Monoco;
 
-public class Clair extends Roles {
-    
+public class Clair extends Nevron {
+	
 	public Clair(UUID uuid, String name) {
         super(uuid, name);
-        this.resi = 1;
+        this.resi += 20;
     }
 
     @Override
     public void onAssign() {
         Player player = getPlayer();
         if (player == null) return;
-
-        // Ajoute Résistance niveau 1 (durée max)
-        player.addPotionEffect(new PotionEffect(
-            PotionEffectType.RESISTANCE,
-            Integer.MAX_VALUE, // Durée infinie tant que le joueur garde le rôle
-            0, // Niveau 0 = Résistance I
-            false, // Pas d’icône dans l’interface
-            false  // Pas de particules
-        ));
 
         player.sendMessage("§bTu es Clair. Tu ressens une force protectrice autour de toi.");
     }
@@ -37,4 +28,11 @@ public class Clair extends Roles {
     public void onPowerUse() {
         // Aucun pouvoir actif
     }
+
+	@Override
+	public void getPowerToMonoco(Player p) {
+		if(RoleManager.getRole(p.getUniqueId()) instanceof Monoco role) {
+			role.getClairPower();
+		}
+	}
 }

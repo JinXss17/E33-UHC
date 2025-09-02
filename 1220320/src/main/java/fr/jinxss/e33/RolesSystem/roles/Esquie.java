@@ -129,7 +129,7 @@ public class Esquie extends Roles {
         Bukkit.getOnlinePlayers().forEach(target -> {
             if (target == p) return;
             if (target.getLocation().distance(p.getLocation()) <= 10) {
-                target.damage(4.0, p); // 2 cœurs
+                target.damage(4.0); // 2 cœurs
                 target.setVelocity(target.getVelocity().setY(1.2));
                 target.sendMessage("§cTu as été frappé par l’onde de choc d’Esquie !");
             }

@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -25,6 +26,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
 import fr.jinxss.e33.E33UHC;
+import fr.jinxss.e33.RolesSystem.Nevron;
+import fr.jinxss.e33.RolesSystem.RoleManager;
+import fr.jinxss.e33.RolesSystem.Nevrons.Noco;
+import fr.jinxss.e33.RolesSystem.roles.Monoco;
 import fr.jinxss.e33.uhcsystem.list.EGameStates;
 
 public class PlayerListener implements Listener {
@@ -139,6 +144,20 @@ public class PlayerListener implements Listener {
 		World world = p.getWorld();
 		
 		plugin.getUHCSystem().PlayerKill(p);
+		
+		for(Entity entity : p.getNearbyEntities(20, 5, 20)) {
+			
+			if(RoleManager.getRole(p.getUniqueId()) instanceof Nevron  nevron 
+					&& entity instanceof Player all 
+					&& RoleManager.getRole(all.getUniqueId()) instanceof Monoco) {
+				if(nevron instanceof Noco noco 
+						&& e.getDamageSource() instanceof Player target) {
+					noco.getPowerToMonoco(all, target);
+				}else {
+					nevron.getPowerToMonoco(all);
+				}
+			}
+		}
 		
 		for(ItemStack drop : p.getInventory()) {
 			world.dropItem(DropLocation, drop);

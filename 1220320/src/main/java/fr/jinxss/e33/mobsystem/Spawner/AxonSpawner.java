@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Bogged;
 import org.bukkit.entity.Evoker;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Vindicator;
 import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.persistence.PersistentDataType;
@@ -16,16 +17,20 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import fr.jinxss.e33.E33UHC;
+import fr.jinxss.e33.RolesSystem.RoleManager;
+import fr.jinxss.e33.RolesSystem.roles.Conservateur;
 import fr.jinxss.e33.mobsystem.MobSystem;
 
 public class AxonSpawner extends MobSystem {
 
 	
 	private E33UHC plugin;
+	private int TimeToGetSpawnLoc= 27;
 	private int TimeToSpawnBoss = 30;
 	
 	private ArrayList<Integer> AxonOrder = new ArrayList<Integer>();
 	private int PickAxon = 0;
+	private Location SpawnLocation;
 	
 	public AxonSpawner(E33UHC plugin){
 		this.plugin = plugin;
@@ -37,18 +42,27 @@ public class AxonSpawner extends MobSystem {
 	@Override
 	public void run() {
 		
-		Location SpawnLoc = getRandomLocation();
-		while(SpawnLoc == null) {
-			SpawnLoc = getRandomLocation();
-		}
-		spawnAxon(SpawnLoc);
-		Bukkit.broadcastMessage("Un Axon est apparu en :§4" + SpawnLoc.getBlockX() + ", " + SpawnLoc.getBlockY() + ", " + SpawnLoc.getBlockZ());
-		
+		spawnAxon(SpawnLocation);
+		Bukkit.broadcastMessage("Un Axon est apparu en :§4" + SpawnLocation.getBlockX() + ", " + SpawnLocation.getBlockY() + ", " + SpawnLocation.getBlockZ());
+		Bukkit.getScheduler().runTaskLater(plugin,( ) ->{
+			SpawnLocation = getRandomLocation();
+			
+			for(Player p : Bukkit.getOnlinePlayers()) {
+				
+				if(RoleManager.getRole(p.getUniqueId()) instanceof Conservateur role) {
+					role.sendAxonPremonition(SpawnLocation);
+				}
+			}
+			
+		}, 20*60*TimeToGetSpawnLoc);
 	}
 	
 	@Override
     public void StartSummonning() {
     	runTaskTimer(plugin, 0, 20 * 60 *TimeToSpawnBoss);
+    	Bukkit.getScheduler().runTaskLater(plugin,( ) ->{
+			SpawnLocation = getRandomLocation();
+		}, 20*60*TimeToGetSpawnLoc);
     }
 	
 	private Location getRandomLocation() {

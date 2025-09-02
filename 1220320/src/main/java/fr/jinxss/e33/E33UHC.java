@@ -35,6 +35,8 @@ import fr.jinxss.e33.uhcsystem.UHCSystem;
 import net.md_5.bungee.api.ChatColor;
 
 public class E33UHC extends JavaPlugin {
+	
+	private static double MaxHealthToPlayer = 50;
 
 	private NamespacedKey CustomKey = new NamespacedKey(this, "Custom_Mob");
 	
@@ -215,7 +217,7 @@ public class E33UHC extends JavaPlugin {
  		
  		customMobSpawner.StartSummonning();
  		Bukkit.getScheduler().runTaskLater(this, () -> {bossSpawner.StartSummonning();}, Delay * 20 * 60);
- 		Bukkit.getScheduler().runTaskLater(this, () -> {axonSpawner.StartSummonning();}, Delay * 20 * 60 *  3);
+ 		Bukkit.getScheduler().runTaskLater(this, () -> {axonSpawner.StartSummonning();}, (Delay * 20 * 60 * 3) - 3);
  	}
 
     @Override
@@ -241,6 +243,10 @@ public class E33UHC extends JavaPlugin {
 
 	public GradeManager getGradeManager() {
 		return gradeManager;
+	}
+
+	public static double getMaxHealthToPlayer() {
+		return MaxHealthToPlayer;
 	}
 	
 }

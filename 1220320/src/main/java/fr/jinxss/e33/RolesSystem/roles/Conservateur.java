@@ -2,6 +2,8 @@ package fr.jinxss.e33.RolesSystem.roles;
 
 import java.util.UUID;
 
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -42,7 +44,7 @@ public class Conservateur extends Roles {
         Player player = getPlayer();
         if (player == null) return;
 
-        ItemStack sharpSword = new ItemStack(org.bukkit.Material.DIAMOND_SWORD);
+        ItemStack sharpSword = new ItemStack(Material.DIAMOND_SWORD);
         sharpSword.addEnchantment(Enchantment.SHARPNESS, 7); // Sharpness VII
         player.getInventory().addItem(sharpSword);
 
@@ -53,10 +55,14 @@ public class Conservateur extends Roles {
      * Méthode à appeler pour prévenir le joueur de la position d'un Axon 3 minutes avant le spawn
      * @param x, y, z coordonnées
      */
-    public void sendAxonPremonition(int x, int y, int z) {
+    public void sendAxonPremonition(Location loc) {
         Player player = getPlayer();
         if (player == null) return;
 
+        double x = loc.getX();
+        double y = loc.getY();
+        double z = loc.getZ();
+        
         player.sendMessage("§6Prémonition Axonique : Un Axon va apparaître bientôt en (" + x + ", " + y + ", " + z + ")");
         // Tu peux ajouter un effet visuel / son ici plus tard
     }

@@ -55,7 +55,7 @@ public class Sciel extends Roles {
             if (target != null && target.isOnline() && !target.isDead()) {
                 int amount = entry.getValue();
                 double damage = amount * 0.2; // 0.1 coeur = 0.2 point de dégâts
-                target.damage(damage, sciel);
+                target.damage(damage);
                 target.sendMessage("§cTu as reçu " + amount + " cartes infligeant §c" + damage + " §cdégâts !");
             }
         }

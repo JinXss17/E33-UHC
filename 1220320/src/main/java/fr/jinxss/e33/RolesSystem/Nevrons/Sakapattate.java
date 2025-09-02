@@ -2,9 +2,16 @@ package fr.jinxss.e33.RolesSystem.Nevrons;
 
 import java.util.UUID;
 
-import fr.jinxss.e33.RolesSystem.Roles;
+import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Player;
 
-public class Sakapattate extends Roles {
+import fr.jinxss.e33.E33UHC;
+import fr.jinxss.e33.RolesSystem.Nevron;
+import fr.jinxss.e33.RolesSystem.RoleManager;
+import fr.jinxss.e33.RolesSystem.roles.Monoco;
+
+public class Sakapattate extends Nevron {
 
 	public Sakapattate(UUID uuid, String name) {
 		super(uuid, name);
@@ -13,7 +20,12 @@ public class Sakapattate extends Roles {
 
 	@Override
 	public void onAssign() {
-		// TODO Auto-generated method stub
+		Player p = Bukkit.getPlayer(uuid);
+		double Health = p.getAttribute(Attribute.MAX_HEALTH).getBaseValue();
+		if(Health + 10 > E33UHC.getMaxHealthToPlayer()) {
+			Health = E33UHC.getMaxHealthToPlayer();
+		}else Health += 10;
+		p.getAttribute(Attribute.MAX_HEALTH).setBaseValue(Health);
 
 	}
 
@@ -21,6 +33,13 @@ public class Sakapattate extends Roles {
 	public void onPowerUse() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public void getPowerToMonoco(Player p) {
+		if(RoleManager.getRole(p.getUniqueId()) instanceof Monoco role) {
+			role.getSakapattatePower();
+		}
 	}
 
 }

@@ -2,24 +2,39 @@ package fr.jinxss.e33.RolesSystem.Nevrons;
 
 import java.util.UUID;
 
-import fr.jinxss.e33.RolesSystem.Roles;
+import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Player;
 
-public class Petank extends Roles {
+import fr.jinxss.e33.RolesSystem.Nevron;
+import fr.jinxss.e33.RolesSystem.RoleManager;
+import fr.jinxss.e33.RolesSystem.roles.Monoco;
+
+public class Petank extends Nevron {
 
     public Petank(UUID uuid, String name) {
         super(uuid, name);
-        this.speed = 1;
-        this.resi = 1;
+        this.speed += 10;
+        this.resi -= 10;
     }
 
     @Override
     public void onAssign() {
-        // Application des effets via les attributs génériques ou un system de gestion des effets
-        // Cela sera traité plus tard dans la gestion centrale des effets
+    	Player p = Bukkit.getPlayer(uuid);
+		double Speed = p.getAttribute(Attribute.MOVEMENT_SPEED).getBaseValue();
+		p.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(Speed * getSpeed());
+    	
     }
 
     @Override
     public void onPowerUse() {
         // Aucun pouvoir actif
     }
+    
+    @Override
+	public void getPowerToMonoco(Player p) {
+		if(RoleManager.getRole(p.getUniqueId()) instanceof Monoco role) {
+			role.getPetankPower();
+		}
+	}
 }

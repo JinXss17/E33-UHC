@@ -17,6 +17,8 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import fr.jinxss.e33.E33UHC;
 import fr.jinxss.e33.Levelsystem.LevelSystem;
 import fr.jinxss.e33.Levelsystem.PlayerLevel;
+import fr.jinxss.e33.RolesSystem.RoleManager;
+import fr.jinxss.e33.RolesSystem.roles.Peintresse;
 
 public class UHCScoreBoard {
 
@@ -94,8 +96,18 @@ public class UHCScoreBoard {
 	    obj.getScore(ChatColor.AQUA + "Z: " + loc.getBlockZ()).setScore(4);
 	    obj.getScore(ChatColor.DARK_RED + "Marqué : " + plugin.getPictoSystem().getPlayerPictos(player).IsMarked() ).setScore(3);
 	    obj.getScore(ChatColor.DARK_PURPLE + "Lumina: " +  (level.getLumina() - level.getUsedLumina()) + "/" + level.getLumina()).setScore(2);
-	    obj.getScore(ChatColor.YELLOW + "Level: " +  level.getLevel()).setScore(1);
-	    obj.getScore(ChatColor.YELLOW + "Exp: " +  level.getExp() + "/" + level.getExpToLevelUp()).setScore(0);
+	    
+	    if(level.getLevel() == 25 && !(RoleManager.getRole(player.getUniqueId()) instanceof Peintresse )) {
+	    	obj.getScore(ChatColor.YELLOW + "Level: MAX").setScore(1);
+	    	obj.getScore(ChatColor.YELLOW + "Exp: MAX/MAX").setScore(0);
+	    }else if(level.getLevel() == 33) {
+	    	obj.getScore(ChatColor.YELLOW + "Level: MAX" +  level.getLevel()).setScore(1);
+	    	obj.getScore(ChatColor.YELLOW + "Exp: MAX/MAX").setScore(0);
+	    }else {
+	    	obj.getScore(ChatColor.YELLOW + "Level: " +  level.getLevel()).setScore(1);
+		    obj.getScore(ChatColor.YELLOW + "Exp: " +  level.getExp() + "/" + level.getExpToLevelUp()).setScore(0);
+	    }
+	    
 	    
 	    
 	    double borderSize = uhcBorder.getCurrentSize();

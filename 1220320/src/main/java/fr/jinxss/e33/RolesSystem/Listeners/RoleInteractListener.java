@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import fr.jinxss.e33.RolesSystem.RoleManager;
 import fr.jinxss.e33.RolesSystem.Roles;
 import fr.jinxss.e33.RolesSystem.Nevrons.Demineur;
+import fr.jinxss.e33.RolesSystem.roles.Esquie;
 import fr.jinxss.e33.RolesSystem.roles.Gustave;
 import fr.jinxss.e33.RolesSystem.roles.Lune;
 import fr.jinxss.e33.RolesSystem.roles.Maelle;
@@ -62,6 +63,22 @@ public class RoleInteractListener implements Listener {
             event.setCancelled(true);
             demineur.onPowerUse();
         }
+        
+        // --- ESQUIE ---------------------------------------------------------
+        if (role instanceof Esquie esquie) {
+        	
+        	if(esquie.isDashItem(item)) {
+        		event.setCancelled(true);
+        		esquie.useDash();
+        	}
+        	if(esquie.isShockwaveItem(item)) {
+        		event.setCancelled(true);
+        		esquie.useShockwave();
+        	}
+            
+        }
+        
+        
 
 
         // plus tard : autres rôles et objets spéciaux…

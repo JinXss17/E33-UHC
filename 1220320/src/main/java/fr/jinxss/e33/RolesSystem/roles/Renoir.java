@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
@@ -65,7 +66,7 @@ public class Renoir extends Roles {
                     mob.setCustomName("§cCréature du Néant");
                     mob.setCustomNameVisible(false);
                     // Ligne a erreur (elle sert a modifier la vie des entité de renoir
-                    //mob.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(8.0); // 4 cœurs
+                    mob.getAttribute(Attribute.MAX_HEALTH).setBaseValue(8.0); // 4 cœurs
                     mob.setHealth(8.0);
                     mob.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 1));
                 }

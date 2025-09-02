@@ -15,6 +15,8 @@ import fr.jinxss.e33.PictoSystem.Pictos.Special.DrawerPower;
 import fr.jinxss.e33.PictoSystem.Pictos.Special.Incendie;
 import fr.jinxss.e33.PictoSystem.Pictos.Special.NouvellePeinture;
 import fr.jinxss.e33.PictoSystem.Pictos.Special.Roulette;
+import fr.jinxss.e33.RolesSystem.RoleManager;
+import fr.jinxss.e33.RolesSystem.roles.Conservateur;
 
 public class CustomMobsListener implements Listener {
 
@@ -50,12 +52,18 @@ public class CustomMobsListener implements Listener {
 				Bukkit.broadcastMessage("§dVisages a été éliminé !");
 				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new Incendie());
 				plugin.getLevelSystem().getPlayerLevel(p).addExp(AxonExp);
+				if(RoleManager.getRole(p.getUniqueId()) instanceof Conservateur role ) {
+					role.onAxonKill();
+				}
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Sirene") ) {
 				p.sendMessage("§dVous avez tuer Sirène !");
 				Bukkit.broadcastMessage("§dLa Sirene a été éliminée !");
 				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new Roulette());
 				plugin.getLevelSystem().getPlayerLevel(p).addExp(AxonExp);
+				if(RoleManager.getRole(p.getUniqueId()) instanceof Conservateur role ) {
+					role.onAxonKill();
+				}
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Faucheuse") ) {
 				p.sendMessage("§dVous avez tuer Faucheuse !");
@@ -64,12 +72,18 @@ public class CustomMobsListener implements Listener {
 						plugin.getPictoSystem().getPlayerPictos(p),
 						plugin.getUHCSystem().getBorder()));
 				plugin.getLevelSystem().getPlayerLevel(p).addExp(AxonExp);
+				if(RoleManager.getRole(p.getUniqueId()) instanceof Conservateur role ) {
+					role.onAxonKill();
+				}
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Transporteuse") ) {
 				p.sendMessage("§dVous avez tuer la Transporteuse !");
 				Bukkit.broadcastMessage("§dLa Transporteuse a été éliminée !");
 				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new DrawerPower());
 				plugin.getLevelSystem().getPlayerLevel(p).addExp(AxonExp);
+				if(RoleManager.getRole(p.getUniqueId()) instanceof Conservateur role ) {
+					role.onAxonKill();
+				}
 			}
 			
 		}

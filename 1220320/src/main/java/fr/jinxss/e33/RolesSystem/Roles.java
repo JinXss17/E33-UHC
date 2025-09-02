@@ -12,9 +12,9 @@ public abstract class Roles {
 
     protected UUID uuid;
     protected String name;
-    protected double speed;
-    protected double force;
-    protected double resi;
+    protected double speed = 100;
+    protected double force = 100;
+    protected double resi = 100;
 
     // Liste des objets associés au rôle (peut être vide, 1 ou plusieurs)
     protected List<ItemStack> roleItems = new ArrayList<>();

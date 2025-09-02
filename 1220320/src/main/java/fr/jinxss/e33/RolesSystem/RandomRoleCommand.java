@@ -21,6 +21,7 @@ import fr.jinxss.e33.RolesSystem.Nevrons.Matthieu_Le_Coloss;
 import fr.jinxss.e33.RolesSystem.Nevrons.Noco;
 import fr.jinxss.e33.RolesSystem.Nevrons.Obscur;
 
+
 public class RandomRoleCommand implements CommandExecutor {
 
     private final Set<String> uniqueRolesLeft = new HashSet<>(Arrays.asList(

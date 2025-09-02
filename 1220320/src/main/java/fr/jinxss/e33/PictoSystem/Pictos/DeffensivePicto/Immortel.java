@@ -9,6 +9,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import fr.jinxss.e33.E33UHC;
 import fr.jinxss.e33.PictoSystem.ENiveau;
 import fr.jinxss.e33.PictoSystem.Pictos.Picto;
 
@@ -46,7 +47,10 @@ public class Immortel extends Picto {
 	public void Activate(Player p) {
 		
 		double Health = p.getAttribute(Attribute.MAX_HEALTH).getValue();
-		p.getAttribute(Attribute.MAX_HEALTH).setBaseValue(Health + HealthBoost);
+		if(Health + HealthBoost > E33UHC.getMaxHealthToPlayer()) {
+			Health = E33UHC.getMaxHealthToPlayer();
+		}else Health += HealthBoost;
+		p.getAttribute(Attribute.MAX_HEALTH).setBaseValue(Health);
 		
 	}
 	
@@ -71,7 +75,9 @@ public class Immortel extends Picto {
 		Health -= HealthBoost;
 		if(Level == ENiveau.Maitrise)HealthBoost += HealthBoostLvl2;
 		if(Level == ENiveau.Instinctif)HealthBoost += HealthBoostLvl3;
-		Health += HealthBoost;
+		if(Health + HealthBoost > E33UHC.getMaxHealthToPlayer()) {
+			Health = E33UHC.getMaxHealthToPlayer();
+		}else Health += HealthBoost;
 		p.getAttribute(Attribute.MAX_HEALTH).setBaseValue(Health);
 		
 	}

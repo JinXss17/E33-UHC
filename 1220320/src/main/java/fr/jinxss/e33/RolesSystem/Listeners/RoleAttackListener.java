@@ -1,8 +1,11 @@
 package fr.jinxss.e33.RolesSystem.Listeners;
 
 import fr.jinxss.e33.RolesSystem.RoleManager;
+import fr.jinxss.e33.RolesSystem.roles.Gustave;
 import fr.jinxss.e33.RolesSystem.roles.Lune;
+import fr.jinxss.e33.RolesSystem.roles.Sciel;
 import fr.jinxss.e33.RolesSystem.roles.Lune.Element;
+import fr.jinxss.e33.RolesSystem.roles.Maelle;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,5 +38,20 @@ public class RoleAttackListener implements Listener {
 	                break;
 	        }
         }
+        
+        if(RoleManager.getRole(damager.getUniqueId()) instanceof Sciel) {
+			Sciel role = (Sciel)RoleManager.getRole(damager.getUniqueId());
+			role.onAttack(target);
+		}
+		
+		if(RoleManager.getRole(damager.getUniqueId()) instanceof Gustave) {
+			Gustave role = (Gustave)RoleManager.getRole(damager.getUniqueId());
+			role.handleAttack(event);
+		}
+		
+		if(RoleManager.getRole(damager.getUniqueId()) instanceof Maelle) {
+			Maelle role = (Maelle)RoleManager.getRole(damager.getUniqueId());
+			role.handleAttack(event);
+		}
     }
 }

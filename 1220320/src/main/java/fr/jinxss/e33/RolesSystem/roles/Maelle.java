@@ -15,7 +15,7 @@ import fr.jinxss.e33.RolesSystem.Roles;
 public class Maelle extends Roles {
 
     private enum Posture {
-        NEUTRE, DEFENSIVE, OFFENSIVE
+        NEUTRE, DEFENSIVE, OFFENSIVE, VIRTUOSE
     }
 
     private Posture posture = Posture.NEUTRE;
@@ -23,6 +23,11 @@ public class Maelle extends Roles {
 
     // Paramètres ajustables
     private final double MODIFIER = 0.3; // 30% bonus/malus
+    private final double VIRTUOSE_MODIFIER = 0.5;
+    private final int KILL_COUNT_TO_VIRTUOSE = 2;
+    
+    private int Kill_Count = 0;
+    
 
     public Maelle(UUID uuid, String name) {
         super(uuid, name);
@@ -60,9 +65,20 @@ public class Maelle extends Roles {
                 player.sendMessage("§c→ Tu es maintenant en posture §lOffensive§r§c.");
                 break;
             case OFFENSIVE:
-                posture = Posture.NEUTRE;
+            	if(Kill_Count >= KILL_COUNT_TO_VIRTUOSE) {
+            		posture = Posture.VIRTUOSE;
+                    player.sendMessage("§5→ Tu es maintenant en posture §lVirtuose§r§5.");
+                    break;
+            	}else {
+            		posture = Posture.NEUTRE;
+                    player.sendMessage("§a→ Tu es maintenant en posture §lNeutre§r§a.");
+                    break;
+            	}
+            case VIRTUOSE:
+            	posture = Posture.NEUTRE;
                 player.sendMessage("§a→ Tu es maintenant en posture §lNeutre§r§a.");
                 break;
+            	
         }
 
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1f, 1.2f);
@@ -74,6 +90,8 @@ public class Maelle extends Roles {
             event.setDamage(event.getDamage() * (1 - MODIFIER));
         } else if (posture == Posture.OFFENSIVE) {
             event.setDamage(event.getDamage() * (1 + MODIFIER));
+        } else if(posture == Posture.VIRTUOSE) {
+        	event.setDamage(event.getDamage() * (1 + VIRTUOSE_MODIFIER));
         }
     }
 

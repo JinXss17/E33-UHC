@@ -3,6 +3,7 @@ package fr.jinxss.e33.mobsystem;
 import java.util.Random;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class MobSystem extends BukkitRunnable {
@@ -26,7 +27,7 @@ public class MobSystem extends BukkitRunnable {
             int dz = random.nextInt(16) - 8;
             Location loc = origin.clone().add(dx, 0, dz);
             loc.setY(loc.getWorld().getHighestBlockYAt(loc));
-            if (loc.getBlock().getType().isSolid()) return loc.add(0, 1, 0);
+            if (loc.getBlock().getType().isSolid() && loc.getBlock().getType() != Material.BARRIER ) return loc.add(0, 1, 0);
         }
         return null;
     }

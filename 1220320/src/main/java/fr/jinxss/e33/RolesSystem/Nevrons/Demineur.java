@@ -6,9 +6,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import fr.jinxss.e33.RolesSystem.Roles;
+import fr.jinxss.e33.RolesSystem.Nevron;
 
-public class Demineur extends Roles {
+public class Demineur extends Nevron {
 
     private boolean canUse = true;
     @SuppressWarnings("unused")
@@ -72,4 +72,10 @@ public class Demineur extends Roles {
     public boolean isDemineurItem(ItemStack item) {
         return item != null && item.isSimilar(explosiveArrowItem);
     }
+
+	@Override
+	public void getPowerToMonoco(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

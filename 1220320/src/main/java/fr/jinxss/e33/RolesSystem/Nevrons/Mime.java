@@ -1,16 +1,19 @@
 package fr.jinxss.e33.RolesSystem.Nevrons;
 
-import fr.jinxss.e33.RolesSystem.RoleManager;
-import fr.jinxss.e33.RolesSystem.Roles;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import fr.jinxss.e33.RolesSystem.Nevron;
+import fr.jinxss.e33.RolesSystem.RoleManager;
+import fr.jinxss.e33.RolesSystem.Roles;
 
 
-public class Mime extends Roles {
+public class Mime extends Nevron {
 
     private Roles copiedRole;
     private boolean canCopy = true;
@@ -72,4 +75,10 @@ public class Mime extends Roles {
 
         return true;
     }
+
+	@Override
+	public void getPowerToMonoco(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

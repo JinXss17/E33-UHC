@@ -17,6 +17,11 @@ public class RoleRecipes {
     	registerLune(plugin);
     	registerRenoir(plugin);
     	registerSciel(plugin);
+    	registerMonoco(plugin);
+    	registerEsquie(plugin);
+    	registerPeintresse(plugin);
+    	registerConservateur(plugin);
+    	
     }
     
 
@@ -89,15 +94,15 @@ public class RoleRecipes {
 
         ShapedRecipe recipe = new ShapedRecipe(key, result);
         //Créer le craft pour le rôle sciel
-        recipe.shape("RBR", "PGP", "RBR");
-        recipe.setIngredient('R', Material.REDSTONE);
-        recipe.setIngredient('P', Material.PISTON);
-        recipe.setIngredient('B', Material.IRON_BARS);
-        recipe.setIngredient('G', Material.GLOWSTONE);
+        recipe.shape("PAP", "AHA", "PAP");
+        recipe.setIngredient('P', Material.PAPER);
+        recipe.setIngredient('H', Material.DIAMOND_HOE);
+        recipe.setIngredient('A', Material.AMETHYST_SHARD);
 
         Bukkit.addRecipe(recipe);
     }
-     private static void registerRenoir(JavaPlugin plugin) {
+	
+    private static void registerRenoir(JavaPlugin plugin) {
         ItemStack result = new ItemStack(Material.FEATHER);
         ItemMeta meta = result.getItemMeta();
         meta.setDisplayName("§dRôle - Renoir");
@@ -111,6 +116,76 @@ public class RoleRecipes {
         recipe.setIngredient('R', Material.ROTTEN_FLESH);
         recipe.setIngredient('S', Material.STRING);
         recipe.setIngredient('B', Material.BONE);
+        Bukkit.addRecipe(recipe);
+    }
+    
+    private static void registerMonoco(JavaPlugin plugin) {
+        ItemStack result = new ItemStack(Material.FEATHER);
+        ItemMeta meta = result.getItemMeta();
+        meta.setDisplayName("§dRôle - Monoco");
+        result.setItemMeta(meta);
+
+        NamespacedKey key = new NamespacedKey(plugin, "Roles_Monoco");
+
+        ShapedRecipe recipe = new ShapedRecipe(key, result);
+        
+        recipe.shape("SRS", "RFR", "SRS");
+        recipe.setIngredient('S', Material.FERMENTED_SPIDER_EYE);
+        recipe.setIngredient('F', Material.RABBIT_FOOT);
+        recipe.setIngredient('R', Material.ROTTEN_FLESH);
+        Bukkit.addRecipe(recipe);
+    }
+    
+    private static void registerEsquie(JavaPlugin plugin) {
+        ItemStack result = new ItemStack(Material.FEATHER);
+        ItemMeta meta = result.getItemMeta();
+        meta.setDisplayName("§dRôle - Esquie");
+        result.setItemMeta(meta);
+
+        NamespacedKey key = new NamespacedKey(plugin, "Roles_Esquie");
+
+        ShapedRecipe recipe = new ShapedRecipe(key, result);
+        
+        recipe.shape("SAS", "GSD", "SPS");
+        recipe.setIngredient('S', Material.STONE);
+        recipe.setIngredient('A', Material.ANDESITE);
+        recipe.setIngredient('G', Material.GRANITE);
+        recipe.setIngredient('D', Material.DIORITE);
+        recipe.setIngredient('P', Material.DEEPSLATE);
+        Bukkit.addRecipe(recipe);
+    }
+    
+    private static void registerPeintresse(JavaPlugin plugin) {
+        ItemStack result = new ItemStack(Material.FEATHER);
+        ItemMeta meta = result.getItemMeta();
+        meta.setDisplayName("§dRôle - Peintresse");
+        result.setItemMeta(meta);
+
+        NamespacedKey key = new NamespacedKey(plugin, "Roles_Peintresse");
+
+        ShapedRecipe recipe = new ShapedRecipe(key, result);
+        
+        recipe.shape("FDF", "DPD", "FDF");
+        recipe.setIngredient('F', Material.FEATHER);
+        recipe.setIngredient('P', Material.PAINTING);
+        recipe.setIngredient('D', Material.DEEPSLATE);
+        Bukkit.addRecipe(recipe);
+    }
+    
+    private static void registerConservateur(JavaPlugin plugin) {
+        ItemStack result = new ItemStack(Material.FEATHER);
+        ItemMeta meta = result.getItemMeta();
+        meta.setDisplayName("§dRôle - Conservateur");
+        result.setItemMeta(meta);
+
+        NamespacedKey key = new NamespacedKey(plugin, "Roles_Conservateur");
+
+        ShapedRecipe recipe = new ShapedRecipe(key, result);
+        
+        recipe.shape("LAL", "ASA", "LAL");
+        recipe.setIngredient('A', Material.AMETHYST_SHARD);
+        recipe.setIngredient('S', Material.DIAMOND_SWORD);
+        recipe.setIngredient('L', Material.LEATHER);
         Bukkit.addRecipe(recipe);
     }
     

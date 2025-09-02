@@ -20,11 +20,11 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
-        run: mvn clean package
+        run: mvn -f 1220320/pom.xml clean package
 
       - name: Upload JAR to Release
         uses: softprops/action-gh-release@v1
         with:
-          files: target/*.jar
+          files: 1220320/target/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}

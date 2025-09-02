@@ -23,7 +23,8 @@ public class UpdateChecker {
 	}
 	
 	private E33UHC plugin;
-	private static final String API_URL = "https://github.com/JinXss17/E33-UHC/releases/latest";
+	private static final String API_URL = "https://api.github.com/repos/JinXss17/E33-UHC/releases/latest";
+	private final String API_TOKEN = "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";
 	
 	public void CheckUpdate() {
 		
@@ -33,6 +34,8 @@ public class UpdateChecker {
                 // Appel à l’API GitHub
                 HttpURLConnection conn = (HttpURLConnection) new URL(API_URL).openConnection();
                 conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+                conn.setRequestProperty("Accept", "application/vnd.github.v3+json");
+                conn.setRequestProperty("Authorization", "token "+ API_TOKEN);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder response = new StringBuilder();
                 String line;
@@ -41,8 +44,7 @@ public class UpdateChecker {
 
                 // Parse JSON
                 JSONObject json = (JSONObject) new JSONParser().parse(response.toString());
-                String latestVersion = (String) json.get("tag_name");
-
+                String latestVersion = ((String) json.get("tag_name")).replace("v", ""); // retire le v
                 String currentVersion = plugin.getDescription().getVersion();
 
                 if (!currentVersion.equalsIgnoreCase(latestVersion)) {

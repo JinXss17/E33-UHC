@@ -23,7 +23,7 @@ public class UpdateChecker {
 	}
 	
 	private E33UHC plugin;
-	private static final String API_URL = "https://api.github.com/repos/<TON_USER>/<TON_REPO>/releases/latest";
+	private static final String API_URL = "https://github.com/JinXss17/E33-UHC/releaseslatest";
 	
 	public void CheckUpdate() {
 		

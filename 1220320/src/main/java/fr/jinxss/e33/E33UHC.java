@@ -61,6 +61,10 @@ public class E33UHC extends JavaPlugin {
  	@Override
     public void onEnable() {
  		
+ 		UpdateChecker maj = new UpdateChecker(this);
+ 		maj.CheckUpdate();
+ 		
+ 		
  		File file = new File(getDataFolder(), String.valueOf(ConfigFileName) + ".yml");
  		if(!file.exists()) {
  			createFile(ConfigFileName);

@@ -60,7 +60,8 @@ public class E33UHC extends JavaPlugin {
 	File config;
 	YamlConfiguration yamlConfiguration;
 	
- 	@Override
+ 	@SuppressWarnings("deprecation")
+	@Override
     public void onEnable() {
  		
  		UpdateChecker maj = new UpdateChecker(this);

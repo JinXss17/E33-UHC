@@ -23,6 +23,7 @@ public class UpdateChecker {
         this.plugin = plugin;
     }
 
+    @Deprecated
     public void checkUpdate() {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {

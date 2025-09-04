@@ -7,10 +7,9 @@ import org.bukkit.WorldBorder;
 public class UHCBorder {
 	
 	private final WorldBorder border;
-	public double InitialBorderSize = 1000;
-	public double MeetUpBorderSize = 200;
+	public double InitialBorderSize = 4000;
+	public double MeetUpBorderSize = 1000;
 	public long MeetUpReduceTime = 20l;
-	public int MinuteToMeetUp = 20;
 	
 	public UHCBorder() {
 		border = Bukkit.getWorld("world").getWorldBorder();

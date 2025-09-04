@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -26,7 +27,6 @@ public class UHCScoreBoard {
     private final Map<Player, Scoreboard> scoreboards = new HashMap<>();
     private long startTime;
     
-    public long PVP_ENABLE_TIME = 10; // en minutes
     private final UHCSystem uhcSystem;
     private final UHCBorder uhcBorder;
     private final LevelSystem levelSystem;
@@ -65,9 +65,31 @@ public class UHCScoreBoard {
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     updateScoreboard(player);
+                    updateHealth(player);
                 }
             }
-        }.runTaskTimer(plugin, 0, 20); // toutes les secondes
+        }.runTaskTimer(plugin, 0, 1); // toutes les secondes
+    }
+    
+    private void updateHealth(Player player) {
+    	
+    	if (!scoreboards.containsKey(player)) createScoreboard(player);
+    	
+	    Scoreboard board = scoreboards.get(player);
+	    Objective Healthobj = board.getObjective("Health");
+    	
+        double health = player.getHealth();
+        double maxHealth = player.getAttribute(Attribute.MAX_HEALTH).getValue();
+
+        int percent = (int) Math.round((health / maxHealth) * 100);
+
+        // On applique au scoreboard
+        Healthobj.getScore(player.getName()).setScore(percent);
+
+        // S’assurer que le joueur utilise bien ce scoreboard
+        if (player.getScoreboard() != board) {
+            player.setScoreboard(board);
+        }
     }
 
     private void updateScoreboard(Player player) {
@@ -114,11 +136,11 @@ public class UHCScoreBoard {
 	    obj.getScore(ChatColor.DARK_GREEN + "Bordure: " + (int) borderSize).setScore(-2);
 	
 	     // Activer le PvP si le temps est dépassé et qu'il ne l'est pas encore
-	     if (!uhcSystem.isPvpEnabled() && elapsed >= PVP_ENABLE_TIME * 60) {
+	     if (!uhcSystem.isPvpEnabled() && elapsed >= uhcSystem.PVP_ENABLE_TIME * 60) {
 	         uhcSystem.TogglePvP();
 	     }
 	     if (!uhcSystem.isPvpEnabled()) {
-		    long remaining = PVP_ENABLE_TIME * 60 - elapsed;
+		    long remaining = uhcSystem.PVP_ENABLE_TIME * 60 - elapsed;
 		    long lminutes = remaining / 60;
 		    long lseconds = remaining % 60;
 	
@@ -127,7 +149,7 @@ public class UHCScoreBoard {
 	     } else {
 	    	    obj.getScore(ChatColor.LIGHT_PURPLE + "PvP: Activé").setScore(-1);
 	     }
-	     if (!meetupStarted && elapsed >= uhcBorder.MinuteToMeetUp * 60) {
+	     if (!meetupStarted && elapsed >= uhcSystem.MinuteToMeetUp * 60) {
 		    meetupStarted = true;
 		    uhcBorder.ReduceToMeetUpSize();
 	
@@ -135,7 +157,7 @@ public class UHCScoreBoard {
 		    Bukkit.broadcastMessage(ChatColor.GOLD + "⚔️ MeetUp ! La bordure se réduit !");
 	     }
 	     if (!meetupStarted) {
-			long remaining = uhcBorder.MinuteToMeetUp * 60 - elapsed;
+			long remaining = uhcSystem.MinuteToMeetUp * 60 - elapsed;
 			long lminutes = remaining / 60;
 			long lseconds = remaining % 60;
 			

@@ -31,19 +31,36 @@ public class UHCConfigMenu implements Listener {
 
     private void setupItems() {
         // Temps PvP
-        menu.setItem(10, createItem(Material.RED_CONCRETE, "⏱ Temps PvP -", "Prochain : " + (uhcSystem.getBoard().PVP_ENABLE_TIME-1) + "min"));
-        menu.setItem(11, createItem(Material.CLOCK, "⏱ Temps PvP", uhcSystem.getBoard().PVP_ENABLE_TIME + " Minutes"));
-        menu.setItem(12, createItem(Material.LIME_CONCRETE, "⏱ Temps PvP +", "Prochain : " + (uhcSystem.getBoard().PVP_ENABLE_TIME+1) + "min"));
+        menu.setItem(1, createItem(Material.RED_CONCRETE, "⏱ Temps PvP -", "Prochain : " + (uhcSystem.PVP_ENABLE_TIME-1) + "min"));
+        int PVPHour = (int) (uhcSystem.PVP_ENABLE_TIME/60);
+        int PVPMin = (int) (uhcSystem.PVP_ENABLE_TIME%60);
+        if(PVPHour == 0) {
+        	menu.setItem(2, createItem(Material.IRON_SWORD, "⏱ Temps PvP", "" + PVPMin + "Min"));
+        }else {
+        	menu.setItem(2, createItem(Material.IRON_SWORD, "⏱ Temps PvP", PVPHour + "H"+ PVPMin + "Min"));
+        }
+        menu.setItem(3, createItem(Material.LIME_CONCRETE, "⏱ Temps PvP +", "Prochain : " + (uhcSystem.PVP_ENABLE_TIME+1) + "min"));
 
         // Taille bordure
-        menu.setItem(19, createItem(Material.RED_CONCRETE, "⬅ Bordure -", (uhcBorder.InitialBorderSize-100) + ""));
-        menu.setItem(20, createItem(Material.MAP, "Taille bordure", uhcBorder.InitialBorderSize + ""));
-        menu.setItem(21, createItem(Material.LIME_CONCRETE, "➡ Bordure +", (uhcBorder.InitialBorderSize+100) + ""));
+        menu.setItem(10, createItem(Material.RED_CONCRETE, "⬅ Bordure -", (uhcBorder.InitialBorderSize/2-100) + ""));
+        menu.setItem(11, createItem(Material.MAP, "Taille bordure", uhcBorder.InitialBorderSize/2 + ""));
+        menu.setItem(12, createItem(Material.LIME_CONCRETE, "➡ Bordure +", (uhcBorder.InitialBorderSize/2+100) + ""));
 
         // Taille MeetUp
-        menu.setItem(28, createItem(Material.RED_CONCRETE, "⬅ MeetUp -", (uhcBorder.MeetUpBorderSize-25) + ""));
-        menu.setItem(29, createItem(Material.BARRIER, "Taille MeetUp", uhcBorder.MeetUpBorderSize + ""));
-        menu.setItem(30, createItem(Material.LIME_CONCRETE, "➡ MeetUp +", (uhcBorder.MeetUpBorderSize+25) + ""));
+        menu.setItem(19, createItem(Material.RED_CONCRETE, "⬅ MeetUp -", (uhcBorder.MeetUpBorderSize/2-25) + ""));
+        menu.setItem(20, createItem(Material.BARRIER, "Taille MeetUp", uhcBorder.MeetUpBorderSize/2 + ""));
+        menu.setItem(21, createItem(Material.LIME_CONCRETE, "➡ MeetUp +", (uhcBorder.MeetUpBorderSize/2+25) + ""));
+        
+        // Temps MeetUp
+        menu.setItem(28, createItem(Material.RED_CONCRETE, "⬅ MeetUp -", "Prochain : " + (uhcSystem.MinuteToMeetUp - 1) + " min"));
+        int MeetUpHour = uhcSystem.MinuteToMeetUp/60;
+        int MeetUpMin = uhcSystem.MinuteToMeetUp%60;
+        if(MeetUpHour == 0) {
+        	menu.setItem(29, createItem(Material.CLOCK, "⏱ Temps MeetUp", "" + MeetUpMin + "Min"));
+        }else {
+        	menu.setItem(29, createItem(Material.CLOCK, "⏱ Temps MeetUp", MeetUpHour + "H"+ MeetUpMin + "Min"));
+        }
+        menu.setItem(30, createItem(Material.LIME_CONCRETE, "➡ MeetUp +", "Prochain : " + (uhcSystem.MinuteToMeetUp + 1) + " min"));
         
         // Bouton Toggle Roles / Mobs
         if(plugin.isRolesToggled()) 
@@ -88,16 +105,19 @@ public class UHCConfigMenu implements Listener {
 
             switch (slot) {
                 // Temps PvP
-                case 10 -> uhcSystem.getBoard().PVP_ENABLE_TIME -= 1;
-                case 12 -> uhcSystem.getBoard().PVP_ENABLE_TIME += 1;
+                case 1 -> uhcSystem.PVP_ENABLE_TIME = Math.max(0, uhcSystem.PVP_ENABLE_TIME - 1);
+                case 3 -> uhcSystem.PVP_ENABLE_TIME += 1;
 
                 // Taille bordure
-                case 19 -> uhcBorder.InitialBorderSize = Math.max(100, uhcBorder.InitialBorderSize - 100);
-                case 21 -> uhcBorder.InitialBorderSize += 100;
+                case 10 -> uhcBorder.InitialBorderSize = Math.max(100, uhcBorder.InitialBorderSize - 100);
+                case 12 -> uhcBorder.InitialBorderSize += 100;
 
                 // Taille MeetUp
-                case 28 -> uhcBorder.MeetUpBorderSize = Math.max(25, uhcBorder.MeetUpBorderSize - 25);
-                case 30 -> uhcBorder.MeetUpBorderSize += 25;
+                case 19 -> uhcBorder.MeetUpBorderSize = Math.max(25, uhcBorder.MeetUpBorderSize - 25);
+                case 21 -> uhcBorder.MeetUpBorderSize += 25;
+                
+                case 28 -> uhcSystem.MinuteToMeetUp = (int) Math.max(20, uhcSystem.MinuteToMeetUp - 1);
+                case 30 -> uhcSystem.MinuteToMeetUp += 1;
                 
                 //Toggle Roles / Mobs System
                 case 37 -> plugin.ToggleRoles();

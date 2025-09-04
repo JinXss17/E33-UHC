@@ -21,6 +21,9 @@ public class UHCSystem {
 	private static ArrayList<Player> _PlayerList = new ArrayList<Player>();
 	private static ArrayList<UUID> _DeadPlayerList = new ArrayList<UUID>();
 	private static ArrayList<UUID> _AlivePlayerList = new ArrayList<UUID>();
+
+    public long PVP_ENABLE_TIME = 10; // en minutes
+	public int MinuteToMeetUp = 60;
 	
 	private float teleportHeight = 300;
 	

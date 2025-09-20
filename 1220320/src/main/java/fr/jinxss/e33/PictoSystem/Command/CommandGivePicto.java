@@ -10,10 +10,8 @@ import fr.jinxss.e33.PictoSystem.PictoSystem;
 
 public class CommandGivePicto implements CommandExecutor {
 
-	private PictoSystem system;
 	
-	public CommandGivePicto(PictoSystem system) {
-		this.system = system;
+	public CommandGivePicto() {
 	}
 	@SuppressWarnings("deprecation")
 	@Override
@@ -24,7 +22,7 @@ public class CommandGivePicto implements CommandExecutor {
 		if(Bukkit.getPlayer(args[0]) != null) {
 			Player p = Bukkit.getPlayer(args[0]);
 			
-			system.GiveRandomPictoToPlayer(p);
+			PictoSystem.GiveRandomPictoToPlayer(p);
 			
 			return true;
 			

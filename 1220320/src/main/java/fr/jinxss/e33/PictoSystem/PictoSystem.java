@@ -42,20 +42,20 @@ public class PictoSystem {
 	
 	private static HashMap<UUID, PlayerPictos> playerPicto = new HashMap<UUID, PlayerPictos>();
 
-	private E33UHC plugin;
+	private static E33UHC plugin;
 	
 	public PictoSystem(E33UHC plugin) {
 		
-		this.plugin = plugin;
-		plugin.getCommand("givePicto").setExecutor(new CommandGivePicto(this));
-		plugin.getCommand("Picto").setExecutor(new CommandPicto(this));
-		this.plugin.getServer().getPluginManager().registerEvents(new PictoListener(this.plugin, this), this.plugin);
+		PictoSystem.plugin = plugin;
+		plugin.getCommand("givePicto").setExecutor(new CommandGivePicto());
+		plugin.getCommand("Picto").setExecutor(new CommandPicto());
+		plugin.getServer().getPluginManager().registerEvents(new PictoListener(plugin), plugin);
 
 		
 	}
 	
 	@Deprecated
-	public void GiveRandomPictoToPlayer(Player p) {
+	public static void GiveRandomPictoToPlayer(Player p) {
 		
 	try {
 		Random r  = new Random();
@@ -102,7 +102,7 @@ public class PictoSystem {
 		return BasicPicto;
 	}
 	
-	public PlayerPictos getPlayerPictos(Player player) {
+	public static PlayerPictos getPlayerPictos(Player player) {
 		return playerPicto.getOrDefault(player.getUniqueId(), null);
 	}
 	public void registerPlayerPictos(Player p, PlayerPictos pictos) {

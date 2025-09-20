@@ -18,6 +18,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import fr.jinxss.e33.E33UHC;
 import fr.jinxss.e33.Levelsystem.LevelSystem;
 import fr.jinxss.e33.Levelsystem.PlayerLevel;
+import fr.jinxss.e33.PictoSystem.PictoSystem;
 import fr.jinxss.e33.RolesSystem.RoleManager;
 import fr.jinxss.e33.RolesSystem.roles.Peintresse;
 
@@ -116,7 +117,7 @@ public class UHCScoreBoard {
 	    obj.getScore(ChatColor.AQUA + "X: " + loc.getBlockX()).setScore(6);
 	    obj.getScore(ChatColor.AQUA + "Y: " + loc.getBlockY()).setScore(5);
 	    obj.getScore(ChatColor.AQUA + "Z: " + loc.getBlockZ()).setScore(4);
-	    obj.getScore(ChatColor.DARK_RED + "Marqué : " + plugin.getPictoSystem().getPlayerPictos(player).IsMarked() ).setScore(3);
+		obj.getScore(ChatColor.DARK_RED + "Marqué : " + PictoSystem.getPlayerPictos(player).IsMarked() ).setScore(3);
 	    obj.getScore(ChatColor.DARK_PURPLE + "Lumina: " +  (level.getLumina() - level.getUsedLumina()) + "/" + level.getLumina()).setScore(2);
 	    
 	    if(level.getLevel() == 25 && !(RoleManager.getRole(player.getUniqueId()) instanceof Peintresse )) {

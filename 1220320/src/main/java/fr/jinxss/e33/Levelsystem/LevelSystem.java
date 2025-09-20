@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.bukkit.entity.Player;
 
 import fr.jinxss.e33.E33UHC;
+import fr.jinxss.e33.PictoSystem.PictoSystem;
 import fr.jinxss.e33.PictoSystem.PlayerPictos;
 
 public class LevelSystem {
@@ -21,7 +22,7 @@ public class LevelSystem {
 	}
 	
 	public PlayerLevel getPlayerLevel(Player p ) {
-		PlayerPictos pictos = system.getPictoSystem().getPlayerPictos(p);
+		PlayerPictos pictos = PictoSystem.getPlayerPictos(p);
 		PlayerLevel level = Levels.getOrDefault(p.getUniqueId(), new PlayerLevel(pictos, p));
 		return level;
 	}

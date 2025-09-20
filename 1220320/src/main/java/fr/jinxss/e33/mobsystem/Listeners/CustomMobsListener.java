@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.persistence.PersistentDataType;
 
 import fr.jinxss.e33.E33UHC;
+import fr.jinxss.e33.PictoSystem.PictoSystem;
 import fr.jinxss.e33.PictoSystem.Pictos.Special.DrawerPower;
 import fr.jinxss.e33.PictoSystem.Pictos.Special.Incendie;
 import fr.jinxss.e33.PictoSystem.Pictos.Special.NouvellePeinture;
@@ -40,17 +41,17 @@ public class CustomMobsListener implements Listener {
 			
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Boss")) {
 				plugin.getLevelSystem().getPlayerLevel(p).addExp(BossExp);
-				plugin.getPictoSystem().GiveRandomPictoToPlayer(p);
+				PictoSystem.GiveRandomPictoToPlayer(p);
 				p.sendMessage("§aVous avez tuer un Boss !");
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Custom")) {
 				Random r = new Random();
-				if(r.nextFloat() * 100 <= plugin.getPictoDropRate())plugin.getPictoSystem().GiveRandomPictoToPlayer(p);
+				if(r.nextFloat() * 100 <= plugin.getPictoDropRate())PictoSystem.GiveRandomPictoToPlayer(p);
 			}
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Visages") ) {
 				p.sendMessage("§dVous avez tuer Visages !");
 				Bukkit.broadcastMessage("§dVisages a été éliminé !");
-				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new Incendie());
+				PictoSystem.getPlayerPictos(p).addToPictoList(new Incendie());
 				plugin.getLevelSystem().getPlayerLevel(p).addExp(AxonExp);
 				if(RoleManager.getRole(p.getUniqueId()) instanceof Conservateur role ) {
 					role.onAxonKill();
@@ -59,7 +60,7 @@ public class CustomMobsListener implements Listener {
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Sirene") ) {
 				p.sendMessage("§dVous avez tuer Sirène !");
 				Bukkit.broadcastMessage("§dLa Sirene a été éliminée !");
-				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new Roulette());
+				PictoSystem.getPlayerPictos(p).addToPictoList(new Roulette());
 				plugin.getLevelSystem().getPlayerLevel(p).addExp(AxonExp);
 				if(RoleManager.getRole(p.getUniqueId()) instanceof Conservateur role ) {
 					role.onAxonKill();
@@ -68,8 +69,8 @@ public class CustomMobsListener implements Listener {
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Faucheuse") ) {
 				p.sendMessage("§dVous avez tuer Faucheuse !");
 				Bukkit.broadcastMessage("§dLa Faucheuse a été éliminée !");
-				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new NouvellePeinture(p,
-						plugin.getPictoSystem().getPlayerPictos(p),
+				PictoSystem.getPlayerPictos(p).addToPictoList(new NouvellePeinture(p,
+						PictoSystem.getPlayerPictos(p),
 						plugin.getUHCSystem().getBorder()));
 				plugin.getLevelSystem().getPlayerLevel(p).addExp(AxonExp);
 				if(RoleManager.getRole(p.getUniqueId()) instanceof Conservateur role ) {
@@ -79,7 +80,7 @@ public class CustomMobsListener implements Listener {
 			if(entity.getPersistentDataContainer().get(plugin.getCustomKey(), PersistentDataType.STRING).equalsIgnoreCase("Transporteuse") ) {
 				p.sendMessage("§dVous avez tuer la Transporteuse !");
 				Bukkit.broadcastMessage("§dLa Transporteuse a été éliminée !");
-				plugin.getPictoSystem().getPlayerPictos(p).addToPictoList(new DrawerPower());
+				PictoSystem.getPlayerPictos(p).addToPictoList(new DrawerPower());
 				plugin.getLevelSystem().getPlayerLevel(p).addExp(AxonExp);
 				if(RoleManager.getRole(p.getUniqueId()) instanceof Conservateur role ) {
 					role.onAxonKill();

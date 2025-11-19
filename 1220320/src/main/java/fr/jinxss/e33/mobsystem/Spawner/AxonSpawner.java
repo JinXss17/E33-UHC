@@ -86,11 +86,8 @@ public class AxonSpawner extends MobSystem {
 	public void spawnAxon(Location loc) {
 		
 		PickAxon++;
-		if(PickAxon > 3) {
-			PickAxon = 0;
-			Collections.shuffle(AxonOrder);
-		}
-		
+		PickAxon = PickAxon % 4;
+		Collections.shuffle(AxonOrder);
 		if(AxonOrder.get(PickAxon) == 1) {
 			Evoker z = loc.getWorld().spawn(loc, Evoker.class);
 	        z.setCustomName("§5Visage");

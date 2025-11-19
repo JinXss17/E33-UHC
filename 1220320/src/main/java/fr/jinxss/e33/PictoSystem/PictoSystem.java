@@ -87,6 +87,9 @@ public class PictoSystem {
 				return;
 			}
 			boucle ++;
+			
+			
+			
 		}
 		
 		getPlayerPictos(p).addToPictoList(picto);
